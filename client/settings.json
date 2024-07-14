@@ -1,0 +1,18 @@
+{
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "path-autocomplete.extensionOnImport": true,
+
+  "path-autocomplete.pathMappings": {
+    "@assets": "${workspace}/src/assets",
+    "@components": "${workspace}/src/components",
+    "@constants": "${workspace}/src/constants",
+    "@contexts": "${workspace}/src/contexts",
+    "@hooks": "${workspace}/src/hooks",
+    "@pages": "${workspace}/src/pages",
+    "@routes": "${workspace}/src/routes",
+    "@services": "${workspace}/src/services",
+    "@style": "${workspace}/src/style",
+    "@utils": "${workspace}/src/utils"
+  }
+}
