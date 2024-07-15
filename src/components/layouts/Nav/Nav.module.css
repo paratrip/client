@@ -25,3 +25,7 @@
   height: 60px;
   position: relative;
 }
+
+.activeText {
+  color: #3434ff;
+}
