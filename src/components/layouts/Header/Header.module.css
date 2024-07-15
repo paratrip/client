@@ -1,0 +1,30 @@
+.header {
+  box-sizing: border-box;
+  display: inline-flex;
+  padding: 11px 18px;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 484px;
+  position: fixed;
+  background-color: #fff;
+
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  height: 48px;
+  background-color: rgb(255, 255, 255);
+  z-index: 100;
+}
+
+.logo {
+  width: 54px;
+  height: 22px;
+}
+.bell {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  padding: 2.877px 3px 2.388px 3px;
+  justify-content: center;
+  align-items: center;
+}

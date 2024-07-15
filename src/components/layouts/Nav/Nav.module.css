@@ -1,0 +1,31 @@
+.nav {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+
+  background-color: #fff;
+  box-sizing: border-box;
+  z-index: 550;
+  max-width: 600px;
+  margin: 0px auto;
+  gap: 24px;
+}
+
+.navButton {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  width: 125.6px;
+  height: 60px;
+  position: relative;
+}
+
+.activeText {
+  color: #3434ff;
+}
