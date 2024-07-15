@@ -4,7 +4,9 @@
 */
 
 html,
-body,
+body * {
+  box-sizing: border-box;
+}
 div,
 span,
 applet,
@@ -136,4 +138,10 @@ table {
 
 a {
   text-decoration: none;
+}
+
+button {
+  border: none;
+  background-color: #ffffff;
+  cursor: pointer;
 }
