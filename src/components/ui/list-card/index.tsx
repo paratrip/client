@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import heart_s from '@assets/icons/heart_s.svg';
 
-import CardTitle from '../card-title/CardTitle';
-import Image from '../image/Image';
-import LocationTitle from '../location-title/LocationTitle';
+import CardTitle from '../card-title';
+import Image from '../image';
+import LocationTitle from '../location-title';
 
-import styles from './style.module.css';
+import style from './style.module.css';
 
 type ListCardProps = {
   title: string;
@@ -15,16 +16,16 @@ type ListCardProps = {
   alt?: string;
 };
 
-export default function ListCard(props: ListCardProps) {
+const ListCard = memo(function ListCard(props: ListCardProps) {
   const { src, alt, title, likeCount, price, location } = props;
 
   return (
-    <article className={styles['list-card']}>
+    <article className={style['list-card']}>
       <div>
-        <Image className={styles.card__image} src={src} alt={alt} />
+        <Image className={style.card__image} src={src} alt={alt} />
       </div>
 
-      <div className={styles.information}>
+      <div className={style.information}>
         <CardTitle title={title} />
 
         <p>
@@ -39,4 +40,6 @@ export default function ListCard(props: ListCardProps) {
       </div>
     </article>
   );
-}
+});
+
+export default ListCard;

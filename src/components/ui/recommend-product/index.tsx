@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import styles from './style.module.css';
 
 type RecommendProductProps = {
@@ -8,7 +10,9 @@ type RecommendProductProps = {
   hr?: boolean;
 };
 
-export default function RecommendProduct(props: RecommendProductProps) {
+const RecommendProduct = memo(function RecommendProduct(
+  props: RecommendProductProps
+) {
   const { className, name, price, description, hr = false } = props;
 
   return (
@@ -27,4 +31,6 @@ export default function RecommendProduct(props: RecommendProductProps) {
       {hr && <hr />}
     </section>
   );
-}
+});
+
+export default RecommendProduct;
