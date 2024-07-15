@@ -1,0 +1,31 @@
+.list-card {
+  display: flex;
+}
+
+.list-card div:first-child {
+  margin-right: 14px;
+}
+
+.list-card .information {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.information h3 {
+  margin-bottom: 8px;
+}
+
+.information strong {
+  margin-bottom: 9px;
+}
+
+.information p {
+  margin-bottom: 18px;
+}
+
+.card__image {
+  width: 187px;
+  height: 137px;
+  border-radius: 10px;
+}

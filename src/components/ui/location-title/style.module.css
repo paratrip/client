@@ -1,0 +1,7 @@
+.location-title {
+  color: var(--Gray-Scale-gray9);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%; /* 14px */
+}

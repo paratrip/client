@@ -140,6 +140,15 @@ a {
   text-decoration: none;
 }
 
+:root {
+  --Gray-Scale-black: #000;
+  --Gray-Scale-gray2: #eff1f4;
+  --Gray-Scale-gray3: #e4e6ea;
+  --Gray-Scale-gray4: #d5d8dc;
+  --Gray-Scale-gray7: #7f828c;
+  --Gray-Scale-gray9: #3b3f4a
+}
+
 button {
   border: none;
   background-color: #ffffff;
