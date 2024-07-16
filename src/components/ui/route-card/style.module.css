@@ -1,0 +1,27 @@
+.route-card {
+  display: flex;
+}
+
+.card__image {
+  width: 146px;
+  height: 104px;
+  margin-right: 14px;
+}
+
+.card__information {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card__information h3 {
+  margin-bottom: 21px;
+}
+
+.card__information p {
+  color: var(--Gray-Scale-gray8);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+}
