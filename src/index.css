@@ -4,7 +4,9 @@
 */
 
 html,
-body,
+body * {
+  box-sizing: border-box;
+}
 div,
 span,
 applet,
@@ -148,4 +150,10 @@ a {
   --Gray-Scale-gray9: #3b3f4a;
 
   --Secondary-secondary: #d4ff5e;
+}
+
+button {
+  border: none;
+  background-color: #ffffff;
+  cursor: pointer;
 }
