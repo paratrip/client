@@ -1,0 +1,11 @@
+.input {
+  display: flex;
+  width: 564px;
+  height: 44px;
+  padding: 10px 12px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 10px;
+  background-color: var(--Gray-Scale-gray2);
+  border: none;
+}

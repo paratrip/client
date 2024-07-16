@@ -1,0 +1,25 @@
+.profile-information {
+  display: flex;
+}
+
+.profile-information img {
+  margin-right: 8px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.information__information {
+  display: flex;
+  flex-direction: column;
+
+  color: var(--Gray-Scale-gray8);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+}
+
+.information__information strong {
+  margin-bottom: 8px;
+}
