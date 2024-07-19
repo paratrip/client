@@ -21,6 +21,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           fill={fillColor}
         >
           <g clipRule='url(#clip0_1_6396)'>
+
             <path
               d='M4.10055 8.85559H0V19.1298H2.16824V10.6252H3.71484C5.0068 10.6106 5.63218 11.309 5.6172 12.3364C5.63218 13.3528 5.0068 14.0622 3.71484 14.0768H2.87975V15.7879H4.07434C6.48225 15.7879 7.87906 14.3656 7.87906 12.3364C7.87906 10.3071 6.51221 8.86656 4.1043 8.85559H4.10055Z'
               fill='#3434FF'
@@ -140,6 +141,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           fill={fillColor}
         >
           <g clipRule='url(#clip0_41_1543)'>
+
             <path
               fillRule='evenodd'
               clipRule='evenodd'
@@ -174,6 +176,146 @@ const renderIcon = (iconType: string, isActive: boolean) => {
             clipRule='evenodd'
             d='M12.7497 13.2857C15.59 13.2857 17.8925 10.9832 17.8925 8.14287C17.8925 5.30254 15.59 3 12.7497 3C9.90935 3 7.6068 5.30254 7.6068 8.14287C7.6068 10.9832 9.90935 13.2857 12.7497 13.2857ZM12.7499 14.5715C8.97653 14.5715 5.74555 16.8936 4.408 20.1867C4.24617 20.5851 4.55456 21 4.9846 21H20.5151C20.9451 21 21.2536 20.5851 21.0917 20.1867C19.7542 16.8936 16.5232 14.5715 12.7499 14.5715Z'
             fill={fillColor}
+          />
+        </svg>
+      );
+    case 'search':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='20'
+          height='20'
+          viewBox='0 0 20 20'
+          fill='none'
+        >
+          <g clipPath='url(#clip0_20_1891)'>
+            <path
+              d='M1 8.99994C1 13.4182 4.58172 16.9999 9 16.9999C13.4183 16.9999 17 13.4182 17 8.99994C17 4.58166 13.4183 0.999939 9 0.999939C4.58172 0.999938 1 4.58166 1 8.99994Z'
+              stroke='#7F828C'
+              stroke-width='2'
+              stroke-linecap='round'
+              stroke-linejoin='round'
+            />
+            <path
+              d='M19 19.0001L15 15'
+              stroke='#7F828C'
+              stroke-width='2'
+              stroke-linecap='round'
+              stroke-linejoin='round'
+            />
+          </g>
+          <defs>
+            <clipPath id='clip0_20_1891'>
+              <rect
+                width='20'
+                height='20'
+                fill='white'
+                transform='translate(20) rotate(90)'
+              />
+            </clipPath>
+          </defs>
+        </svg>
+      );
+    case 'write':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='52'
+          height='52'
+          viewBox='0 0 52 52'
+          fill='none'
+        >
+          <g filter='url(#filter0_d_20_2478)'>
+            <circle cx='26' cy='24' r='20' fill='#3434FF' />
+            <path
+              d='M18 31.5861H34M18 31.5861V27.5861L26 19.5861M18 31.5861L22 31.586L30 23.586M26 19.5861L28.8686 16.7174L28.8704 16.7157C29.2652 16.3208 29.463 16.123 29.691 16.0489C29.8919 15.9837 30.1082 15.9837 30.3091 16.0489C30.5369 16.123 30.7345 16.3205 31.1288 16.7149L32.8686 18.4547C33.2646 18.8507 33.4627 19.0488 33.5369 19.2771C33.6022 19.4779 33.6021 19.6943 33.5369 19.8951C33.4628 20.1233 33.265 20.3211 32.8695 20.7166L32.8686 20.7174L30 23.586M26 19.5861L30 23.586'
+              stroke='white'
+              stroke-width='2'
+              stroke-linecap='round'
+              stroke-linejoin='round'
+            />
+          </g>
+          <defs>
+            <filter
+              id='filter0_d_20_2478'
+              x='0'
+              y='0'
+              width='52'
+              height='52'
+              filterUnits='userSpaceOnUse'
+              color-interpolation-filters='sRGB'
+            >
+              <feFlood flood-opacity='0' result='BackgroundImageFix' />
+              <feColorMatrix
+                in='SourceAlpha'
+                type='matrix'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+                result='hardAlpha'
+              />
+              <feOffset dy='2' />
+              <feGaussianBlur stdDeviation='3' />
+              <feComposite in2='hardAlpha' operator='out' />
+              <feColorMatrix
+                type='matrix'
+                values='0 0 0 0 0.203922 0 0 0 0 0.203922 0 0 0 0 1 0 0 0 0.2 0'
+              />
+              <feBlend
+                mode='normal'
+                in2='BackgroundImageFix'
+                result='effect1_dropShadow_20_2478'
+              />
+              <feBlend
+                mode='normal'
+                in='SourceGraphic'
+                in2='effect1_dropShadow_20_2478'
+                result='shape'
+              />
+            </filter>
+          </defs>
+        </svg>
+      );
+    case 'comment':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='19'
+          height='18'
+          viewBox='0 0 19 18'
+          fill='none'
+        >
+          <path
+            d='M14.1667 4H4.83333C4.47971 4 4.14057 4.13634 3.89052 4.37904C3.64048 4.62173 3.5 4.9509 3.5 5.29412V15L5.81133 13.3176C6.04213 13.1496 6.32284 13.0588 6.61133 13.0588H14.1667C14.5203 13.0588 14.8594 12.9225 15.1095 12.6798C15.3595 12.4371 15.5 12.1079 15.5 11.7647V5.29412C15.5 4.9509 15.3595 4.62173 15.1095 4.37904C14.8594 4.13634 14.5203 4 14.1667 4Z'
+            fill='#9DA0A8'
+          />
+        </svg>
+      );
+    case 'heart':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='19'
+          height='18'
+          viewBox='0 0 19 18'
+          fill='none'
+        >
+          <path
+            d='M14.928 4.67798C16.088 5.83797 16.1324 7.70451 15.0289 8.91835L9.49962 15L3.97109 8.91833C2.8676 7.70449 2.91204 5.83792 4.07202 4.67794C5.36721 3.38275 7.50029 3.50111 8.64453 4.9314L9.5 6.00034L10.3547 4.93128C11.499 3.50098 13.6328 3.38279 14.928 4.67798Z'
+            fill='#9DA0A8'
+          />
+        </svg>
+      );
+    case 'scrap':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='19'
+          height='18'
+          viewBox='0 0 19 18'
+          fill='none'
+        >
+          <path
+            d='M4.5 16V4.44444C4.5 4.04722 4.64 3.7073 4.92 3.42467C5.2 3.14204 5.53619 3.00048 5.92857 3H13.0714C13.4643 3 13.8007 3.14156 14.0807 3.42467C14.3607 3.70778 14.5005 4.0477 14.5 4.44444V16L9.5 13.8333L4.5 16Z'
+            fill='#9DA0A8'
           />
         </svg>
       );
