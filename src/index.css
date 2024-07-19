@@ -158,3 +158,16 @@ button {
   background-color: #ffffff;
   cursor: pointer;
 }
+
+.slick-track {
+  display: flex;
+  margin: 0;
+}
+
+.slick-slide {
+  margin: 0 1rem;
+}
+
+.slick-slide:first-child {
+  margin: 0 1rem 0 0;
+}

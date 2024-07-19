@@ -10,10 +10,10 @@ export default function CommunityHome() {
 
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: false, // ! true 고민 중
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     swipeToSlide: true,
   };
 
@@ -91,12 +91,12 @@ export default function CommunityHome() {
       <div className={style.slideContent}>
         <h1 className={style.title}>이번주 인기 게시글</h1>
         <Slider {...settings}>
-          {[...Array(5)].map((_, index) => (
+          {[...Array(6)].map((_, index) => (
             <div key={index}>
               <div className={style.slide}>
                 <div className={style.userInfo}>
                   <img className={style.userImg} alt='user' />
-                  <p className={style.userName}>나무의자 님</p>
+                  <p className={style.userName}>{index}나무의자 님</p>
                 </div>
                 <p className={style.contentText}>
                   이 풍경 보세요!! 정말 좋은 경험을 간직해보세요
