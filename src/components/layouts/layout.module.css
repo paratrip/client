@@ -29,6 +29,10 @@
   transform: translateX(300px);
 }
 
+/* ! 중앙 배치를 위한 코드 */
 .outletContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
 }
