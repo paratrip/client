@@ -20,7 +20,8 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           viewBox='0 0 54 22'
           fill={fillColor}
         >
-          <g clipPath='url(#clip0_1_6396)'>
+          <g clipRule='url(#clip0_1_6396)'>
+
             <path
               d='M4.10055 8.85559H0V19.1298H2.16824V10.6252H3.71484C5.0068 10.6106 5.63218 11.309 5.6172 12.3364C5.63218 13.3528 5.0068 14.0622 3.71484 14.0768H2.87975V15.7879H4.07434C6.48225 15.7879 7.87906 14.3656 7.87906 12.3364C7.87906 10.3071 6.51221 8.86656 4.1043 8.85559H4.10055Z'
               fill='#3434FF'
@@ -139,7 +140,8 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           viewBox='0 0 24 24'
           fill={fillColor}
         >
-          <g clipPath='url(#clip0_41_1543)'>
+          <g clipRule='url(#clip0_41_1543)'>
+
             <path
               fillRule='evenodd'
               clipRule='evenodd'

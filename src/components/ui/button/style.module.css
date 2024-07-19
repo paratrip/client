@@ -6,4 +6,5 @@
   border-radius: 22px;
   border: none;
   gap: 10px;
+  background: var(--Gray-Scale-gray3);
 }
