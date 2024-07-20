@@ -1,10 +1,11 @@
 import { InputHTMLAttributes, memo } from 'react';
 import style from './style.module.css';
-import { INPUT } from '@constants/text';
+import { INPUT } from '@constants/texts';
 import Icon from '../Icon';
 
 type InputProps = {
   className?: string;
+  onClick?: () => void;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const Input = memo(function Input(props: InputProps) {
