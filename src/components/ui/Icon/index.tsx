@@ -21,7 +21,6 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           fill={fillColor}
         >
           <g clipRule='url(#clip0_1_6396)'>
-
             <path
               d='M4.10055 8.85559H0V19.1298H2.16824V10.6252H3.71484C5.0068 10.6106 5.63218 11.309 5.6172 12.3364C5.63218 13.3528 5.0068 14.0622 3.71484 14.0768H2.87975V15.7879H4.07434C6.48225 15.7879 7.87906 14.3656 7.87906 12.3364C7.87906 10.3071 6.51221 8.86656 4.1043 8.85559H4.10055Z'
               fill='#3434FF'
@@ -141,7 +140,6 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           fill={fillColor}
         >
           <g clipRule='url(#clip0_41_1543)'>
-
             <path
               fillRule='evenodd'
               clipRule='evenodd'
@@ -192,16 +190,16 @@ const renderIcon = (iconType: string, isActive: boolean) => {
             <path
               d='M1 8.99994C1 13.4182 4.58172 16.9999 9 16.9999C13.4183 16.9999 17 13.4182 17 8.99994C17 4.58166 13.4183 0.999939 9 0.999939C4.58172 0.999938 1 4.58166 1 8.99994Z'
               stroke='#7F828C'
-              stroke-width='2'
-              stroke-linecap='round'
-              stroke-linejoin='round'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             />
             <path
               d='M19 19.0001L15 15'
               stroke='#7F828C'
-              stroke-width='2'
-              stroke-linecap='round'
-              stroke-linejoin='round'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             />
           </g>
           <defs>
@@ -230,9 +228,9 @@ const renderIcon = (iconType: string, isActive: boolean) => {
             <path
               d='M18 31.5861H34M18 31.5861V27.5861L26 19.5861M18 31.5861L22 31.586L30 23.586M26 19.5861L28.8686 16.7174L28.8704 16.7157C29.2652 16.3208 29.463 16.123 29.691 16.0489C29.8919 15.9837 30.1082 15.9837 30.3091 16.0489C30.5369 16.123 30.7345 16.3205 31.1288 16.7149L32.8686 18.4547C33.2646 18.8507 33.4627 19.0488 33.5369 19.2771C33.6022 19.4779 33.6021 19.6943 33.5369 19.8951C33.4628 20.1233 33.265 20.3211 32.8695 20.7166L32.8686 20.7174L30 23.586M26 19.5861L30 23.586'
               stroke='white'
-              stroke-width='2'
-              stroke-linecap='round'
-              stroke-linejoin='round'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             />
           </g>
           <defs>
@@ -243,9 +241,9 @@ const renderIcon = (iconType: string, isActive: boolean) => {
               width='52'
               height='52'
               filterUnits='userSpaceOnUse'
-              color-interpolation-filters='sRGB'
+              colorInterpolationFilters='sRGB'
             >
-              <feFlood flood-opacity='0' result='BackgroundImageFix' />
+              <feFlood floodOpacity='0' result='BackgroundImageFix' />
               <feColorMatrix
                 in='SourceAlpha'
                 type='matrix'
@@ -317,6 +315,69 @@ const renderIcon = (iconType: string, isActive: boolean) => {
             d='M4.5 16V4.44444C4.5 4.04722 4.64 3.7073 4.92 3.42467C5.2 3.14204 5.53619 3.00048 5.92857 3H13.0714C13.4643 3 13.8007 3.14156 14.0807 3.42467C14.3607 3.70778 14.5005 4.0477 14.5 4.44444V16L9.5 13.8333L4.5 16Z'
             fill='#9DA0A8'
           />
+        </svg>
+      );
+    case 'topArrow':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='52'
+          height='52'
+          viewBox='0 0 52 52'
+          fill='none'
+        >
+          <g filter='url(#filter0_d_20_2494)'>
+            <circle cx='26' cy='24' r='19.5' fill='white' stroke='#5F5FFF' />
+            <path
+              d='M26 32V16'
+              stroke='#3434FF'
+              strokeWidth='2'
+              strokeLinecap='round'
+            />
+            <path
+              d='M20 22L26 16L32 22'
+              stroke='#3434FF'
+              strokeWidth='2'
+              strokeLinecap='round'
+            />
+          </g>
+          <defs>
+            <filter
+              id='filter0_d_20_2494'
+              x='0'
+              y='0'
+              width='52'
+              height='52'
+              filterUnits='userSpaceOnUse'
+              colorInterpolationFilters='sRGB'
+            >
+              <feFlood floodOpacity='0' result='BackgroundImageFix' />
+              <feColorMatrix
+                in='SourceAlpha'
+                type='matrix'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+                result='hardAlpha'
+              />
+              <feOffset dy='2' />
+              <feGaussianBlur stdDeviation='3' />
+              <feComposite in2='hardAlpha' operator='out' />
+              <feColorMatrix
+                type='matrix'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0'
+              />
+              <feBlend
+                mode='normal'
+                in2='BackgroundImageFix'
+                result='effect1_dropShadow_20_2494'
+              />
+              <feBlend
+                mode='normal'
+                in='SourceGraphic'
+                in2='effect1_dropShadow_20_2494'
+                result='shape'
+              />
+            </filter>
+          </defs>
         </svg>
       );
     default:

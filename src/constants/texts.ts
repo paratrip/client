@@ -1,6 +1,6 @@
-export const TEXT = {
+export const TITLE = {
   COMMUNITY: {
-    TITLE: '이번주 인기 게시글',
+    TOPPOST: '이번주 인기 게시글',
   },
 };
 
