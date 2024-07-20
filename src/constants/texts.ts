@@ -1,6 +1,10 @@
 export const TITLE = {
   COMMUNITY: {
     TOPPOST: '이번주 인기 게시글',
+    NODATA: {
+      ALL: '게시글이 없습니다.',
+      MINE: '작성한 게시글이 없습니다.',
+    },
   },
 };
 

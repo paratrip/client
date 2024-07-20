@@ -115,6 +115,36 @@ export default function CommunityHome() {
     },
   ];
 
+  const postMineData = [
+    {
+      userName: '나무의자1',
+      userImg: '',
+      postImg: '',
+      postTitle:
+        '1이 풍경 보세요!! 정말 좋은 경험을 간직해보세요11이 풍경 보세요!! 정말 좋은 경험을 간직해보세요11이 풍경 보세요!! 정말 좋은 경험을 간직해보세요11이 풍경 보세요!! 정말 좋은 경험을 간직해보세요1',
+      postDate: '1일 전',
+      location: '지역1',
+      postStatus: {
+        comment: 1,
+        heart: 2,
+        scrap: 3,
+      },
+    },
+    {
+      userName: '나무의자2',
+      userImg: '',
+      postImg: '',
+      postTitle: '2이 풍경 보세요!! 정말 좋은 경험을 간직해보세요2',
+      postDate: '2일 전',
+      location: '지역2',
+      postStatus: {
+        comment: 1,
+        heart: 2,
+        scrap: 3,
+      },
+    },
+  ];
+
   const handleSearch = () => {
     console.log('검색');
   };
@@ -154,7 +184,7 @@ export default function CommunityHome() {
         {postToggle ? (
           <CustomPost data={postData} postType={'ALL'} />
         ) : (
-          <CustomPost data={postData} postType={'MY'} />
+          <CustomPost data={postMineData} postType={'MY'} />
         )}
       </div>
     </>

@@ -26,6 +26,16 @@
   position: relative;
 }
 
+.navButtonTitle {
+  color: var(--Gray-Gray6, #9da0a8);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%; /* 16.8px */
+}
+
 .activeText {
   color: #3434ff;
 }
