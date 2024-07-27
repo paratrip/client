@@ -3,11 +3,32 @@ import Slider from 'react-slick';
 import { TITLE } from '@constants/texts';
 import { useNavigate } from 'react-router-dom';
 
+import Card from '../card';
+import RecommendLocationCard from '@components/home/recommend-location-card/RecommendCard';
+
+type Post = {
+  postImg: string;
+  postTitle: string;
+};
+
+type PostData = {
+  user: string;
+  userImg: string;
+} & Post;
+
+type HomeData = {
+  postImg: string;
+  postTitle: string;
+  location: string;
+  likeCount: number;
+  price: number;
+} & Post;
+
 type SliderProps = {
-  data: { user: string; userImg: string; postImg: string; postTitle: string }[];
-  sliderType: string;
+  data: PostData[] | HomeData[] | Post[];
+  sliderType: 'communityTopPost' | 'homeRecommendPost' | 'homeLocation';
   filter: boolean;
-  moreBtn: boolean;
+  moreBtn?: boolean;
 };
 
 export default function CustomSlider(props: SliderProps) {
@@ -19,7 +40,7 @@ export default function CustomSlider(props: SliderProps) {
     ...rest
   } = props;
 
-  const navigetion = useNavigate();
+  const navigation = useNavigate();
 
   const sliderSettings = {
     dots: false,
@@ -33,15 +54,43 @@ export default function CustomSlider(props: SliderProps) {
 
   const handleMoreView = () => {
     console.log('더보기 클릭');
-    navigetion('/'); //TODO: 더보기 클릭시 이동할 페이지 추가
+    navigation('/'); //TODO: 더보기 클릭시 이동할 페이지 추가
   };
+
+  // 지역별 패러글라이딩 장소 추천
+  if (sliderType === 'homeRecommendPost') {
+    return (
+      <div className={style.SliderContainer}>
+        <Slider {...sliderSettings}>
+          {(data as HomeData[]).map((item: HomeData, index: number) => (
+            <div key={'*' + index} className={style.SliderItem}>
+              <Card {...item} />
+            </div>
+          ))}
+        </Slider>
+      </div>
+    );
+  }
+
+  // 지역 추천
+  if (sliderType === 'homeLocation') {
+    return (
+      <div className={style.SliderContainer}>
+        <Slider {...sliderSettings}>
+          {(data as Post[]).map((item: Post, index: number) => (
+            <div key={'*' + index} className={style.SliderItem}>
+              <RecommendLocationCard {...item} />
+            </div>
+          ))}
+        </Slider>
+      </div>
+    );
+  }
 
   return (
     <div className={style.sliderMainContainer}>
       <div className={style.titleContainer}>
-        <h1 className={style.title}>
-          {sliderType === 'communityTopPost' ? TITLE.COMMUNITY.TOPPOST : 'none'}
-        </h1>
+        <h1 className={style.title}>{TITLE.COMMUNITY.TOPPOST}</h1>
 
         {/* //TODO: 더보기 버튼 클릭시 이동할 페이지 추가 */}
         {moreBtn && (
@@ -55,23 +104,19 @@ export default function CustomSlider(props: SliderProps) {
       {filter && <>필터</>}
 
       <div className={style.SliderContainer}>
-        {sliderType === 'communityTopPost' ? (
-          <Slider {...sliderSettings}>
-            {data.map((item, index) => (
-              <div key={index} className={style.SliderItem}>
-                <div className={style.SliderContent}>
-                  <div className={style.userInfo}>
-                    <img className={style.userImg} alt='user' />
-                    <p className={style.userName}>{item.user} 님</p>
-                  </div>
-                  <p className={style.contentText}>{item.postTitle}</p>
+        <Slider {...sliderSettings}>
+          {(data as PostData[]).map((item: PostData, index: number) => (
+            <div key={index} className={style.SliderItem}>
+              <div className={style.SliderContent}>
+                <div className={style.userInfo}>
+                  <img className={style.userImg} alt='user' />
+                  <p className={style.userName}>{item.user} 님</p>
                 </div>
+                <p className={style.contentText}>{item.postTitle}</p>
               </div>
-            ))}
-          </Slider>
-        ) : (
-          <div>여기에 추가</div> // TODO: 슬라이드할 컴포넌트 추가
-        )}
+            </div>
+          ))}
+        </Slider>
       </div>
     </div>
   );
