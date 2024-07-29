@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import logo from '@assets/logo.svg';
 import kakao from '@assets/icons/kakao.svg';
 
-import AuthContainer from '@components/auth/auth-container';
+import AuthContainer from '@components/auth/auth-container/AuthContainer';
 import Button from '@components/ui/button';
 
-import style from './style.module.css';
+import style from './Login.module.css';
 
 export default function Login() {
   return (
