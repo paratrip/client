@@ -1,4 +1,4 @@
-import style from './style.module.css';
+import style from './AuthContainer.module.css';
 
 type AuthContainerProps = {
   children: React.ReactNode;

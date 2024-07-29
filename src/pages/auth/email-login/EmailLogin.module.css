@@ -1,0 +1,27 @@
+.form__checkbox {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+
+  color: var(--Gray-Scale-gray7);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 14px */
+  letter-spacing: -0.056px;
+
+  margin-bottom: 35px;
+}
+
+.form__checkbox input {
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+  border-radius: 10px;
+}
+
+.container__nav span {
+  margin: 0 10px;
+  stroke-width: 1px;
+  stroke: var(--Gray-Scale-gray4);
+}
