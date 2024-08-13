@@ -149,6 +149,17 @@ a {
   color: #666;
 }
 
+input {
+  border: none;
+  outline: none;
+}
+
+textarea {
+  border: none;
+  outline: none;
+  resize: none;
+}
+
 :root {
   --Gray-Scale-black: #000;
   --Gray-Scale-gray2: #eff1f4;

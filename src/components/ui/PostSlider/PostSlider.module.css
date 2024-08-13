@@ -1,0 +1,54 @@
+/* PostSlider.module.css */
+.sliderContainer {
+  position: relative;
+}
+
+.sliderContainer :global(.slick-slider .slick-track),
+.sliderContainer :global(.slick-slider .slick-list) {
+  display: flex;
+  align-items: center;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.slideItem {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.slideItem img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+.sliderContainer :global(.slick-slide),
+.sliderContainer :global(.slick-active),
+.sliderContainer :global(.slick-center),
+.sliderContainer :global(.slick-current) {
+  margin: 0 !important;
+}
+
+.sliderContainer .slideCounter {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 10px 16px;
+  border-radius: 17px;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+
+  color: #fff;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%; /* 14px */
+}
