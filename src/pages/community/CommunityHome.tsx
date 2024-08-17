@@ -1,6 +1,6 @@
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Input from '@components/ui/input';
+import Input from '@components/ui/search-input';
 import CustomSlider from '@components/ui/CustomSlider';
 import CustomPost from '@components/Community/Post';
 import { useState } from 'react';

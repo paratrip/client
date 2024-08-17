@@ -1,4 +1,4 @@
-import style from './AuthButton.module.css';
+import style from './auth-button.module.css';
 
 type AuthButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
