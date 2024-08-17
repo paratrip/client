@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import logo from '@assets/logo.svg';
 import kakao from '@assets/icons/kakao.svg';
 
-import AuthContainer from '@components/auth/auth-container/AuthContainer';
+import AuthContainer from '@components/auth/common/auth-container';
 import Button from '@components/ui/button';
 
 import style from './Login.module.css';

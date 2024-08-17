@@ -1,5 +1,6 @@
 import Login from '@pages/auth/login/Login';
 import EmailLogin from '@pages/auth/email-login/EmailLogin';
+import SignUp from '@pages/auth/sign-up/SignUp';
 
 export const AUTH_ROUTES = [
   {
@@ -13,6 +14,7 @@ export const AUTH_ROUTES = [
 
   {
     path: 'signup',
+    element: <SignUp />,
   },
   {
     path: 'forgot-password',

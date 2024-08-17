@@ -16,7 +16,7 @@
 .container__kakao,
 .container__email {
   display: flex;
-  width: 296px;
+  width: 375px;
   height: 48px;
   padding: 10px 6px;
   justify-content: center;
@@ -24,7 +24,10 @@
   gap: 10px;
   border-radius: 6px;
   background: #f9e200;
-  margin-bottom: 10px;
+}
+
+.container__kakao {
+  margin-bottom: 18px;
 }
 
 .container__kakao span {
@@ -42,6 +45,7 @@
   background: #fff;
   border: 1px solid #3434ff;
   color: #3434ff;
+  margin-bottom: 20px;
 }
 
 .section__header {

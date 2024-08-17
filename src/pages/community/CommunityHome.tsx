@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+
 import CustomSlider from '@components/ui/CustomSlider';
 import CustomPost from '@components/Community/Post';
 import style from './CommunityHome.module.css';

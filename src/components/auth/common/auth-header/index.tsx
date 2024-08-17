@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import ActionButton from '@components/ui/action-button';
 
-import style from './AuthHeader.module.css';
+import style from './auth-header.module.css';
 
 type AuthHeaderProps = {
   title: string;

@@ -1,11 +1,11 @@
-import AuthInput from '@components/auth/auth-input/AuthInput';
+import AuthInput from '@components/auth/common/auth-input';
 import Button from '@components/ui/button';
 import { Link } from 'react-router-dom';
 
 import line from '@assets/icons/line.svg';
-import AuthContainer from '@components/auth/auth-container/AuthContainer';
-import AuthHeader from '@components/auth-header/AuthHeader';
-import AuthButton from '@components/auth/auth-button/AuthButton';
+import AuthContainer from '@components/auth/common/auth-container';
+import AuthHeader from '@components/auth/common/auth-header';
+import AuthButton from '@components/auth/common/auth-button';
 
 import style from './EmailLogin.module.css';
 
