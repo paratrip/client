@@ -1,6 +1,7 @@
 import Icon from '@components/ui/Icon';
 import style from './Post.module.css';
 import { TITLE } from '@constants/texts';
+import { useNavigate } from 'react-router-dom';
 
 type PostProps = {
   postType: string;
@@ -21,6 +22,7 @@ type PostProps = {
 
 const CustomPost = (props: PostProps) => {
   const { postType, data } = props;
+  const navigate = useNavigate();
 
   const handleEdit = () => {
     console.log('수정');
@@ -31,6 +33,7 @@ const CustomPost = (props: PostProps) => {
 
   const handleWritePost = () => {
     console.log('글쓰기');
+    navigate('/community/write');
   };
 
   const handleOnTop = () => {

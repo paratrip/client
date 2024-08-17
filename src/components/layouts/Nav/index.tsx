@@ -9,7 +9,7 @@ const Nav = () => {
   const currentPath = location.pathname;
 
   const buttons = [
-    { path: '/', iconType: 'home', title: '홈' },
+    { path: '/home', iconType: 'home', title: '홈' },
     { path: '/tour-course', iconType: 'tour-course', title: '관광코스' },
     { path: '/community', iconType: 'community', title: '커뮤니티' },
     { path: '/mypage', iconType: 'mypage', title: '마이페이지' },
@@ -21,17 +21,17 @@ const Nav = () => {
         <button
           key={button.path}
           className={`${style.navButton} ${
-            currentPath === button.path ? style.active : ''
+            currentPath.includes(button.path) ? style.active : ''
           }`}
           onClick={() => navigate(button.path)}
         >
           <Icon
             iconType={button.iconType}
-            isActive={currentPath === button.path}
+            isActive={currentPath.includes(button.path)}
           />
           <p
             className={`${style.navButtonTitle} ${
-              currentPath === button.path ? style.activeText : ''
+              currentPath.includes(button.path) ? style.activeText : ''
             }`}
           >
             {button.title}

@@ -28,7 +28,8 @@ type SliderProps = {
   data: PostData[] | HomeData[] | Post[];
   sliderType: 'communityTopPost' | 'homeRecommendPost' | 'homeLocation';
   filter: boolean;
-  moreBtn?: boolean;
+  moreBtn: boolean;
+  moreBtnPath: string;
 };
 
 export default function CustomSlider(props: SliderProps) {
@@ -37,6 +38,7 @@ export default function CustomSlider(props: SliderProps) {
     filter = false,
     sliderType = '',
     moreBtn = false,
+    moreBtnPath,
     ...rest
   } = props;
 
@@ -54,7 +56,8 @@ export default function CustomSlider(props: SliderProps) {
 
   const handleMoreView = () => {
     console.log('더보기 클릭');
-    navigation('/'); //TODO: 더보기 클릭시 이동할 페이지 추가
+    // navigetion('/'); //TODO: 더보기 클릭시 이동할 페이지 추가
+    navigation(moreBtnPath);
   };
 
   // 지역별 패러글라이딩 장소 추천

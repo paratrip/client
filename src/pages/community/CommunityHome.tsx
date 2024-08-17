@@ -1,18 +1,26 @@
+import { useState } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Input from '@components/ui/search-input';
+
 import CustomSlider from '@components/ui/CustomSlider';
 import CustomPost from '@components/Community/Post';
-import { useState } from 'react';
 import style from './CommunityHome.module.css';
+import SearchInput from '@components/ui/SearchInput';
+import { Outlet, useLocation } from 'react-router-dom';
+import Header from '@components/layouts/Header';
 
 export default function CommunityHome() {
+  const location = useLocation();
+  const hideParent =
+    location.pathname.includes('/community/detail') ||
+    location.pathname.includes('/community/write');
+
   const [postToggle, setPostToggle] = useState(true);
 
   const handlePostToggle = () => {
     setPostToggle(!postToggle);
   };
-
+  // 임시 데이터
   const slidesData = [
     {
       user: '나무의자1',
@@ -45,7 +53,6 @@ export default function CommunityHome() {
       postTitle: '5이 풍경 보세요!! 정말 좋은 경험을 간직해보세요5',
     },
   ];
-
   const postData = [
     {
       userName: '나무의자1',
@@ -114,7 +121,6 @@ export default function CommunityHome() {
       },
     },
   ];
-
   const postMineData = [
     {
       userName: '나무의자1',
@@ -145,18 +151,23 @@ export default function CommunityHome() {
     },
   ];
 
+  // [ ] 검색 핸들러
   const handleSearch = () => {
     console.log('검색');
   };
 
-  return (
+  return hideParent ? (
+    <Outlet />
+  ) : (
     <>
-      <Input onClick={handleSearch} />
+      <Header main={true} />
+      <SearchInput onClick={handleSearch} />
       <CustomSlider
         data={slidesData}
         sliderType={'communityTopPost'}
-        filter={true}
+        filter={false}
         moreBtn={true}
+        moreBtnPath={'/community'}
       />
       <div className={style.postContainer}>
         <div className={style.buttonWrap}>
@@ -187,6 +198,7 @@ export default function CommunityHome() {
           <CustomPost data={postMineData} postType={'MY'} />
         )}
       </div>
+      <Outlet />
     </>
   );
 }
