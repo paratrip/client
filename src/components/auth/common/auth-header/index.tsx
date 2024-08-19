@@ -9,15 +9,21 @@ import style from './auth-header.module.css';
 type AuthHeaderProps = {
   title: string;
   type?: 'progress' | 'none';
+  width: number;
+  customBack?: string;
 };
 
 export default function AuthHeader(props: AuthHeaderProps) {
-  const { title, type = 'none' } = props;
+  const { title, type = 'none', width, customBack } = props;
 
   const navigate = useNavigate();
 
   function backHandler() {
-    navigate(-1);
+    if (customBack) {
+      navigate(customBack);
+    } else {
+      navigate(-1);
+    }
   }
 
   return (
@@ -33,6 +39,11 @@ export default function AuthHeader(props: AuthHeaderProps) {
 
         <div />
       </section>
+      {type === 'progress' && (
+        <div className={style.progress}>
+          <div className={style.bar} style={{ width: `${width}%` }} />
+        </div>
+      )}
     </header>
   );
 }

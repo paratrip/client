@@ -559,11 +559,6 @@
   dependencies:
     "@swc/core" "^1.5.7"
 
-"@xionhub/funnel-app-router-adapter@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@xionhub/funnel-app-router-adapter/-/funnel-app-router-adapter-0.0.5.tgz#acb5059f735ec86582adb07dbc4570bbf96df38c"
-  integrity sha512-hPxxqVR1MeOy12BxvIOskoH/3K7AwjQpQQI1INdGgRKu764iiTA/0nk5nrK8loiqz2ab03Kmu1c808n9zb54pQ==
-
 "@xionhub/funnel-client@^0.0.5":
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/@xionhub/funnel-client/-/funnel-client-0.0.5.tgz#7ef331a816917a82bd34d950e9b6433ea1953c6a"
@@ -573,6 +568,11 @@
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/@xionhub/funnel-core/-/funnel-core-0.0.5.tgz#66716cc6533de2fa22b12c319faa2462ad9b3b7d"
   integrity sha512-YIMmxPNPFpdisoZnD611YqwiNFxRTmljPiss6uRAywBKLCi1wCdw+astmu4W2CFUo6pCoUufBinUPvFaVWCX4Q==
+
+"@xionhub/funnel-react-router-dom-adapter@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@xionhub/funnel-react-router-dom-adapter/-/funnel-react-router-dom-adapter-0.0.4.tgz#ca57cee37ed974e5572eac0ea4487ff5e512eac7"
+  integrity sha512-F8weCta2HnnCAGsSmUOeKfxweiPpj6gKpWgmMavp/6Xvegi5Ak2XalB6oCSqxFa5tHmE1j/x3pGBHJEmLnUhYg==
 
 acorn-jsx@^5.3.2:
   version "5.3.2"
