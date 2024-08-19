@@ -27,7 +27,7 @@ export default function EmailLogin() {
       </form>
 
       <nav className={style.container__nav}>
-        <Link to='/signup'>회원가입</Link>
+        <Link to='/sign-up'>회원가입</Link>
         <span>
           <img src={line} alt='line' />
         </span>

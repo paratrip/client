@@ -1,0 +1,14 @@
+.funnel__header {
+  width: 100%;
+  padding: 24px 24px 0px 24px;
+  text-align: left;
+}
+
+.header__heading {
+  color: #000;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%; /* 39.2px */
+  letter-spacing: -0.168px;
+}

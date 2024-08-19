@@ -13,7 +13,7 @@ export const AUTH_ROUTES = [
   },
 
   {
-    path: 'signup',
+    path: 'sign-up',
     element: <SignUp />,
   },
   {

@@ -1,0 +1,35 @@
+.funnel-input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 24px;
+  margin-bottom: 5px;
+}
+
+.container__default-input,
+.container__duplication-input {
+  padding: 18px 16px;
+  gap: 10px;
+}
+
+.container__default-input {
+  width: 552px;
+}
+
+.container__duplication-input {
+  display: flex;
+
+  width: 459px;
+  align-items: center;
+  margin-right: 8px;
+}
+
+.container__button {
+  display: flex;
+  padding: 18px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--Gray-Scale-gray4);
+  color: var(--Gray-Scale-gray4);
+}

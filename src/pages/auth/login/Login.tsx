@@ -34,8 +34,8 @@ export default function Login() {
         </header>
 
         <nav className={style.section__nav}>
-          <Link to='register'>회원가입</Link>
-          <Link to='find'>계정 찾기</Link>
+          <Link to='/sign-up'>회원가입</Link>
+          <Link to='/find'>계정 찾기</Link>
         </nav>
       </section>
     </AuthContainer>

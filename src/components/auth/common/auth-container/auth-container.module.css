@@ -8,12 +8,20 @@
   background-color: #d9d9d9;
 }
 
-.container__box {
+.container__content,
+.container__funnel {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 600px;
   height: 100%;
   background-color: #fff;
+}
+
+.container__content {
+  justify-content: center;
+}
+
+.container__funnel {
+  padding-top: 110px;
 }
