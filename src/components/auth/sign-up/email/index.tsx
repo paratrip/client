@@ -17,7 +17,7 @@ export default function Email(props: EmailProps) {
     <AuthContainer type='funnel'>
       <FunnelHeader heading='이메일을 입력해주세요.' />
 
-      <FunnelInput type='duplication' />
+      <FunnelInput inputStyle='duplication' placeholder='이메일 주소' />
 
       <FunnelButton setStep={setStep}>다음단계</FunnelButton>
     </AuthContainer>

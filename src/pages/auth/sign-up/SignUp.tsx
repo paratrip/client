@@ -11,8 +11,10 @@ import AuthContainer from '@components/auth/common/auth-container';
 import { useFunnelDefaultStep } from '@xionhub/funnel-core';
 import Password from '@components/auth/sign-up/password';
 import Information from '@components/auth/sign-up/information';
+import Terms from '@components/auth/sign-up/terms';
+import Finish from '@components/auth/sign-up/finish';
 
-type Step = 'email' | 'password' | 'information' | 'finish';
+type Step = 'email' | 'password' | 'information' | 'terms' | 'finish';
 
 export default function SingUp() {
   const [Funnel, { createStep, step }] = useFunnel(basicFunnelOptions());
@@ -28,21 +30,24 @@ export default function SingUp() {
   useEffect(() => {
     switch (step) {
       case 'email':
-        setProgressWith(25);
+        setProgressWith(20);
         setCustomBack('/login');
         break;
       case 'password':
-        setProgressWith(50);
+        setProgressWith(40);
         setCustomBack('');
         break;
       case 'information':
-        setProgressWith(75);
+        setProgressWith(60);
+        setCustomBack('');
+        break;
+      case 'terms':
+        setProgressWith(80);
         setCustomBack('');
         break;
       case 'finish':
         setProgressWith(100);
         setCustomBack('');
-        break;
     }
   }, [step]);
 
@@ -55,7 +60,7 @@ export default function SingUp() {
   }
 
   return (
-    <AuthContainer>
+    <AuthContainer type='default'>
       <AuthHeader
         title='회원가입'
         type='progress'
@@ -71,7 +76,13 @@ export default function SingUp() {
           <Password setStep={() => stepHandler('information')} />
         </Funnel.Step>
         <Funnel.Step name='information'>
-          <Information setStep={() => stepHandler('information')} />
+          <Information setStep={() => stepHandler('terms')} />
+        </Funnel.Step>
+        <Funnel.Step name='terms'>
+          <Terms setStep={() => stepHandler('finish')} />
+        </Funnel.Step>
+        <Funnel.Step name='finish'>
+          <Finish />
         </Funnel.Step>
       </Funnel>
     </AuthContainer>
