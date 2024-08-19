@@ -1,4 +1,3 @@
-import AuthContainer from '@components/auth/common/auth-container';
 import FunnelHeader from '@components/auth/common/funnel-header';
 import { Link } from 'react-router-dom';
 
@@ -28,7 +27,7 @@ const INFORMATION = [
 
 export default function Finish() {
   return (
-    <AuthContainer type='funnel'>
+    <>
       <FunnelHeader heading='회원가입이 완료되었습니다!' />
 
       <section className={styles.funnel__section}>
@@ -58,9 +57,9 @@ export default function Finish() {
         </article>
       </section>
 
-      <Link className={styles.button} to='/login'>
+      <Link className={styles.button} to='/auth/email'>
         로그인하러 가기
       </Link>
-    </AuthContainer>
+    </>
   );
 }

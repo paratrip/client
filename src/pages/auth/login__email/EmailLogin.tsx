@@ -11,7 +11,7 @@ import style from './EmailLogin.module.css';
 
 export default function EmailLogin() {
   return (
-    <AuthContainer>
+    <AuthContainer type='default'>
       <AuthHeader title='로그인' />
 
       <form>

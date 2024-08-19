@@ -9,7 +9,7 @@ import style from './auth-header.module.css';
 type AuthHeaderProps = {
   title: string;
   type?: 'progress' | 'none';
-  width: number;
+  width?: number;
   customBack?: string;
 };
 
