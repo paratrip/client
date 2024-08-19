@@ -2,13 +2,16 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 24px;
+  padding: 24px 24px 0 24px;
   margin-bottom: 5px;
 }
 
 .container__default-input,
-.container__duplication-input {
+.container__duplication-input,
+.container__certification-input {
   padding: 18px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--Gray-Scale-gray4);
   gap: 10px;
 }
 
@@ -16,9 +19,9 @@
   width: 552px;
 }
 
+.container__certification-input,
 .container__duplication-input {
   display: flex;
-
   width: 459px;
   align-items: center;
   margin-right: 8px;

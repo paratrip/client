@@ -18,7 +18,11 @@ export default function Password(props: PasswordProps) {
     <AuthContainer type='funnel'>
       <FunnelHeader heading='비밀번호를 입력해주세요.' />
 
-      <FunnelInput type='default' />
+      <FunnelInput
+        inputStyle='default'
+        placeholder='비밀번호'
+        type='password'
+      />
 
       <FunnelButton setStep={setStep}>다음단계</FunnelButton>
     </AuthContainer>
