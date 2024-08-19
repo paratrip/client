@@ -1,29 +1,27 @@
 import { useEffect, useReducer, useState } from 'react';
 import { useNavigate, useLocation, useNavigationType } from 'react-router-dom';
 import { useFunnel } from '@xionhub/funnel-react-router-dom-adapter';
+import { useFunnelDefaultStep } from '@xionhub/funnel-core';
 
-import { basicFunnelOptions } from '@utils/funnel-option';
+import { signUpFunnelOptions } from '@utils/funnel/option';
 import { signUpInitialState, signUpReducer } from '@utils/reducer/auth-reducer';
 
 import Email from '@components/auth/sign-up/email';
 import AuthHeader from '@components/auth/common/auth-header';
 import AuthContainer from '@components/auth/common/auth-container';
-import { useFunnelDefaultStep } from '@xionhub/funnel-core';
 import Password from '@components/auth/sign-up/password';
 import Information from '@components/auth/sign-up/information';
 import Terms from '@components/auth/sign-up/terms';
 import Finish from '@components/auth/sign-up/finish';
 
-type Step = 'email' | 'password' | 'information' | 'terms' | 'finish';
+import { type SignUpStep } from '@utils/funnel/types/funnel-types';
 
 export default function SingUp() {
-  const [Funnel, { createStep, step }] = useFunnel(basicFunnelOptions());
+  const [Funnel, { createStep, step }] = useFunnel(signUpFunnelOptions());
   const [progressWidth, setProgressWith] = useState<number>(25);
   const [customBack, setCustomBack] = useState<string>('');
 
   const navigate = useNavigate();
-  const navigationType = useNavigationType();
-  const location = useLocation();
 
   const [authState, dispatch] = useReducer(signUpReducer, signUpInitialState);
 
@@ -31,7 +29,7 @@ export default function SingUp() {
     switch (step) {
       case 'email':
         setProgressWith(20);
-        setCustomBack('/login');
+        setCustomBack('/auth');
         break;
       case 'password':
         setProgressWith(40);
@@ -55,12 +53,12 @@ export default function SingUp() {
     navigate(createStep('email'), { replace: true });
   });
 
-  function stepHandler(step: Step) {
+  function stepHandler(step: SignUpStep) {
     navigate(createStep(step, {}));
   }
 
   return (
-    <AuthContainer type='default'>
+    <AuthContainer type='funnel'>
       <AuthHeader
         title='회원가입'
         type='progress'

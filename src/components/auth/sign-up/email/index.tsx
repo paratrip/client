@@ -6,20 +6,18 @@ import FunnelHeader from '@components/auth/common/funnel-header';
 import FunnelInput from '@components/auth/common/funnel-input';
 import FunnelButton from '@components/auth/common/funnel-button';
 
-type EmailProps = {
-  setStep: () => void;
-};
+import { type FunnelProps } from '@utils/funnel/types/funnel-types';
 
-export default function Email(props: EmailProps) {
+export default function Email(props: FunnelProps) {
   const { setStep } = props;
 
   return (
-    <AuthContainer type='funnel'>
+    <>
       <FunnelHeader heading='이메일을 입력해주세요.' />
 
       <FunnelInput inputStyle='duplication' placeholder='이메일 주소' />
 
       <FunnelButton setStep={setStep}>다음단계</FunnelButton>
-    </AuthContainer>
+    </>
   );
 }
