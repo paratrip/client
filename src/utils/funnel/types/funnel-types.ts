@@ -11,4 +11,4 @@ export type SignUpStep =
 
 export type RecoveryEmailStep = 'phone-number' | 'finish';
 
-export type RecoveryPasswordStep = 'phone-number' | 'recovery' | 'finish';
+export type RecoveryPasswordStep = 'phone-number' | 'password' | 'finish';

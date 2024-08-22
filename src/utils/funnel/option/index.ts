@@ -13,3 +13,10 @@ export const recoveryEmailFunnelOption = () =>
     funnelId: '',
     defaultPrefix: '/account-recovery/email',
   });
+
+export const recoveryPasswordFunnelOption = () =>
+  funnelOptions({
+    steps: ['phone-number', 'password', 'finish'],
+    funnelId: '',
+    defaultPrefix: '/account-recovery/password',
+  });
