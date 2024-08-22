@@ -1,0 +1,22 @@
+.section {
+  margin-top: 66px;
+}
+
+.section header {
+  margin-bottom: 14px;
+}
+
+.section header h2 {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+.location__filter {
+  display: flex;
+  margin-bottom: 24px;
+}
+.location__filter button {
+  margin-right: 8px;
+}

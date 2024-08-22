@@ -1,12 +1,18 @@
 .list-card {
   display: flex;
+  flex-direction: column;
 }
 
 .list-card div:first-child {
   margin-right: 14px;
 }
 
-.list-card .information {
+.card__content {
+  display: flex;
+  margin: 20px 0;
+}
+
+.information {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,8 +30,16 @@
   margin-bottom: 18px;
 }
 
+.information__price p {
+  color: var(--gray-Scale-gray7);
+}
+
 .card__image {
   width: 187px;
   height: 137px;
   border-radius: 10px;
+}
+
+.footer {
+  width: 100%;
 }
