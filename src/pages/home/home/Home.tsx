@@ -103,7 +103,7 @@ export default function Home() {
 
       <Container>
         <section className={style.main__location}>
-          <MoreHeader title='지역별 패러글라이딩 장소' to='/location' />
+          <MoreHeader title='지역별 패러글라이딩 장소' to='location' />
 
           <nav className={style.location__filter}>
             <Button>전체</Button>
@@ -121,7 +121,7 @@ export default function Home() {
         </section>
 
         <section className={style.main__location}>
-          <MoreHeader title='인기 TOP 패러글라이딩' to='/popular' />
+          <MoreHeader title='인기 TOP 패러글라이딩' to='popular' />
 
           <nav className={style.location__filter}>
             <Button>전체</Button>

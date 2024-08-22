@@ -12,18 +12,18 @@ export const HOME_ROUTES = [
         element: <Home />,
       },
       {
-        path: '/:id',
+        path: ':id',
         element: <Detail />,
       },
-    ],
-  },
+      {
+        path: 'location',
+        element: <Location />,
+      },
 
-  {
-    path: 'location',
-    element: <Location />,
-  },
-  {
-    path: 'popular',
-    element: <Popular />,
+      {
+        path: 'popular',
+        element: <Popular />,
+      },
+    ],
   },
 ];
