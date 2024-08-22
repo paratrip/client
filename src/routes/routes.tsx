@@ -2,13 +2,14 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import {
   AUTH_ROUTES,
+  HOME_ROUTES,
   COMMUNITY_ROUTES,
   TOUR_COURSE_ROUTES,
   MY_PAGE_ROUTES,
 } from './path';
 
 import Layout from '@components/layouts/layout';
-import Home from '@pages/home/Home';
+import Home from '@pages/home/home/Home';
 
 export const routes = createBrowserRouter([
   ...AUTH_ROUTES,
@@ -20,10 +21,7 @@ export const routes = createBrowserRouter([
         index: true,
         element: <Home />,
       },
-      {
-        path: '/home',
-        element: <Home />,
-      },
+      ...HOME_ROUTES,
       ...COMMUNITY_ROUTES,
       ...TOUR_COURSE_ROUTES,
       ...MY_PAGE_ROUTES,

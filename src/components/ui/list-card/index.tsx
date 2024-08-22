@@ -21,23 +21,29 @@ const ListCard = memo(function ListCard(props: ListCardProps) {
 
   return (
     <article className={style['list-card']}>
-      <div>
-        <Image className={style.card__image} src={src} alt={alt} />
-      </div>
+      <section className={style.card__content}>
+        <div>
+          <Image className={style.card__image} src={src} alt={alt} />
+        </div>
 
-      <div className={style.information}>
-        <CardTitle title={title} />
+        <div className={style.information}>
+          <CardTitle title={title} />
 
-        <p>
-          <img src={heart_s} alt={`좋아요 ${likeCount}개`} /> {likeCount}
-        </p>
+          <p>
+            <img src={heart_s} alt={`좋아요 ${likeCount}개`} /> {likeCount}
+          </p>
 
-        <strong>
-          {price} <span>원</span>
-        </strong>
+          <strong className={style.information__price}>
+            {price} <span>원</span>
+          </strong>
 
-        <LocationTitle title={location} />
-      </div>
+          <LocationTitle title={location} />
+        </div>
+      </section>
+
+      <footer className={style.footer}>
+        <hr />
+      </footer>
     </article>
   );
 });
