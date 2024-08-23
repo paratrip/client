@@ -7,7 +7,7 @@ import ActionButton from '@components/ui/action-button';
 import style from './auth-header.module.css';
 
 type AuthHeaderProps = {
-  title: string;
+  title?: string;
   type?: 'progress' | 'none';
   width?: number;
   customBack?: string;

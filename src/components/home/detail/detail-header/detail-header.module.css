@@ -1,0 +1,50 @@
+.detail-header {
+  display: flex;
+  text-overflow: ellipsis;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.header__section a {
+  display: block;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%;
+  color: var(--primary-primary);
+  margin-bottom: 2px;
+}
+
+.header__section h2 {
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 33px */
+  letter-spacing: -0.066px;
+  margin-bottom: 14px;
+}
+
+.header__section strong {
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%; /* 30.8px */
+  letter-spacing: -0.066px;
+}
+
+.header__section span {
+  color: var(--Gray-Scale-gray7);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%;
+}
+
+.header__nav {
+  display: flex;
+  height: 14px;
+}
+
+.header__nav button {
+  margin: 0 14px;
+}
