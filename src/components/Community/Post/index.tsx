@@ -45,7 +45,7 @@ const CustomPost = (props: PostProps) => {
   };
 
   return (
-    <div>
+    <div style={{ minHeight: '450px' }}>
       {data.length === 0 ? (
         <div className={style.noData}>
           {postType === 'ALL'

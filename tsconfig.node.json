@@ -21,7 +21,8 @@
       "@routes/*": ["./src/routes/*"],
       "@services/*": ["./src/services/*"],
       "@styles/*": ["./src/styles/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@utils/*": ["./src/utils/*"],
+      "@store/*": ["./src/store/*"]
     }
   },
   "include": ["vite.config.ts", "src/**/*.ts", "src/**/*.tsx"]

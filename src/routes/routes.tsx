@@ -9,6 +9,7 @@ import {
 
 import Layout from '@components/layouts/layout';
 import Home from '@pages/home/Home';
+import Notification from '@pages/Notification';
 
 export const routes = createBrowserRouter([
   ...AUTH_ROUTES,
@@ -27,6 +28,7 @@ export const routes = createBrowserRouter([
       ...COMMUNITY_ROUTES,
       ...TOUR_COURSE_ROUTES,
       ...MY_PAGE_ROUTES,
+      { path: 'notification', element: <Notification /> },
     ],
   },
 ]);

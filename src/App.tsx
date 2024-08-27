@@ -6,12 +6,14 @@ import { RecoilRoot } from 'recoil';
 
 import { routes } from './routes/routes';
 import { queryClient } from '@services/react-query';
+import Modal from '@components/ui/Modal';
 
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         <RouterProvider router={routes} />
+        <Modal />
       </RecoilRoot>
 
       <ReactQueryDevtools />

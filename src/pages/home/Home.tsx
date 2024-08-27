@@ -5,6 +5,7 @@ import MoreHeader from '@components/ui/more-header';
 import CustomSlider from '@components/ui/CustomSlider';
 
 import style from './Home.module.css';
+import Header from '@components/layouts/Header';
 
 const data = [
   {
@@ -76,6 +77,7 @@ const locationData = [
 export default function Home() {
   return (
     <>
+      <Header type='main' />
       <nav className={style.nav}>
         <section className={style.nav__left}>
           <div className={style['left__container-icon']}>

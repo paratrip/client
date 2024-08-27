@@ -74,6 +74,15 @@
   line-height: 100%; /* 14px */
 }
 
+.postStatusContainer .postStatus .buttonText {
+  color: var(--Gray-Gray9, #3b3f4a);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+}
+
 /* post userInfo */
 .post .userInfo {
   display: flex;
@@ -118,6 +127,7 @@
 
 .postStatusContainer .postStatus {
   display: flex;
+  align-items: center;
   gap: 4px;
   border-right: 1px solid var(--Gray-Scale-gray4, d5d8dc);
   padding-right: 10px;
@@ -194,6 +204,24 @@
 
 /* NoData */
 .noData {
+  /* color: var(--Gray-Scale-gray8, #5a5e6a);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%; 
+  padding-top: 200px; */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   color: var(--Gray-Scale-gray8, #5a5e6a);
   text-align: center;
   font-family: Pretendard;
@@ -201,9 +229,4 @@
   font-style: normal;
   font-weight: 600;
   line-height: 100%; /* 22px */
-  padding-top: 200px;
-  /* display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 741px; */
 }

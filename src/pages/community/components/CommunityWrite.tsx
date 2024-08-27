@@ -15,11 +15,6 @@ const CommunityWrite = () => {
   const [location, setLocation] = useState('');
   const [contentError, setContentError] = useState('');
 
-  // [x] 뒤로가기
-  const backPage = () => {
-    navigate('/community');
-  };
-
   // [x] 제목 입력
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
@@ -111,7 +106,7 @@ const CommunityWrite = () => {
 
   return (
     <>
-      <Header back={true} title='게시글 작성' onClick={backPage} />
+      <Header type='back' title='게시글 작성' />
       <form className={style.writeForm} onSubmit={handleSubmit}>
         <input
           type='text'
