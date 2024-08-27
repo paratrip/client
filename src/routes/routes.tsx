@@ -10,6 +10,7 @@ import {
 
 import Layout from '@components/layouts/layout';
 import Home from '@pages/home/home/Home';
+import Notification from '@pages/Notification';
 
 export const routes = createBrowserRouter([
   ...AUTH_ROUTES,

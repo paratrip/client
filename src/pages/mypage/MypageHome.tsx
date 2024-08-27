@@ -9,21 +9,32 @@ const MypageHome = () => {
   const hideParent =
     location.pathname.includes('/mypage/account') ||
     location.pathname.includes('/mypage/scrap') ||
-    location.pathname.includes('/mypage/heart');
+    location.pathname.includes('/mypage/heart') ||
+    location.pathname.includes('/mypage/termsOfUse');
 
-  // [ ] 계정 관리 이동 핸들러
+  // [x] 계정 관리 이동 핸들러
   const goAccount = () => {
     navigate('/mypage/account');
   };
 
-  // [ ] 스크랩 이동 핸들러
+  // [x] 스크랩 이동 핸들러
   const goScrapPost = () => {
     navigate('/mypage/scrap');
   };
 
-  // [ ] 찜 패글 이동 핸들러
+  // [x] 찜 패글 이동 핸들러
   const goHeartPost = () => {
     navigate('/mypage/heart');
+  };
+
+  // [ ] 문의하기 이동 핸들러
+  const goContact = () => {
+    console.log('goContact');
+  };
+
+  // [x] 서비스 약관 이동 핸들러
+  const goTermsOfUse = () => {
+    navigate('/mypage/termsOfUse');
   };
 
   return hideParent ? (
@@ -64,11 +75,11 @@ const MypageHome = () => {
             <p>계정 관리</p>
             <Icon iconType='rightArrow' />
           </div>
-          <div className={style.menuItem}>
+          <div className={style.menuItem} onClick={goContact}>
             <p>Paratrip 문의하기</p>
             <Icon iconType='rightArrow' />
           </div>
-          <div className={style.menuItem}>
+          <div className={style.menuItem} onClick={goTermsOfUse}>
             <p>서비스 약관</p>
             <Icon iconType='rightArrow' />
           </div>
