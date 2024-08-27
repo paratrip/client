@@ -7,15 +7,13 @@ import Button from '@components/ui/button';
 
 import { signUpInitialState } from '@utils/reducer/auth-reducer';
 
-type PasswordProps = {
-  setStep: () => void;
-};
+import { type FunnelProps } from '@utils/funnel/types/funnel-types';
 
-export default function Password(props: PasswordProps) {
+export default function Password(props: FunnelProps) {
   const { setStep } = props;
 
   return (
-    <AuthContainer type='funnel'>
+    <>
       <FunnelHeader heading='비밀번호를 입력해주세요.' />
 
       <FunnelInput
@@ -25,6 +23,6 @@ export default function Password(props: PasswordProps) {
       />
 
       <FunnelButton setStep={setStep}>다음단계</FunnelButton>
-    </AuthContainer>
+    </>
   );
 }

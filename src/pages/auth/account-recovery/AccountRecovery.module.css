@@ -1,0 +1,26 @@
+.link-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  border: 1px solid var(--primary-primary);
+  border-radius: 10px;
+  width: 552px;
+  padding: 16px;
+}
+
+.link-container strong {
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  color: #111;
+}
+
+.link-container p {
+  color: var(--Gray-Scale-gray8);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 15px;
+}

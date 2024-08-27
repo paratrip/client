@@ -6,11 +6,11 @@ import kakao from '@assets/icons/kakao.svg';
 import AuthContainer from '@components/auth/common/auth-container';
 import Button from '@components/ui/button';
 
-import style from './Login.module.css';
+import style from './AuthHome.module.css';
 
-export default function Login() {
+export default function AuthHome() {
   return (
-    <AuthContainer>
+    <AuthContainer type='default'>
       <header className={style.container__header}>
         <img src={logo} alt='패러트립 로고' />
 
@@ -35,7 +35,7 @@ export default function Login() {
 
         <nav className={style.section__nav}>
           <Link to='/sign-up'>회원가입</Link>
-          <Link to='/find'>계정 찾기</Link>
+          <Link to='/account-recovery'>계정 찾기</Link>
         </nav>
       </section>
     </AuthContainer>

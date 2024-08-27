@@ -3,17 +3,15 @@ import FunnelButton from '@components/auth/common/funnel-button';
 import FunnelHeader from '@components/auth/common/funnel-header';
 import FunnelInput from '@components/auth/common/funnel-input';
 
+import { type FunnelProps } from '@utils/funnel/types/funnel-types';
+
 import { signUpInitialState } from '@utils/reducer/auth-reducer';
 
-type InformationProps = {
-  setStep: () => void;
-};
-
-export default function Information(props: InformationProps) {
+export default function Information(props: FunnelProps) {
   const { setStep } = props;
 
   return (
-    <AuthContainer type='funnel'>
+    <>
       <FunnelHeader heading='정보를 입력해주세요.' />
       <section>
         <FunnelInput inputStyle='duplication' />
@@ -29,6 +27,6 @@ export default function Information(props: InformationProps) {
       </section>
 
       <FunnelButton setStep={setStep}>다음단계</FunnelButton>
-    </AuthContainer>
+    </>
   );
 }

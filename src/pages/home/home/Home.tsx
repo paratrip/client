@@ -5,7 +5,7 @@ import MoreHeader from '@components/ui/more-header';
 import CustomSlider from '@components/ui/CustomSlider';
 
 import style from './Home.module.css';
-import Header from '@components/layouts/Header';
+import Container from '@components/ui/container';
 
 const data = [
   {
@@ -102,9 +102,9 @@ export default function Home() {
         </section>
       </nav>
 
-      <main className={style.main}>
+      <Container>
         <section className={style.main__location}>
-          <MoreHeader title='지역별 패러글라이딩 장소' to='/' />
+          <MoreHeader title='지역별 패러글라이딩 장소' to='location' />
 
           <nav className={style.location__filter}>
             <Button>전체</Button>
@@ -116,12 +116,13 @@ export default function Home() {
               sliderType='homeRecommendPost'
               filter={true}
               moreBtn={false}
+              moreBtnPath=''
             />
           </ul>
         </section>
 
         <section className={style.main__location}>
-          <MoreHeader title='지역별 패러글라이딩 장소' to='/' />
+          <MoreHeader title='인기 TOP 패러글라이딩' to='popular' />
 
           <nav className={style.location__filter}>
             <Button>전체</Button>
@@ -133,6 +134,7 @@ export default function Home() {
               sliderType='homeRecommendPost'
               filter={true}
               moreBtn={false}
+              moreBtnPath=''
             />
           </ul>
         </section>
@@ -148,10 +150,11 @@ export default function Home() {
               sliderType='homeLocation'
               filter={false}
               moreBtn={false}
+              moreBtnPath=''
             />
           </ul>
         </section>
-      </main>
+      </Container>
     </>
   );
 }

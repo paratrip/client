@@ -11,7 +11,7 @@ import style from './EmailLogin.module.css';
 
 export default function EmailLogin() {
   return (
-    <AuthContainer>
+    <AuthContainer type='default'>
       <AuthHeader title='로그인' />
 
       <form>
@@ -31,7 +31,7 @@ export default function EmailLogin() {
         <span>
           <img src={line} alt='line' />
         </span>
-        <Link to='/forgot'>계정찾기</Link>
+        <Link to='/account-recovery'>계정찾기</Link>
       </nav>
     </AuthContainer>
   );
