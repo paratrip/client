@@ -1,0 +1,239 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.accountContainer {
+}
+
+.accountContainer .userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  margin: 27px 0 22px 0;
+}
+
+.accountContainer .userInfo .userTextBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.accountContainer .userInfo .userTextBox .userEmailBox {
+  display: flex;
+  gap: 4px;
+}
+
+.accountContainer .userInfo .userTextBox .userEmailBox .userEmail {
+  color: var(--Gray-Scale-gray8, #5a5e6a);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%; /* 23.4px */
+}
+
+.accountContainer .userInfo .userTextBox .userPhoneNumber {
+  color: var(--Gray-Scale-gray8, #5a5e6a);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 18.2px */
+}
+
+.accountContainer .infoModifyContainer {
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: calc(100vh - 320px);
+}
+.accountContainer .infoModifyContainer .infoModifyInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.accountContainer .infoModifyContainer .infoModifyInputs .birthInput {
+  display: flex;
+  width: 552px;
+  padding: 18px 16px;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+
+  border-radius: 10px;
+  border: 1px solid var(--Gray-Scale-gray4, #d5d8dc);
+  background: #fff;
+}
+
+.accountContainer .infoModifyContainer .infoModifyInputs select {
+  display: flex;
+  width: 552px;
+  height: 50px;
+  padding: 16px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+
+  border-radius: 10px;
+  border: 1px solid var(--Gray-Scale-gray4, #d5d8dc);
+  background: var(--Gray-Scale-white, #fff);
+
+  color: var(--Gray-Scale-black, #000);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: -0.056px;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  background: url(/src/assets/icons/Chevron_Arrowdown.png) no-repeat 97.5%;
+}
+
+.accountContainer .infoModifyContainer .infoModifyInputs select:focus {
+  background: url(/src/assets/icons/Chevron_Arrowup.png) no-repeat 97.5%;
+}
+
+.accountContainer .infoModifyContainer .infoModifyInputs select option {
+  display: flex;
+  width: 552px;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 10px;
+  border: 1px solid var(--Gray-Scale-gray4, #d5d8dc);
+  background: #fff;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.08);
+}
+
+.accountContainer .infoModifyContainer .idBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+.accountContainer .infoModifyContainer .idBox .idInputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.accountContainer .infoModifyContainer .idBox .idInput {
+  display: flex;
+  width: 459px;
+  padding: 18px 16px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--Gray-Scale-gray4, #d5d8dc);
+  background: #fff;
+
+  color: #000;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 14px */
+  letter-spacing: -1px;
+}
+
+.accountContainer .infoModifyContainer .idBox .idInputWarning {
+  border: 1px solid var(--systeam-color-Error, #f43c35);
+}
+
+.wraningText {
+  color: var(--systeam-color-Error, #f43c35);
+  font-family: Pretendard;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%; /* 13px */
+  letter-spacing: -0.052px;
+}
+
+.accountContainer .infoModifyContainer .idBox .checkBtnDisabled {
+  display: flex;
+  padding: 18px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--Gray-Scale-gray4, #d5d8dc);
+  background: #fff;
+
+  color: var(--Gray-Scale-gray6, #9da0a8);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%; /* 14px */
+  letter-spacing: -0.056px;
+}
+
+.accountContainer .infoModifyContainer .idBox .checkBtnAbled {
+  display: flex;
+  padding: 18px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--Primary-p400, #6565ff);
+  background: #fff;
+
+  color: var(--Primary-primary, #3434ff);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%; /* 14px */
+  letter-spacing: -0.056px;
+}
+
+/* 저장 버튼 */
+.infoModifyContainer .submitBtnDisabled {
+  display: flex;
+  width: 520px;
+  height: 50px;
+  padding: 11px 228px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+
+  border-radius: 10px;
+  background: var(--Gray-Scale-gray5, #bec1c7);
+
+  color: var(--Gray-Scale-gray8, #5a5e6a);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px; /* 155.556% */
+}
+.infoModifyContainer .submitBtnAbled {
+  display: flex;
+  width: 520px;
+  height: 50px;
+  padding: 11px 228px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+
+  border-radius: 10px;
+  background: var(--Primary-primary, #3434ff);
+
+  color: var(--Gray-Scale-white, #fff);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px; /* 155.556% */
+}

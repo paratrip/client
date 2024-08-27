@@ -77,6 +77,7 @@ const locationData = [
 export default function Home() {
   return (
     <>
+      <Header type='main' />
       <nav className={style.nav}>
         <section className={style.nav__left}>
           <div className={style['left__container-icon']}>

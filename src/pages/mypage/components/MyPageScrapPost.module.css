@@ -1,0 +1,10 @@
+.postContainer {
+  display: flex;
+  width: 600px;
+  min-height: calc(100vh - 60px);
+  flex-direction: column;
+  align-items: center;
+
+  background: #eff1f4;
+  padding: 20px 18px;
+}

@@ -21,6 +21,7 @@ export const routes = createBrowserRouter([
       ...COMMUNITY_ROUTES,
       ...TOUR_COURSE_ROUTES,
       ...MY_PAGE_ROUTES,
+      { path: 'notification', element: <Notification /> },
     ],
   },
 ]);

@@ -301,7 +301,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
             stroke='#7F828C'
             strokeWidth='2'
             strokeLinecap='round'
-            strokeLlinejoin='round'
+            strokeLinejoin='round'
           />
         </svg>
       );
@@ -317,6 +317,21 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           <path
             d='M14.928 4.67798C16.088 5.83797 16.1324 7.70451 15.0289 8.91835L9.49962 15L3.97109 8.91833C2.8676 7.70449 2.91204 5.83792 4.07202 4.67794C5.36721 3.38275 7.50029 3.50111 8.64453 4.9314L9.5 6.00034L10.3547 4.93128C11.499 3.50098 13.6328 3.38279 14.928 4.67798Z'
             fill='#9DA0A8'
+          />
+        </svg>
+      );
+    case 'fillHeart':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='21'
+          height='21'
+          viewBox='0 0 21 21'
+          fill='none'
+        >
+          <path
+            d='M16.6431 10.4095L10.4999 17.1669L4.35678 10.4095C3.13067 9.06074 3.18003 6.98681 4.46889 5.69794C5.90799 4.25884 8.27849 4.39013 9.54987 5.97935L10.4999 7.16691L11.45 5.97935C12.7213 4.39013 15.0918 4.25884 16.5309 5.69794C17.8198 6.9868 17.8692 9.06074 16.6431 10.4095Z'
+            fill='#F43C35'
           />
         </svg>
       );
@@ -348,6 +363,21 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           <path
             d='M4.5 16V4.44444C4.5 4.04722 4.64 3.7073 4.92 3.42467C5.2 3.14204 5.53619 3.00048 5.92857 3H13.0714C13.4643 3 13.8007 3.14156 14.0807 3.42467C14.3607 3.70778 14.5005 4.0477 14.5 4.44444V16L9.5 13.8333L4.5 16Z'
             fill='#9DA0A8'
+          />
+        </svg>
+      );
+    case 'fillScrap':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='20'
+          height='21'
+          viewBox='0 0 20 21'
+          fill='none'
+        >
+          <path
+            d='M14.1667 3.8335H5.83333C5.3731 3.8335 5 4.20659 5 4.66683V17.2764C5 17.942 5.74179 18.339 6.29558 17.9698L9.53775 15.8083C9.81767 15.6217 10.1823 15.6217 10.4622 15.8083L13.7044 17.9698C14.2582 18.339 15 17.942 15 17.2764V4.66683C15 4.20659 14.6269 3.8335 14.1667 3.8335Z'
+            fill='#3434FF'
           />
         </svg>
       );
@@ -412,6 +442,42 @@ const renderIcon = (iconType: string, isActive: boolean) => {
               />
             </filter>
           </defs>
+        </svg>
+      );
+    case 'rightArrow':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='24'
+          height='24'
+          viewBox='0 0 24 24'
+          fill='none'
+        >
+          <path
+            d='M8 5L15 12L8 19'
+            stroke='#D5D8DC'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          />
+        </svg>
+      );
+    case 'primaryRightArrow':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='18'
+          height='18'
+          viewBox='0 0 18 18'
+          fill='none'
+        >
+          <path
+            d='M6.75 3.75L12 9L6.75 14.25'
+            stroke='#8383FF'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          />
         </svg>
       );
     case 'back':
@@ -489,6 +555,139 @@ const renderIcon = (iconType: string, isActive: boolean) => {
             stroke='white'
             strokeWidth='2'
             strokeLinecap='round'
+          />
+        </svg>
+      );
+    case 'userDefaultImg':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='82'
+          height='82'
+          viewBox='0 0 82 82'
+          fill='none'
+        >
+          <g filter='url(#filter0_d_187_1144)'>
+            <circle cx='41' cy='39' r='34' fill='#3434FF' />
+            <circle cx='41' cy='39' r='34.5' stroke='white' />
+          </g>
+          <circle cx='41' cy='31' r='13' fill='white' />
+          <ellipse cx='40.5' cy='60.5' rx='23.5' ry='12.5' fill='white' />
+          <defs>
+            <filter
+              id='filter0_d_187_1144'
+              x='0'
+              y='0'
+              width='82'
+              height='82'
+              filterUnits='userSpaceOnUse'
+              colorInterpolationFilters='sRGB'
+            >
+              <feFlood floodOpacity='0' result='BackgroundImageFix' />
+              <feColorMatrix
+                in='SourceAlpha'
+                type='matrix'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+                result='hardAlpha'
+              />
+              <feOffset dy='2' />
+              <feGaussianBlur stdDeviation='3' />
+              <feComposite in2='hardAlpha' operator='out' />
+              <feColorMatrix
+                type='matrix'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0'
+              />
+              <feBlend
+                mode='normal'
+                in2='BackgroundImageFix'
+                result='effect1_dropShadow_187_1144'
+              />
+              <feBlend
+                mode='normal'
+                in='SourceGraphic'
+                in2='effect1_dropShadow_187_1144'
+                result='shape'
+              />
+            </filter>
+          </defs>
+        </svg>
+      );
+    case 'kakaoTalk':
+      return (
+        <svg
+          width='18'
+          height='18'
+          viewBox='0 0 18 18'
+          fill='none'
+          xmlns='http://www.w3.org/2000/svg'
+        >
+          <circle cx='9' cy='9' r='9' fill='#FEE500' />
+          <path
+            d='M13.7236 8.99987C13.7236 11.3195 11.6081 13.1999 8.99851 13.1999C8.06869 13.1999 7.2016 12.9612 6.47058 12.5489L4.27344 13.1999L5.00582 11.2469C4.54201 10.5971 4.27344 9.82638 4.27344 8.99987C4.27344 6.68024 6.38892 4.7998 8.99851 4.7998C11.6081 4.7998 13.7236 6.68024 13.7236 8.99987Z'
+            fill='#392020'
+          />
+        </svg>
+      );
+    case 'notiHeart':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='28'
+          height='29'
+          viewBox='0 0 28 29'
+          fill='none'
+        >
+          <path
+            d='M22.4435 7.7767C24.2479 9.58112 24.317 12.4846 22.6005 14.3728L13.9994 23.8332L5.39947 14.3728C3.68293 12.4846 3.75206 9.58105 5.55647 7.77664C7.57121 5.7619 10.8893 5.946 12.6693 8.17091L14 9.8337L15.3296 8.17072C17.1095 5.94581 20.4288 5.76196 22.4435 7.7767Z'
+            fill='#F43C35'
+            stroke='#F43C35'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          />
+        </svg>
+      );
+    case 'notiScrap':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='28'
+          height='29'
+          viewBox='0 0 28 29'
+          fill='none'
+        >
+          <path
+            d='M6.22266 25.3887V7.41342C6.22266 6.79552 6.44043 6.26674 6.87599 5.8271C7.31154 5.38745 7.83451 5.16725 8.44488 5.1665H19.556C20.1671 5.1665 20.6904 5.3867 21.126 5.8271C21.5615 6.26749 21.7789 6.79627 21.7782 7.41342V25.3887L14.0004 22.0184L6.22266 25.3887Z'
+            fill='#3434FF'
+          />
+        </svg>
+      );
+    case 'notiComment':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='28'
+          height='29'
+          viewBox='0 0 28 29'
+          fill='none'
+        >
+          <path
+            d='M21.2586 6.72217H6.74009C6.19001 6.72217 5.66246 6.93426 5.2735 7.31178C4.88453 7.68931 4.66602 8.20134 4.66602 8.73524V23.8333L8.26142 21.2163C8.62044 20.9549 9.0571 20.8137 9.50587 20.8137H21.2586C21.8087 20.8137 22.3362 20.6016 22.7252 20.2241C23.1142 19.8465 23.3327 19.3345 23.3327 18.8006V8.73524C23.3327 8.20134 23.1142 7.68931 22.7252 7.31178C22.3362 6.93426 21.8087 6.72217 21.2586 6.72217Z'
+            fill='#FFB744'
+          />
+        </svg>
+      );
+    case 'notiStar':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='28'
+          height='29'
+          viewBox='0 0 28 29'
+          fill='none'
+        >
+          <path
+            d='M10.2456 9.83992L3.85751 10.7652L3.74436 10.7882C3.57308 10.8336 3.41694 10.9237 3.29188 11.0491C3.16682 11.1745 3.07732 11.3309 3.03252 11.5022C2.98772 11.6734 2.98923 11.8535 3.03689 12.0241C3.08455 12.1946 3.17666 12.3494 3.3038 12.4727L7.93167 16.9731L6.84029 23.3301L6.82727 23.4401C6.81679 23.6171 6.85357 23.7937 6.93386 23.9518C7.01414 24.1099 7.13505 24.2438 7.28419 24.3399C7.43333 24.436 7.60535 24.4907 7.78263 24.4985C7.95992 24.5063 8.1361 24.467 8.29313 24.3844L14.0064 21.3835L19.7066 24.3844L19.8067 24.4304C19.972 24.4954 20.1516 24.5154 20.3272 24.4882C20.5027 24.461 20.6678 24.3876 20.8056 24.2756C20.9434 24.1636 21.0489 24.017 21.1112 23.8509C21.1736 23.6847 21.1906 23.505 21.1605 23.3301L20.0681 16.9731L24.6979 12.4717L24.776 12.3867C24.8876 12.2494 24.9608 12.0851 24.988 11.9103C25.0153 11.7356 24.9957 11.5568 24.9313 11.3921C24.8669 11.2274 24.76 11.0827 24.6213 10.9728C24.4827 10.8628 24.3174 10.7915 24.1422 10.7662L17.7541 9.83992L14.8985 4.05814C14.8159 3.89062 14.688 3.74956 14.5292 3.65092C14.3705 3.55228 14.1873 3.5 14.0004 3.5C13.8134 3.5 13.6302 3.55228 13.4715 3.65092C13.3128 3.74956 13.1849 3.89062 13.1022 4.05814L10.2456 9.83992Z'
+            fill='#B0E809'
           />
         </svg>
       );

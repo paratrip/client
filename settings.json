@@ -13,6 +13,7 @@
     "@routes": "${workspace}/src/routes",
     "@services": "${workspace}/src/services",
     "@style": "${workspace}/src/style",
-    "@utils": "${workspace}/src/utils"
+    "@utils": "${workspace}/src/utils",
+    "@store": "${workspace}/src/store"
   }
 }

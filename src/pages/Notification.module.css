@@ -1,0 +1,82 @@
+.notificationContainer {
+  display: flex;
+  width: 600px;
+  min-height: calc(100vh - 60px);
+  flex-direction: column;
+  align-items: center;
+
+  background: #eff1f4;
+  padding: 20px 18px;
+}
+
+.notificationBox {
+  display: flex;
+  padding: 17px 18px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-bottom: 1px solid var(--Gray-Scale-gray4, #d5d8dc);
+  border-radius: 10px;
+  background: #fff;
+}
+.notificationBox:not(:first-child, :last-child) {
+  border-radius: 0px;
+}
+
+.notificationBox:first-child {
+  border-radius: 10px 10px 0px 0px;
+}
+
+.notificationBox:last-child {
+  border-radius: 0px 0px 10px 10px;
+  border-bottom: none;
+}
+
+.notificationBox:only-child {
+  border-radius: 10px;
+}
+
+.notificationTextBox {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.notificationTitle {
+  color: #6b6b6b;
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 18px */
+  letter-spacing: -0.06px;
+}
+
+.notificationContent {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 21px */
+  letter-spacing: -0.07px;
+}
+
+.nonData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  color: var(--Gray-Scale-gray8, #5a5e6a);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%; /* 22px */
+}

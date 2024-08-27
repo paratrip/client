@@ -1,0 +1,122 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.accountContainer {
+  padding: 20px 18px;
+}
+
+.accountContainer .infoModify {
+  color: var(--primary-primary, #3434ff);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%; /* 18.2px */
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  cursor: pointer;
+}
+
+.accountContainer .userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  margin: 27px 0 22px 0;
+}
+
+.accountContainer .userInfo .userTextBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.accountContainer .userInfo .userTextBox .userEmailBox {
+  display: flex;
+  gap: 4px;
+}
+
+.accountContainer .userInfo .userTextBox .userEmailBox .userEmail {
+  color: var(--Gray-Scale-gray8, #5a5e6a);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%; /* 23.4px */
+}
+
+.accountContainer .userInfo .userTextBox .userPhoneNumber {
+  color: var(--Gray-Scale-gray8, #5a5e6a);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%; /* 18.2px */
+}
+.accountContainer .userBox {
+  width: 564px;
+  height: 218px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--Gray-Scale-gray2, #eff1f4);
+}
+
+.accountContainer .userBox .userInput {
+  padding: 16px;
+  border-bottom: 1px solid #d5d8dc;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.accountContainer .userBox .userInput:last-child {
+  border-bottom: none;
+}
+
+.accountContainer .userBox .userInput .userTitle {
+  color: #5a5e6a;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 14px */
+  letter-spacing: -0.07px;
+}
+
+.accountContainer .userBox .userInput .userValue {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%; /* 16px */
+  letter-spacing: -1px;
+}
+
+.mypageMenu .menuItem {
+  cursor: pointer;
+  display: flex;
+  width: 600px;
+  height: 48px;
+  padding: 12px 22px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+
+  color: var(--Gray-Scale-gray8, #5a5e6a);
+
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140%; /* 22.4px */
+  letter-spacing: -0.08px;
+}
+
+.mypageMenu .menuItem.primaryText {
+  color: var(--Primary-primary, #3434ff);
+}

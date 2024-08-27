@@ -1,16 +1,13 @@
 import Header from '@components/layouts/Header';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from './CommunityDetail.module.css';
 import Icon from '@components/ui/Icon';
 import PostSlider from '@components/ui/PostSlider/PostSlider';
+import ScrapButton from '@components/ui/ScrapButton';
+import HeartButton from '@components/ui/HeartButton';
 
 const CommunityDetail = () => {
   const navigate = useNavigate();
-  // [x] 뒤로가기 핸들러
-  const goBack = () => {
-    navigate('/community');
-  };
 
   const slidesData = [
     { src: 'https://picsum.photos/564/304' },
@@ -32,7 +29,7 @@ const CommunityDetail = () => {
 
   return (
     <>
-      <Header back={true} onClick={goBack} />
+      <Header type='back' />
       <div className={style.postDetailContainer}>
         <div className={style.postWrapper}>
           <div className={style.userInfoContainer}>
@@ -45,8 +42,10 @@ const CommunityDetail = () => {
               <div className={style.locationInput}>지역</div>
             </div>
             <div className={style.activeBox}>
-              <Icon iconType='nullScrap' />
-              <Icon iconType='nullHeart' />
+              {/* <Icon iconType='nullScrap' />               
+              <Icon iconType='nullHeart' />*/}
+              <ScrapButton />
+              <HeartButton />
             </div>
           </div>
           <div className={style.postContainer}>
