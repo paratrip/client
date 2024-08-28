@@ -1,11 +1,20 @@
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 .funnel-input-container {
   display: flex;
   align-items: center;
   width: 100%;
   padding: 24px 24px 0 24px;
   margin-bottom: 5px;
+  animation: 1s fadeIn ease-in-out;
 }
 
+.container__duplication-input__default,
 .container__default-input,
 .container__duplication-input,
 .container__certification-input {
@@ -13,12 +22,14 @@
   border-radius: 10px;
   border: 1px solid var(--Gray-Scale-gray4);
   gap: 10px;
+  transition: 1s all;
 }
 
 .container__default-input {
   width: 552px;
 }
 
+.container__duplication-input__default,
 .container__certification-input,
 .container__duplication-input {
   display: flex;
@@ -27,12 +38,35 @@
   margin-right: 8px;
 }
 
-.container__button {
+.container__duplication-input {
+  border: 1px solid #0081ef;
+}
+
+.container__button,
+.container__disabled {
   display: flex;
   padding: 18px;
   align-items: center;
   gap: 10px;
   border-radius: 10px;
+}
+
+.container__button {
+  border: 1px solid var(--primary-primary);
+  color: var(--primary-primary);
+}
+
+.container__disabled {
   border: 1px solid var(--Gray-Scale-gray4);
   color: var(--Gray-Scale-gray4);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

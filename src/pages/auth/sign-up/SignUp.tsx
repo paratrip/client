@@ -10,7 +10,7 @@ import Email from '@components/auth/sign-up/email';
 import AuthHeader from '@components/auth/common/auth-header';
 import AuthContainer from '@components/auth/common/auth-container';
 import Password from '@components/auth/sign-up/password';
-import Information from '@components/auth/sign-up/information';
+import Information from '@components/auth/sign-up/information/information';
 import Terms from '@components/auth/sign-up/terms';
 import Finish from '@components/auth/sign-up/finish';
 
