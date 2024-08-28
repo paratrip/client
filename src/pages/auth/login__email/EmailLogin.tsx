@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useState } from 'react';
+import { AxiosError, isAxiosError } from 'axios';
 
 import { useFetch } from '@hooks/useFetch';
 
@@ -10,16 +11,37 @@ import AuthInput from '@components/auth/common/auth-input';
 import AuthHeader from '@components/auth/common/auth-header';
 import AuthButton from '@components/auth/common/auth-button';
 
-import style from './EmailLogin.module.css';
 import { END_POINT_MEMBER } from '@utils/endpoint/endpoint';
+import { useRecoilState } from 'recoil';
+import {
+  loginAccessToken,
+  loginMemberSeq,
+  loginRefreshToken,
+} from '@store/login-token';
+
+import styles from './EmailLogin.module.css';
 
 export default function EmailLogin() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [fetchData, fetchHandler] = useFetch();
+  const [fetchData, fetchHandler] = useFetch<
+    { email: string; password: string },
+    {
+      accessToken: string;
+      memberSeq: number;
+      refreshToken: string;
+    }
+  >();
+
+  const [accessToken, setAccessToken] = useRecoilState(loginAccessToken);
+  const [refreshToken, setRefreshToken] = useRecoilState(loginRefreshToken);
+  const [memberSeq, setMemberSeq] = useRecoilState(loginMemberSeq);
+
+  const [isValid, setIsValid] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   function getValueHandler(e: React.ChangeEvent<HTMLInputElement>): void {
-    console.log(e.target.name);
     if (e.target.name === 'email') {
       setEmail(e.target.value);
       return;
@@ -28,21 +50,41 @@ export default function EmailLogin() {
     setPassword(e.target.value);
   }
 
-  console.log(email);
-  console.log(password);
-
   async function submitHandler(
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> {
     e.preventDefault();
 
-    await fetchHandler({
-      url: END_POINT_MEMBER + '/login',
-      method: 'post',
-      data: { email, password },
-    });
+    try {
+      const response = await fetchHandler({
+        url: END_POINT_MEMBER + '/login',
+        method: 'post',
+        data: { email, password },
+      });
 
-    console.log(fetchData);
+      if (response.status === 200) {
+        setAccessToken(response.data.accessToken);
+        setRefreshToken(response.data.refreshToken);
+        setMemberSeq(response.data.memberSeq);
+
+        localStorage.setItem('accessToken', response.data.accessToken);
+        localStorage.setItem('refreshToken', response.data.refreshToken);
+        localStorage.setItem('memberSeq', String(response.data.memberSeq));
+
+        navigate('/home');
+      }
+    } catch (error) {
+      if (isAxiosError(error)) {
+        const axiosError = error as AxiosError<{ status: string }>;
+        if (axiosError.response) {
+          setIsValid(true);
+        } else {
+          console.log('No response received:', axiosError.message);
+        }
+      } else {
+        console.log('Unexpected error:', error);
+      }
+    }
   }
 
   const conditional = email.length === 0 && password.length === 0;
@@ -65,7 +107,15 @@ export default function EmailLogin() {
           onChange={getValueHandler}
         />
 
-        <div className={style.form__checkbox}>
+        {isValid && (
+          <section>
+            <p className={styles.error}>
+              입력한 회원정보를 다시 한 번 확인해 주세요.
+            </p>
+          </section>
+        )}
+
+        <div className={styles.form__checkbox}>
           <input type='checkbox' name='' id='' />
           <label htmlFor=''>로그인 상태 유지</label>
         </div>
@@ -75,7 +125,7 @@ export default function EmailLogin() {
         </AuthButton>
       </form>
 
-      <nav className={style.container__nav}>
+      <nav className={styles.container__nav}>
         <Link to='/sign-up'>회원가입</Link>
         <span>
           <img src={line} alt='line' />
