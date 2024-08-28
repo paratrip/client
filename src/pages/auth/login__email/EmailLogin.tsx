@@ -1,29 +1,78 @@
-import AuthInput from '@components/auth/common/auth-input';
-import Button from '@components/ui/button';
 import { Link } from 'react-router-dom';
+
+import { useState } from 'react';
+
+import { useFetch } from '@hooks/useFetch';
 
 import line from '@assets/icons/line.svg';
 import AuthContainer from '@components/auth/common/auth-container';
+import AuthInput from '@components/auth/common/auth-input';
 import AuthHeader from '@components/auth/common/auth-header';
 import AuthButton from '@components/auth/common/auth-button';
 
 import style from './EmailLogin.module.css';
+import { END_POINT_MEMBER } from '@utils/endpoint/endpoint';
 
 export default function EmailLogin() {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [fetchData, fetchHandler] = useFetch();
+
+  function getValueHandler(e: React.ChangeEvent<HTMLInputElement>): void {
+    console.log(e.target.name);
+    if (e.target.name === 'email') {
+      setEmail(e.target.value);
+      return;
+    }
+
+    setPassword(e.target.value);
+  }
+
+  console.log(email);
+  console.log(password);
+
+  async function submitHandler(
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> {
+    e.preventDefault();
+
+    await fetchHandler({
+      url: END_POINT_MEMBER + '/login',
+      method: 'post',
+      data: { email, password },
+    });
+
+    console.log(fetchData);
+  }
+
+  const conditional = email.length === 0 && password.length === 0;
+
   return (
     <AuthContainer type='default'>
       <AuthHeader title='로그인' />
 
-      <form>
-        <AuthInput placeholder='이메일 주소' type='email' />
-        <AuthInput placeholder='비밀번호' type='password' />
+      <form onSubmit={submitHandler}>
+        <AuthInput
+          placeholder='이메일 주소'
+          type='email'
+          name='email'
+          onChange={getValueHandler}
+        />
+        <AuthInput
+          placeholder='비밀번호'
+          type='password'
+          name='password'
+          onChange={getValueHandler}
+        />
 
         <div className={style.form__checkbox}>
           <input type='checkbox' name='' id='' />
           <label htmlFor=''>로그인 상태 유지</label>
         </div>
 
-        <AuthButton>로그인</AuthButton>
+        <AuthButton type='submit' disabled={conditional}>
+          로그인
+        </AuthButton>
       </form>
 
       <nav className={style.container__nav}>
