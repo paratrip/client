@@ -1,0 +1,64 @@
+.selectContainer {
+  position: relative;
+  margin-top: 16px;
+  width: 552px;
+  font-family: Arial, sans-serif;
+}
+
+.selectHeader {
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px 16px;
+}
+
+.arrow {
+  border: solid #333;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transition: transform 0.3s ease;
+}
+
+.down {
+  transform: rotate(45deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+}
+
+.optionsContainer {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  padding: 10px 16px;
+}
+
+.option {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.option:hover {
+  background-color: #e8e8e8;
+}
+
+.option.selected {
+  background-color: #e8e8e8;
+}

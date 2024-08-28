@@ -4,6 +4,7 @@ import SignUp from '@pages/auth/sign-up/SignUp';
 import AccountRecovery from '@pages/auth/account-recovery/AccountRecovery';
 import RecoveryEmail from '@pages/auth/account-recovery__email/RecoveryEmail';
 import RecoveryPassword from '@pages/auth/account-recovery__password/RecoveryPassword';
+import SignUpError from '@components/auth/sign-up/error';
 
 export const AUTH_ROUTES = [
   {
@@ -24,6 +25,12 @@ export const AUTH_ROUTES = [
     path: 'sign-up',
     element: <SignUp />,
   },
+
+  {
+    path: 'sign-up/error',
+    element: <SignUpError />,
+  },
+
   {
     path: 'account-recovery',
     children: [
