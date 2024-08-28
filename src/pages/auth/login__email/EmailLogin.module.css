@@ -25,3 +25,24 @@
   stroke-width: 1px;
   stroke: var(--Gray-Scale-gray4);
 }
+
+.error {
+  color: #f43c35;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: -0.052px;
+  opacity: 1;
+  animation: 1s fadeIn;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

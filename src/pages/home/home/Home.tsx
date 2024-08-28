@@ -1,5 +1,7 @@
 import sun from '@assets/icons/sun.svg';
 
+import Header from '@components/layouts/Header';
+
 import Button from '@components/ui/button';
 import MoreHeader from '@components/ui/more-header';
 import CustomSlider from '@components/ui/CustomSlider';
