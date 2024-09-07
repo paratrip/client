@@ -6,18 +6,8 @@ import course from '@assets/icons/course.svg';
 import community from '@assets/icons/community.svg';
 
 import styles from './finish.module.css';
-import { useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import {
-  signUpBornState,
-  signUpEmailState,
-  signUpGenderState,
-  signUpNicknameState,
-  signUpPasswordState,
-  signUpPhonNumberState,
-} from '@store/sign-up';
-import { END_POINT_MEMBER } from '@utils/endpoint/endpoint';
-import { useFetch } from '@hooks/useFetch';
+import { useRecoilValue } from 'recoil';
+import { signUpEmailState } from '@store/sign-up';
 
 const INFORMATION = [
   {
@@ -38,37 +28,7 @@ const INFORMATION = [
 ];
 
 export default function Finish() {
-  const [fetchData, fetchHandler] = useFetch();
-
-  const navigate = useNavigate();
-
   const email = useRecoilValue(signUpEmailState);
-  const password = useRecoilValue(signUpPasswordState);
-  const nickname = useRecoilValue(signUpNicknameState);
-  const phoneNumber = useRecoilValue(signUpPhonNumberState);
-  const born = useRecoilValue(signUpBornState);
-  const gender = useRecoilValue(signUpGenderState);
-
-  useEffect(() => {
-    (async function () {
-      try {
-        await fetchHandler({
-          url: END_POINT_MEMBER,
-          method: 'post',
-          data: {
-            email,
-            password,
-            userId: nickname,
-            phoneNumber,
-            birth: born,
-            gender,
-          },
-        });
-      } catch (error) {
-        navigate('/sign-up/error');
-      }
-    })();
-  }, []);
 
   return (
     <>

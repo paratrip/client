@@ -15,3 +15,6 @@ export const isValidBirth = (birth: string) => {
   const birthRegex = /^[0-9]{8}$/;
   return birthRegex.test(birth);
 };
+
+export const passwordRegex =
+  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&%^&*])[A-Za-z\d@$!%*#?&%^&*]{8,}$/;

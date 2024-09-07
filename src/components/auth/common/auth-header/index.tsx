@@ -37,7 +37,7 @@ export default function AuthHeader(props: AuthHeaderProps) {
 
         <h1>{title}</h1>
 
-        <div />
+        <div className={style.null} />
       </section>
       {type === 'progress' && (
         <div className={style.progress}>
