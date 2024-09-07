@@ -1,0 +1,11 @@
+.selected-hashtag {
+  display: flex;
+  padding: 12px 22px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 22px;
+  background: var(--primary-primary);
+  color: #fff;
+  margin: 14px 10px 24px 10px;
+}
