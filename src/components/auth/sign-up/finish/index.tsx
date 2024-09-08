@@ -1,11 +1,23 @@
 import FunnelHeader from '@components/auth/common/funnel-header';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import information from '@assets/icons/information.svg';
 import course from '@assets/icons/course.svg';
 import community from '@assets/icons/community.svg';
 
 import styles from './finish.module.css';
+import { useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  signUpBornState,
+  signUpEmailState,
+  signUpGenderState,
+  signUpNicknameState,
+  signUpPasswordState,
+  signUpPhonNumberState,
+} from '@store/sign-up';
+import { END_POINT_MEMBER } from '@utils/endpoint/endpoint';
+import { useFetch } from '@hooks/useFetch';
 
 const INFORMATION = [
   {
@@ -26,6 +38,38 @@ const INFORMATION = [
 ];
 
 export default function Finish() {
+  const [fetchData, fetchHandler] = useFetch();
+
+  const navigate = useNavigate();
+
+  const email = useRecoilValue(signUpEmailState);
+  const password = useRecoilValue(signUpPasswordState);
+  const nickname = useRecoilValue(signUpNicknameState);
+  const phoneNumber = useRecoilValue(signUpPhonNumberState);
+  const born = useRecoilValue(signUpBornState);
+  const gender = useRecoilValue(signUpGenderState);
+
+  useEffect(() => {
+    (async function () {
+      try {
+        await fetchHandler({
+          url: END_POINT_MEMBER,
+          method: 'post',
+          data: {
+            email,
+            password,
+            userId: nickname,
+            phoneNumber,
+            birth: born,
+            gender,
+          },
+        });
+      } catch (error) {
+        navigate('/sign-up/error');
+      }
+    })();
+  }, []);
+
   return (
     <>
       <FunnelHeader heading='회원가입이 완료되었습니다!' />
@@ -33,7 +77,7 @@ export default function Finish() {
       <section className={styles.funnel__section}>
         <h2 className={styles.section__header}>
           환영합니다 👋 <br />
-          [USER EMAIL] 님!
+          {email} 님!
         </h2>
 
         <article className={styles.section__article}>
