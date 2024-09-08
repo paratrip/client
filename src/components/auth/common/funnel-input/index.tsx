@@ -9,6 +9,7 @@ type FunnelInputProps = {
   isNext?: boolean;
   buttonContentTrue?: string;
   buttonContentFalse?: string;
+  inputDisabled?: boolean;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 export default function FunnelInput(props: FunnelInputProps) {
@@ -19,6 +20,7 @@ export default function FunnelInput(props: FunnelInputProps) {
     buttonContentTrue,
     buttonContentFalse,
     isNext,
+    inputDisabled,
     ...rest
   } = props;
 
@@ -26,6 +28,7 @@ export default function FunnelInput(props: FunnelInputProps) {
     return (
       <div className={styles['funnel-input-container']}>
         <input
+          disabled={inputDisabled}
           {...rest}
           className={
             isNext

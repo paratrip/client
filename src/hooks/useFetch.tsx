@@ -24,7 +24,9 @@ export function useFetch<T, U>() {
         data: { ...data },
       });
 
-      setFetchData(response.data);
+      if (response.data) {
+        setFetchData(response.data);
+      }
 
       // response.data가 바로 필요한 경우,
       return response.data;

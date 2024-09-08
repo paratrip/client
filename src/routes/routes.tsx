@@ -6,10 +6,10 @@ import {
   COMMUNITY_ROUTES,
   TOUR_COURSE_ROUTES,
   MY_PAGE_ROUTES,
+  TERMS_ROUTES,
 } from './path';
 
 import Layout from '@components/layouts/layout';
-import Home from '@pages/home/home/Home';
 import Notification from '@pages/Notification';
 
 export const routes = createBrowserRouter([
@@ -22,6 +22,7 @@ export const routes = createBrowserRouter([
       ...COMMUNITY_ROUTES,
       ...TOUR_COURSE_ROUTES,
       ...MY_PAGE_ROUTES,
+      ...TERMS_ROUTES,
       { path: 'notification', element: <Notification /> },
     ],
   },
