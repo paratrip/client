@@ -8,7 +8,6 @@ import CustomSlider from '@components/ui/CustomSlider';
 
 import style from './Home.module.css';
 import Container from '@components/ui/container';
-import Header from '@components/layouts/Header';
 
 const data = [
   {
