@@ -1,3 +1,19 @@
+/**/
+
+.container {
+  min-height: 450px;
+  width: 100%;
+}
+
+.myPageTitle {
+  color: var(--Gray-Scale-black, #000);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 25.2px */
+}
+
 /* post */
 .writeButton {
   background: none;

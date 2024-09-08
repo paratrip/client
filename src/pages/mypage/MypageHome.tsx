@@ -29,7 +29,7 @@ const MypageHome = () => {
 
   // [ ] 문의하기 이동 핸들러
   const goContact = () => {
-    console.log('goContact');
+    window.open('https://moaform.com/q/ZsAoQ5', '_blank');
   };
 
   // [x] 서비스 약관 이동 핸들러
