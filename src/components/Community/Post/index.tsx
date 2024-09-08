@@ -18,10 +18,11 @@ type PostProps = {
       scrap: number;
     };
   }>;
+  myTitle?: string;
 };
 
 const CustomPost = (props: PostProps) => {
-  const { postType, data } = props;
+  const { postType, data, myTitle } = props;
   const navigate = useNavigate();
 
   const handleEdit = () => {
@@ -45,7 +46,8 @@ const CustomPost = (props: PostProps) => {
   };
 
   return (
-    <div style={{ minHeight: '450px' }}>
+    <div className={style.container}>
+      {postType === 'MY' && <p className={style.myPageTitle}>{myTitle}</p>}
       {data.length === 0 ? (
         <div className={style.noData}>
           {postType === 'ALL'
@@ -146,14 +148,16 @@ const CustomPost = (props: PostProps) => {
         ))
       )}
 
-      <div className={style.toolBtnBox}>
-        <button onClick={handleWritePost}>
-          <Icon iconType='write'></Icon>
-        </button>
-        <button onClick={handleOnTop}>
-          <Icon iconType='topArrow'></Icon>
-        </button>
-      </div>
+      {postType === 'ALL' && (
+        <div className={style.toolBtnBox}>
+          <button onClick={handleWritePost}>
+            <Icon iconType='write'></Icon>
+          </button>
+          <button onClick={handleOnTop}>
+            <Icon iconType='topArrow'></Icon>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

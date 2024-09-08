@@ -103,58 +103,67 @@ const MyPageAccountModify = () => {
 
             <form className={style.infoModifyContainer}>
               <div className={style.infoModifyInputs}>
-                <div className={style.idBox}>
-                  <div className={style.idInputBox}>
-                    <input
-                      className={
-                        !isDuplicate
-                          ? style.idInput
-                          : `${style.idInput} ${style.idInputWarning}`
-                      }
-                      type='text'
-                      placeholder='아이디를 입력해 주세요.'
-                      onChange={handleInputId}
-                      value={idValue}
-                    />
-                  </div>
+                <section className={style.inputLabel}>
+                  <label>아이디</label>
+                  <div className={style.idBox}>
+                    <div className={style.idInputBox}>
+                      <input
+                        className={
+                          !isDuplicate
+                            ? style.idInput
+                            : `${style.idInput} ${style.idInputWarning}`
+                        }
+                        type='text'
+                        placeholder='아이디를 입력해 주세요.'
+                        onChange={handleInputId}
+                        value={idValue}
+                      />
+                    </div>
 
-                  <button
-                    className={
-                      isDuplicateCheckActive
-                        ? style.checkBtnAbled
-                        : style.checkBtnDisabled
-                    }
-                    onClick={handleDuplicateCheck}
-                    disabled={!isDuplicateCheckActive}
+                    <button
+                      className={
+                        isDuplicateCheckActive
+                          ? style.checkBtnAbled
+                          : style.checkBtnDisabled
+                      }
+                      onClick={handleDuplicateCheck}
+                      disabled={!isDuplicateCheckActive}
+                    >
+                      중복확인
+                    </button>
+                  </div>
+                  {isDuplicate && (
+                    <p className={style.wraningText}>
+                      중복된 아이디입니다. 다른 아이디를 입력해 주세요.
+                    </p>
+                  )}
+                </section>
+                <section className={style.inputLabel}>
+                  <label>생년월일</label>
+                  <input
+                    type='text'
+                    name='userBirth'
+                    className={style.birthInput}
+                    placeholder='생년월일을 입력해주세요. YYYYMMDD'
+                    onChange={handleInputBirth}
+                    value={birthValue}
+                  />
+                </section>
+                <section className={style.inputLabel}>
+                  <label>성별</label>
+                  <select
+                    name='userGender'
+                    value={genderValue}
+                    onChange={handleSelectChange}
+                    ref={selectRef}
                   >
-                    중복확인
-                  </button>
-                </div>
-                {isDuplicate && (
-                  <p className={style.wraningText}>
-                    중복된 아이디입니다. 다른 아이디를 입력해 주세요.
-                  </p>
-                )}
-                <input
-                  type='text'
-                  name='userBirth'
-                  className={style.birthInput}
-                  placeholder='생년월일을 입력해주세요. YYYYMMDD'
-                  onChange={handleInputBirth}
-                  value={birthValue}
-                />
-                <select
-                  name='userGender'
-                  value={genderValue}
-                  onChange={handleSelectChange}
-                  ref={selectRef}
-                >
-                  <option value='' disabled>
-                    성별을 선택해주세요.
-                  </option>
-                  <option value='male'>남자</option>
-                  <option value='female'>여자</option>
-                </select>
+                    <option value='' disabled>
+                      성별을 선택해주세요.
+                    </option>
+                    <option value='male'>남자</option>
+                    <option value='female'>여자</option>
+                  </select>
+                </section>
               </div>
               <button
                 className={

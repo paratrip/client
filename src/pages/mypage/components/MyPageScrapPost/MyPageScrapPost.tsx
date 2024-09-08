@@ -3,7 +3,7 @@ import style from './MyPageScrapPost.module.css';
 import CustomPost from '@components/Community/Post';
 
 const MyPageScrapPost = () => {
-  const postMineData = [
+  const postMineData: any[] = [
     // {
     //   userName: '나무의자1',
     //   userImg: '',
@@ -36,7 +36,11 @@ const MyPageScrapPost = () => {
     <>
       <Header type='back' title='스크랩 게시글' />
       <div className={style.postContainer}>
-        <CustomPost data={postMineData} postType={'MY'} />
+        <CustomPost
+          data={postMineData}
+          postType={'MY'}
+          myTitle={'스크랩 게시글'}
+        />
       </div>
     </>
   );
