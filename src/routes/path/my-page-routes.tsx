@@ -4,12 +4,17 @@ import MyPageScrapPost from '@pages/mypage/components/MyPageScrapPost/MyPageScra
 import MyPageHeartPaggle from '@pages/mypage/components/MyPageHeartPaggle/MyPageHeartPaggle';
 import MyPageAccountModify from '@pages/mypage/components/MyPageAccountModify/MyPageAccountModify';
 import TermsOfUsePage from '@pages/mypage/components/TermsOfUse';
+import ProtectedRoute from '@components/auth/ProtectedRoute';
 
 export const MY_PAGE_ROUTES = [
   {
     path: 'myPage',
-    element: <MypageHome />,
+    element: <ProtectedRoute />,
     children: [
+      {
+        path: '',
+        element: <MypageHome />,
+      },
       {
         path: 'account',
         element: <MyPageAccountManage />,

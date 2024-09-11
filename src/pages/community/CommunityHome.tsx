@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
@@ -9,6 +9,32 @@ import SearchInput from '@components/ui/SearchInput';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from '@components/layouts/Header';
 
+import { useFetch } from '@hooks/useFetch';
+import { END_POINT } from '@utils/endpoint/endpoint';
+
+// interface BoardCreatorMemberInfo {
+//   memberSeq: number;
+//   userId: string;
+// }
+
+// interface BoardInfo {
+//   boardSeq: number;
+//   title: string;
+//   content: string;
+//   location: string;
+//   updatedAt: string; // 또는 Date 타입을 사용할 수 있습니다.
+//   imageURLs: string[];
+// }
+
+// interface PostData {
+//   boardCreatorMemberInfo: BoardCreatorMemberInfo;
+//   boardInfo: BoardInfo;
+// }
+
+// interface PopularPostData {
+//   data: PostData;
+// }
+
 export default function CommunityHome() {
   const location = useLocation();
   const hideParent =
@@ -17,9 +43,35 @@ export default function CommunityHome() {
 
   const [postToggle, setPostToggle] = useState(true);
 
+  const [popularPostData, setPopularPostData] = useState([]); // 이번주 인기 게시물
+  // const [postData, setPostData] = useState([]); // 전체 게시물
+  // const [postMineData, setPostMineData] = useState([]); // 내가 쓴 게시물
+
+  const [fetchData, fetchHandler] = useFetch();
+
   const handlePostToggle = () => {
     setPostToggle(!postToggle);
   };
+
+  const getPopularPostData = async () => {
+    // 인기 게시물 데이터 가져오기
+    const response = await fetchHandler({
+      url: END_POINT + '/board/popularity',
+      method: 'get',
+      data: {
+        memberSeq: 1,
+        page: 0,
+        size: 10,
+      },
+    });
+
+    console.log(response);
+  };
+
+  useEffect(() => {
+    getPopularPostData();
+  }, []);
+
   // 임시 데이터
   const slidesData = [
     {
@@ -122,33 +174,33 @@ export default function CommunityHome() {
     },
   ];
   const postMineData = [
-    // {
-    //   userName: '나무의자1',
-    //   userImg: '',
-    //   postImg: '',
-    //   postTitle:
-    //     '1이 풍경 보세요!! 정말 좋은 경험을 간직해보세요11이 풍경 보세요!! 정말 좋은 경험을 간직해보세요11이 풍경 보세요!! 정말 좋은 경험을 간직해보세요11이 풍경 보세요!! 정말 좋은 경험을 간직해보세요1',
-    //   postDate: '1일 전',
-    //   location: '지역1',
-    //   postStatus: {
-    //     comment: 1,
-    //     heart: 2,
-    //     scrap: 3,
-    //   },
-    // },
-    // {
-    //   userName: '나무의자2',
-    //   userImg: '',
-    //   postImg: '',
-    //   postTitle: '2이 풍경 보세요!! 정말 좋은 경험을 간직해보세요2',
-    //   postDate: '2일 전',
-    //   location: '지역2',
-    //   postStatus: {
-    //     comment: 1,
-    //     heart: 2,
-    //     scrap: 3,
-    //   },
-    // },
+    {
+      userName: '나무의자1',
+      userImg: '',
+      postImg: '',
+      postTitle:
+        '1이 풍경 보세요!! 정말 좋은 경험을 간직해보세요11이 풍경 보세요!! 정말 좋은 경험을 간직해보세요11이 풍경 보세요!! 정말 좋은 경험을 간직해보세요11이 풍경 보세요!! 정말 좋은 경험을 간직해보세요1',
+      postDate: '1일 전',
+      location: '지역1',
+      postStatus: {
+        comment: 1,
+        heart: 2,
+        scrap: 3,
+      },
+    },
+    {
+      userName: '나무의자2',
+      userImg: '',
+      postImg: '',
+      postTitle: '2이 풍경 보세요!! 정말 좋은 경험을 간직해보세요2',
+      postDate: '2일 전',
+      location: '지역2',
+      postStatus: {
+        comment: 1,
+        heart: 2,
+        scrap: 3,
+      },
+    },
   ];
 
   // [ ] 검색 핸들러
@@ -163,7 +215,7 @@ export default function CommunityHome() {
       <Header type='main' />
       <SearchInput onClick={handleSearch} />
       <CustomSlider
-        data={slidesData}
+        data={popularPostData}
         sliderType={'communityTopPost'}
         filter={false}
         moreBtn={true}
