@@ -15,6 +15,21 @@
   margin: 27px 0 22px 0;
 }
 
+.accountContainer .userImgBox {
+  position: relative;
+}
+
+.accountContainer .userImgBox :nth-child(1) {
+  cursor: pointer;
+}
+
+.accountContainer .userImgBox :nth-child(2) {
+  position: absolute;
+  right: 248px;
+  bottom: 6px;
+  cursor: pointer;
+}
+
 .accountContainer .userInfo .userTextBox {
   display: flex;
   flex-direction: column;
@@ -166,8 +181,18 @@
   border: 1px solid var(--systeam-color-Error, #f43c35);
 }
 
-.wraningText {
+.warningText {
   color: var(--systeam-color-Error, #f43c35);
+  font-family: Pretendard;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%; /* 13px */
+  letter-spacing: -0.052px;
+}
+
+.successText {
+  color: var(--systeam-color-info, #0081ef);
   font-family: Pretendard;
   font-size: 13px;
   font-style: normal;
