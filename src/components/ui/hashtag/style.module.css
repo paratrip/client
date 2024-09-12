@@ -6,6 +6,7 @@
   align-items: center;
   gap: 10px;
   background-color: var(--Secondary-secondary);
+  margin: 0 8px;
 }
 
 .hashtag p {
