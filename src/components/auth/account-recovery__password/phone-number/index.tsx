@@ -25,7 +25,7 @@ export default function PhoneNumber(props: FunnelProps) {
 
   const [certification, setCertification] = useState<string>('');
 
-  const [fetchData, fetchHandler] = useFetch();
+  const fetchHandler = useFetch();
 
   const mobileRegex = /^01[016789]-\d{3,4}-\d{4}$/;
   const mobileRegexTest = mobileRegex.test(phoneNumber);

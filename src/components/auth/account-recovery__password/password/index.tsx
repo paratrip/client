@@ -18,7 +18,7 @@ export default function Password(props: FunnelProps) {
   const phoneNumber = useRecoilValue<string>(findPasswordPhonNumberState);
   const [newPassword, setNewPassword] = useState<string>('');
 
-  const [fetchData, fetchHandler] = useFetch();
+  const fetchHandler = useFetch();
 
   async function submitHandler() {
     await fetchHandler({

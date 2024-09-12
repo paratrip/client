@@ -19,7 +19,7 @@ const MypageHome = () => {
   const navigate = useNavigate();
 
   const memberSeq: string | null = localStorage.getItem('memberSeq');
-  const [_, fetchUser] = useFetch<null, User>();
+  const fetchUser = useFetch<null, User>();
   const [userData, setUserData] = useState<User>({
     memberSeq: -1,
     email: '',

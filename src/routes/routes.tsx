@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import {
   AUTH_ROUTES,
@@ -18,6 +18,7 @@ export const routes = createBrowserRouter([
     path: '/',
     element: <Layout />,
     children: [
+      { index: true, element: <Navigate to='/home' replace /> },
       ...HOME_ROUTES,
       ...COMMUNITY_ROUTES,
       ...TOUR_COURSE_ROUTES,

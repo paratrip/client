@@ -22,10 +22,7 @@ export default function InformationNickname(props: InformationNickname) {
   const [isClick, setIsClick] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<'true' | 'false' | 'null'>('null');
 
-  const [fetchData, fetchHandler] = useFetch<
-    { userId: string },
-    Response<string>
-  >();
+  const fetchHandler = useFetch<{ userId: string }, Response<string>>();
 
   async function nicknameCheckHandler() {
     setIsClick(true);

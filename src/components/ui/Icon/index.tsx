@@ -581,9 +581,9 @@ const renderIcon = (iconType: string, isActive: boolean) => {
               width='102'
               height='102'
               filterUnits='userSpaceOnUse'
-              color-interpolation-filters='sRGB'
+              colorInterpolationFilters='sRGB'
             >
-              <feFlood flood-opacity='0' result='BackgroundImageFix' />
+              <feFlood floodOpacity='0' result='BackgroundImageFix' />
               <feColorMatrix
                 in='SourceAlpha'
                 type='matrix'
@@ -635,9 +635,9 @@ const renderIcon = (iconType: string, isActive: boolean) => {
               width='82'
               height='82'
               filterUnits='userSpaceOnUse'
-              color-interpolation-filters='sRGB'
+              colorInterpolationFilters='sRGB'
             >
-              <feFlood flood-opacity='0' result='BackgroundImageFix' />
+              <feFlood floodOpacity='0' result='BackgroundImageFix' />
               <feColorMatrix
                 in='SourceAlpha'
                 type='matrix'

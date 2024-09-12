@@ -42,8 +42,8 @@ const MyPageAccountModify = () => {
   const navigate = useNavigate();
   const userData = (useLocation() as RouteState).state;
 
-  const [_, fetchVerifyUserId] = useFetch<{ userId: string }, Request>();
-  const [__, fetchModifyUser] = useFetch<ModifyUser, ModifyUser>();
+  const fetchVerifyUserId = useFetch<{ userId: string }, Request>();
+  const fetchModifyUser = useFetch<ModifyUser, ModifyUser>();
 
   const [isDuplicateCheckActive, setIsDuplicateCheckActive] = useState(false);
   const [isModifyActive, setIsModifyActive] = useState(false);
@@ -51,10 +51,7 @@ const MyPageAccountModify = () => {
   const [idValue, setIdValue] = useState(''); // 아이디 인풋값
   const [isCheckedId, setIsCheckedId] = useState(''); // 아이디 중복확인 체크된 값
   const [isDuplicate, setIsDuplicate] = useState(false); // 중복확인된 아이디
-  const [wraningText, setWraningText] = useState<ServiceText | null>({
-    title: '',
-    style: '',
-  });
+  const [wraningText, setWraningText] = useState<ServiceText | null>(null);
   const [birthValue, setBirthValue] = useState('');
   const [genderValue, setGenderValue] = useState('');
   const selectRef = useRef<HTMLSelectElement>(null);
@@ -77,16 +74,13 @@ const MyPageAccountModify = () => {
     setIsCheckedId(''); // 아이디가 변경되면 중복확인 초기화
   };
 
-  // [ ] 아이디 중복확인 핸들러
+  // 아이디 중복확인 핸들러
   const handleDuplicateCheck: React.MouseEventHandler<
     HTMLButtonElement
   > = e => {
     e.preventDefault();
-    // [ ] 여기에 중복확인 로직 추가
-    console.log('??');
     const fetchData = async () => {
       try {
-        console.log('???');
         const response = await fetchVerifyUserId({
           url: `${END_POINT}/member/verify-userId`,
           method: 'post',
@@ -94,7 +88,6 @@ const MyPageAccountModify = () => {
             userId: idValue,
           },
         });
-        console.log('????');
         const { status, data } = response;
         if (status === 200) {
           setWraningText({
@@ -109,7 +102,7 @@ const MyPageAccountModify = () => {
         }
       } catch (error) {
         setWraningText({
-          title: '중복된 아이디입니다. 다른 아이디를 입력해 주세요.',
+          title: '중복된 아이디입니다. 다른 아이디를 입력해 주세요.',
           style: 'fail',
         });
         console.error(error);
@@ -118,13 +111,13 @@ const MyPageAccountModify = () => {
     fetchData();
   };
 
-  // [ ] 생년월일 input 핸들러
+  // 생년월일 input 핸들러
   const handleInputBirth = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setBirthValue(newValue);
   };
 
-  // [ ] select 변경 핸들러
+  // select 변경 핸들러
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (selectRef.current) {
       selectRef.current.blur();
@@ -132,13 +125,12 @@ const MyPageAccountModify = () => {
     setGenderValue(e.target.value);
   };
 
-  // [ ] 계정 수정 핸들러
+  // 계정 수정 핸들러
   const handleAccountModify: React.MouseEventHandler<
     HTMLButtonElement
   > = async e => {
     e.preventDefault();
     if (isModifyActive) {
-      console.log(isCheckedId, birthValue, genderValue);
       try {
         const response = await fetchModifyUser({
           url: `${END_POINT}/member`,
@@ -161,7 +153,7 @@ const MyPageAccountModify = () => {
     }
   };
 
-  // [x] 저장 버튼 활성화 상태 업데이트
+  // 저장 버튼 활성화 상태 업데이트
   useEffect(() => {
     const isValidBirthValue = isValidBirth(birthValue);
     setIsModifyActive(!!isCheckedId && isValidBirthValue && !!genderValue);
@@ -208,7 +200,7 @@ const MyPageAccountModify = () => {
                     <div className={style.idInputBox}>
                       <input
                         className={
-                          wraningText.style === 'fail'
+                          wraningText?.style === 'fail'
                             ? `${style.idInput} ${style.idInputWarning}`
                             : style.idInput
                         }

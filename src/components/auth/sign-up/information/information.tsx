@@ -30,7 +30,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Information(props: FunnelProps) {
   const { setStep } = props;
 
-  const [fetchData, fetchHandler] = useFetch();
+  const fetchHandler = useFetch();
 
   const navigate = useNavigate();
 
