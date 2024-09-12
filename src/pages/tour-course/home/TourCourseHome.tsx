@@ -1,15 +1,13 @@
-import { Suspense } from 'react';
-
 import Header from '@components/layouts/Header';
 
 import styles from './TourCourseHome.module.css';
 import Container from '@components/ui/container';
-import CourseSection from '@components/tour-course/section/course-section';
-import CourseCard from '@components/tour-course/card/course-card';
+import CourseSection from '@components/tour-course/home/section/course-section';
+import CourseCard from '@components/tour-course/home/card/course-card';
 
 export default function TourCourseHome() {
   return (
-    <Suspense>
+    <>
       <Header type='main' />
 
       <Container>
@@ -37,6 +35,6 @@ export default function TourCourseHome() {
           locations={[{ tag: '태그1', href: '' }]}
         />
       </Container>
-    </Suspense>
+    </>
   );
 }

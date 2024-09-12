@@ -11,8 +11,6 @@ export type fetchHandlerParameter<T> = {
 // T: 요청 데이터
 // U: 응답 데이터
 export function useFetch<T, U>() {
-  const [fetchData, setFetchData] = useState<Response<U>>();
-
   async function fetchHandler({
     url,
     method,
@@ -24,11 +22,6 @@ export function useFetch<T, U>() {
         data: { ...data },
       });
 
-      if (response.data) {
-        setFetchData(response.data);
-      }
-
-      // response.data가 바로 필요한 경우,
       return response.data;
     } catch (error) {
       if (typeof error === 'string') {
@@ -38,5 +31,5 @@ export function useFetch<T, U>() {
     }
   }
 
-  return [fetchData, fetchHandler] as const;
+  return [fetchHandler] as const;
 }

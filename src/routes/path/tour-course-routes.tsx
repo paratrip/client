@@ -1,11 +1,5 @@
-import { lazy } from 'react';
-
-const TourCourseHome = lazy(
-  () => import('@pages/tour-course/home/TourCourseHome')
-);
-const TourCourseDetail = lazy(
-  () => import('@pages/tour-course/detail/TourCourseDetail')
-);
+import TourCourseDetail from '@pages/tour-course/detail/TourCourseDetail';
+import TourCourseHome from '@pages/tour-course/home/TourCourseHome';
 
 export const TOUR_COURSE_ROUTES = [
   {
