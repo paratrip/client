@@ -34,7 +34,7 @@ export default function InformationPhone(props: InformationPhoneProps) {
 
   const [certification, setCertification] = useState<string>('');
 
-  const [fetchData, fetchHandler] = useFetch<
+  const fetchHandler = useFetch<
     { phoneNumber: string; certificationNumber?: string },
     Response<{ email?: string }>
   >();

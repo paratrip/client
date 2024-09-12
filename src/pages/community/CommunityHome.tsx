@@ -47,7 +47,7 @@ export default function CommunityHome() {
   // const [postData, setPostData] = useState([]); // 전체 게시물
   // const [postMineData, setPostMineData] = useState([]); // 내가 쓴 게시물
 
-  const [fetchData, fetchHandler] = useFetch();
+  const fetchHandler = useFetch();
 
   const handlePostToggle = () => {
     setPostToggle(!postToggle);

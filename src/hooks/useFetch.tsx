@@ -31,5 +31,5 @@ export function useFetch<T, U>() {
     }
   }
 
-  return [fetchHandler] as const;
+  return fetchHandler;
 }

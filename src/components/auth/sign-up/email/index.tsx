@@ -23,10 +23,7 @@ export default function Email(props: FunnelProps) {
   const [messageType, setMessageType] = useState<MessageType>('null');
   const [isNext, setIsNext] = useState<boolean>(true);
 
-  const [fetchData, fetchHandler] = useFetch<
-    { email: string },
-    Response<string>
-  >();
+  const fetchHandler = useFetch<{ email: string }, Response<string>>();
 
   async function duplicationCheckHandler() {
     const response = await fetchHandler({
