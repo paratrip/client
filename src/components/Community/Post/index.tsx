@@ -2,41 +2,109 @@ import Icon from '@components/ui/Icon';
 import style from './Post.module.css';
 import { TITLE } from '@constants/texts';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { timetoString } from '@utils/validation';
+// interface BoardCreatorMemberInfo {
+//   memberSeq: number;
+//   userId: string;
+// }
 
-type PostProps = {
-  postType: string;
-  data: Array<{
-    userName: string;
-    userImg: string;
-    postImg: string;
-    postTitle: string;
-    postDate: string;
-    location: string;
-    postStatus: {
-      comment: number;
-      heart: number;
-      scrap: number;
-    };
-  }>;
-  myTitle?: string;
-};
+// interface BoardInfo {
+//   boardSeq: number;
+//   title: string;
+//   content: string;
+//   location: string;
+//   updatedAt: string;
+//   imageURLs: string[];
+// }
 
-const CustomPost = (props: PostProps) => {
-  const { postType, data, myTitle } = props;
+// interface CountInfo {
+//   commentCnt: number;
+//   heart: boolean;
+//   scrap: boolean;
+// }
+
+// interface CommentInfo {
+//   commentSeq: number;
+//   comment: string;
+//   updatedAt: string;
+//   memberSeq: number;
+//   userId: string;
+// }
+
+// interface MemberInfo {
+//   memberSeq: number;
+//   userId: string;
+//   imgURL: string;
+// }
+
+// interface Content {
+//   boardInfo: BoardInfo;
+//   countInfo: CountInfo;
+//   memberInfo: MemberInfo;
+// }
+
+// interface PostData {
+//   content: Content;
+// }
+
+// interface PostProps {
+//   data: PostData[];
+//   postType: 'ALL' | 'MY';
+//   myTitle?: string;
+// }
+
+const CustomPost = (props: any) => {
+  const { data, postType, myTitle } = props;
+  const postData = data.content;
+
   const navigate = useNavigate();
 
+  const [isCheckdScroll, setIsCheckdScroll] = useState(false);
+
+  // [x] 스크롤 이벤트 등록
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // [x] 스크롤 이벤트 핸들러
+  const handleScroll = () => {
+    if (window.scrollY > 10) {
+      setIsCheckdScroll(true);
+    } else {
+      setIsCheckdScroll(false);
+    }
+  };
+
+  // [ ] 게시글 수정 핸들러
   const handleEdit = () => {
     console.log('수정');
   };
+
+  // [ ] 게시글 삭제 핸들러
   const handleDelete = () => {
     console.log('삭제');
   };
 
+  // [ ] 게시글 상세 페이지로 이동 핸들러
+  const handlePostDetail = (boardSeq: number) => {
+    const postDetailData = postData.find(
+      (post: any) => post.boardInfo.boardSeq === boardSeq
+    );
+
+    navigate(`/community/detail/:${boardSeq}`, { state: { postDetailData } });
+  };
+
+  // [ ] 글쓰기 페이지로 이동 핸들러
   const handleWritePost = () => {
     console.log('글쓰기');
     navigate('/community/write');
   };
 
+  // [ ] 맨 위로 이동 핸들러
   const handleOnTop = () => {
     window.scroll({
       top: 0,
@@ -48,58 +116,72 @@ const CustomPost = (props: PostProps) => {
   return (
     <div className={style.container}>
       {postType === 'MY' && <p className={style.myPageTitle}>{myTitle}</p>}
-      {data.length === 0 ? (
+
+      {postData?.length === 0 ? (
         <div className={style.noData}>
           {postType === 'ALL'
             ? TITLE.COMMUNITY.NODATA.ALL
             : TITLE.COMMUNITY.NODATA.ALL}
         </div>
       ) : (
-        data.map((post, index) => (
-          <div key={index} className={style.postBox}>
+        postData?.map((post: any, index: any) => (
+          <div
+            key={index}
+            className={style.postBox}
+            onClick={() => handlePostDetail(post.boardInfo.boardSeq)}
+          >
             <div className={style.post}>
               <div className={style.postInfo}>
                 <div className={style.textInfo}>
                   <div className={style.userInfo}>
                     <img
                       className={style.userImg}
-                      src={post.userImg}
+                      src={post.memberInfo?.imgURL}
                       alt='userImg'
                     />
                     <div className={style.userTextBox}>
-                      <p className={style.userName}>{post.userName} 님</p>
-                      <p className={style.postDate}>{post.postDate}</p>
+                      <p className={style.userName}>
+                        {post.memberInfo.userId} 님
+                      </p>
+                      <p className={style.postDate}>
+                        {timetoString(post.boardInfo.updatedAt)}
+                      </p>
                     </div>
                   </div>
-                  <h1 className={style.postTitle}>{post.postTitle}</h1>
-                  <p className={style.postLocation}>{post.location}</p>
+                  <h1 className={style.postTitle}>{post.boardInfo.title}</h1>
+                  <p className={style.postLocation}>
+                    {post.boardInfo.location}
+                  </p>
                   {postType === 'MY' && (
                     <div className={style.postStatusContainer}>
                       <div className={style.postStatus}>
                         <Icon iconType='comment' />
                         <p className={style.buttonText}>
-                          {post.postStatus.comment}
+                          {post.countInfo.commentCnt}
                         </p>
                       </div>
                       <div className={style.postStatus}>
                         <Icon iconType='heart' />
                         <p className={style.buttonText}>
-                          {post.postStatus.heart}
+                          {post.countInfo.heartCnt}
                         </p>
                       </div>
                       <div className={style.postStatus}>
                         <Icon iconType='scrap' />
                         <p className={style.buttonText}>
-                          {post.postStatus.scrap}
+                          {post.countInfo.scrapCnt}
                         </p>
                       </div>
                     </div>
                   )}
                 </div>
-                {post.postImg && (
+
+                {post?.boardInfo.imageURLs.length === 0 ? (
+                  <></>
+                ) : (
                   <img
                     className={postType === 'MY' ? style.myPostImg : ''}
-                    src={post.postImg}
+                    src={post.boardInfo.imageURLs[0]}
                     alt='postImg'
                   />
                 )}
@@ -110,19 +192,19 @@ const CustomPost = (props: PostProps) => {
                     <button className={style.button}>
                       <Icon iconType='comment' />
                       <p className={style.buttonText}>
-                        {post.postStatus.comment}
+                        {post.countInfo.commentCnt}
                       </p>
                     </button>
                     <button className={style.button}>
                       <Icon iconType='heart' />
                       <p className={style.buttonText}>
-                        {post.postStatus.heart}
+                        {post.countInfo.heartCnt}
                       </p>
                     </button>
                     <button className={style.button}>
                       <Icon iconType='scrap' />
                       <p className={style.buttonText}>
-                        {post.postStatus.scrap}
+                        {post.countInfo.scrapCnt}
                       </p>
                     </button>
                   </>
@@ -148,16 +230,16 @@ const CustomPost = (props: PostProps) => {
         ))
       )}
 
-      {postType === 'ALL' && (
-        <div className={style.toolBtnBox}>
-          <button onClick={handleWritePost}>
-            <Icon iconType='write'></Icon>
-          </button>
+      <div className={style.toolBtnBox}>
+        <button onClick={handleWritePost}>
+          <Icon iconType='write'></Icon>
+        </button>
+        {isCheckdScroll && (
           <button onClick={handleOnTop}>
             <Icon iconType='topArrow'></Icon>
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

@@ -1,12 +1,14 @@
 import Header from '@components/layouts/Header';
-import { useNavigate } from 'react-router-dom';
 import style from './CommunityWrite.module.css';
 import Icon from '@components/ui/Icon';
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback } from 'react';
 import { isValidStringLength } from '@utils/validation';
+import { useFetch } from '@hooks/useFetch';
+import { END_POINT } from '@utils/endpoint/endpoint';
+import axios from 'axios';
 
 const CommunityWrite = () => {
-  const navigate = useNavigate();
+  const memberSeq = localStorage.getItem('memberSeq');
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
 
@@ -20,6 +22,7 @@ const CommunityWrite = () => {
     const inputValue = e.target.value;
     setTitle(inputValue);
   };
+
   // [x] 내용 입력
   const handleContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const inputValue = e.target.value;
@@ -62,8 +65,20 @@ const CommunityWrite = () => {
     [uploadedFiles]
   );
 
-  // [ ] 게시글 작성
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  // [ ] 파일 삭제
+  const handleRemoveFile = (
+    index: number,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault(); // 이벤트 전파 방지
+    const newFiles = uploadedFiles.filter((_, i) => i !== index);
+    const newPreviewUrls = previewUrls.filter((_, i) => i !== index);
+    setUploadedFiles(newFiles);
+    setPreviewUrls(newPreviewUrls);
+  };
+
+  // [ ] 게시글 작성 및 게시하기
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isValidStringLength(title, 1, 50)) {
       alert('제목은 1자 이상 50자 이하로 작성해주세요.');
@@ -73,35 +88,40 @@ const CommunityWrite = () => {
       alert('내용은 5자 이상 5000자 이하로 작성해주세요.');
       return;
     }
+
     // FormData 생성
     const formData = new FormData();
-    // 제목, 내용, 지역
 
+    // 텍스트 데이터 추가
+    if (memberSeq !== null && memberSeq !== '-1') {
+      formData.append('memberSeq', memberSeq);
+    } else {
+      alert('회원 정보를 찾을 수 없습니다.');
+      return;
+    }
     formData.append('title', title);
     formData.append('content', content);
-    formData.append('location', location);
-
-    // 이미지 파일들
+    formData.append('location', '서울');
     uploadedFiles.forEach(file => {
       formData.append('images', file);
     });
 
-    console.log(
-      formData.get('title'),
-      formData.get('content'),
-      formData.get('location'),
-      formData.getAll('images')
-    );
+    try {
+      const response = await axios.post(`${END_POINT}/board`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
-    // 서버로 전송
-    // fetch('서버 주소', {
-    //   method: 'POST',
-    //   body: formData,
-    // }).then(response => {
-    //   if (response.ok) {
-    //     navigate('/community');
-    //   }
-    // });
+      if (response.status === 200) {
+        alert('게시글이 작성되었습니다.');
+        window.location.replace('/community');
+        return;
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('게시글 작성 중 오류가 발생했습니다.');
+    }
   };
 
   return (
@@ -145,12 +165,21 @@ const CommunityWrite = () => {
           <div className={style.previewImgContainer}>
             {previewUrls.length > 0 ? (
               previewUrls.map((url, index) => (
-                <img
-                  key={index}
-                  src={url}
-                  alt={`Preview ${index + 1}`}
-                  className={style.previewImg}
-                />
+                <div key={index}>
+                  <img
+                    src={url}
+                    alt={`Preview ${index + 1}`}
+                    className={style.previewImg}
+                  />
+                  <div className={style.previewItem}>
+                    <button
+                      onClick={event => handleRemoveFile(index, event)}
+                      className={style.removeBtn}
+                    >
+                      삭제
+                    </button>
+                  </div>
+                </div>
               ))
             ) : (
               <div className={style.previewExampleImg}>

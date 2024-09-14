@@ -569,7 +569,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
         >
           <g filter='url(#filter0_d_249_1041)'>
             <circle cx='51' cy='49' r='43' fill='#3434FF' />
-            <circle cx='51' cy='49' r='44' stroke='white' stroke-width='2' />
+            <circle cx='51' cy='49' r='44' stroke='white' strokeWidth='2' />
           </g>
           <circle cx='50.9998' cy='38.8826' r='16.4412' fill='white' />
           <ellipse cx='50.5' cy='76.5' rx='30.5' ry='16.5' fill='white' />

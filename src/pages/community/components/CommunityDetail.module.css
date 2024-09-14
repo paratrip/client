@@ -217,6 +217,8 @@
 .commentContainer .commentActiveBox {
   display: flex;
   flex-direction: column;
+  position: absolute;
+  bottom: 60px;
 }
 
 .commentContainer .commentActiveBox .commentInput {

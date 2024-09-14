@@ -8,7 +8,7 @@ export const COMMUNITY_ROUTES = [
     path: 'community',
     element: <CommunityHome />,
     children: [
-      { path: 'detail', element: <CommunityDetail /> },
+      { path: 'detail/:boardId', element: <CommunityDetail /> },
       {
         path: 'write',
         element: <CommunityWrite />,

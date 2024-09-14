@@ -24,9 +24,31 @@ type HomeData = {
   price: number;
 } & Post;
 
+interface BoardCreatorMemberInfo {
+  memberSeq: number;
+  userId: string;
+}
+
+interface BoardInfo {
+  boardSeq: number;
+  title: string;
+  content: string;
+  location: string;
+  updatedAt: string;
+  imageURLs: string[];
+}
+interface PopularPostData {
+  boardCreatorMemberInfo: BoardCreatorMemberInfo;
+  boardInfo: BoardInfo;
+}
+
 type SliderProps = {
-  data: PostData[] | HomeData[] | Post[];
-  sliderType: 'communityTopPost' | 'homeRecommendPost' | 'homeLocation';
+  data: PostData[] | HomeData[] | Post[] | PopularPostData[];
+  sliderType:
+    | 'communityTopPost'
+    | 'homeRecommendPost'
+    | 'homeLocation'
+    | 'popularPost';
   filter: boolean;
   moreBtn: boolean;
   moreBtnPath: string;
