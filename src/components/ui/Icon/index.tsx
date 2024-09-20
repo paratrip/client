@@ -558,7 +558,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'userDefaultImgBig':
+    case 'mypageUserDefaultImgBig':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -612,7 +612,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           </defs>
         </svg>
       );
-    case 'userDefaultImgSmall':
+    case 'mypageUserDefaultImgSmall':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -664,6 +664,38 @@ const renderIcon = (iconType: string, isActive: boolean) => {
               />
             </filter>
           </defs>
+        </svg>
+      );
+    case 'communityUserDefaultImgSmall':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='40'
+          height='40'
+          viewBox='0 0 40 40'
+          fill='none'
+        >
+          <circle cx='20' cy='20' r='19.5' fill='#9DA0A8' stroke='#EFF1F4' />
+          <circle cx='20.0001' cy='15.5294' r='7.26471' fill='#EFF1F4' />
+          <ellipse
+            cx='19.7212'
+            cy='32.0151'
+            rx='13.1324'
+            ry='6.98529'
+            fill='#EFF1F4'
+          />
+        </svg>
+      );
+    case 'communityUserDefaultImg30px':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='32'
+          height='32'
+          viewBox='0 0 32 32'
+          fill='none'
+        >
+          <circle cx='16' cy='16' r='16' fill='#D9D9D9' />
         </svg>
       );
     case 'userModifyImg':

@@ -35,6 +35,7 @@ const CommunityDetail = () => {
   const boardSeq = location.pathname.split('/:').pop();
 
   const [postDetail, setPostDetail] = useState<PostDetail | null>(null);
+  const [userImgURL, setUserImgURL] = useState(null);
   const [slidesData, setSlidesData] = useState([]);
   const [commentData, setCommentData] = useState<
     Array<{
@@ -43,7 +44,7 @@ const CommunityDetail = () => {
       content: string;
     }>
   >([]);
-  const [commentCtn, setCommentCtn] = useState(0);
+  const [commentCnt, setCommentCnt] = useState(0);
 
   const [commentInputValue, setCommentInputValue] = useState('');
   const fetchPostDetail = useFetch(true);
@@ -62,11 +63,13 @@ const CommunityDetail = () => {
       });
       console.log(response);
       if (response.status === 200) {
-        setPostDetail((response.data as PostDetail) || null);
-        setSlidesData(response.data.boardInfo.imageURLs || []);
-        setCommentData(response.data.commentInfos || []);
+        const { data } = response;
+        setPostDetail((data as PostDetail) || null);
+        setUserImgURL(data.boardCreatorInfo.profileImage);
+        setSlidesData(data.boardInfo.imageURLs || []);
+        setCommentData(data.commentInfos || []);
         setCommentInputValue('');
-        setCommentCtn(response.data);
+        setCommentCnt(data.countInfo);
       } else {
         console.error('게시글 상세 정보를 불러오는데 실패했습니다.');
       }
@@ -114,6 +117,8 @@ const CommunityDetail = () => {
     setCommentInputValue(e.target.value);
   };
 
+  console.log(userImgURL);
+
   return (
     <>
       <Header type='back' />
@@ -121,10 +126,15 @@ const CommunityDetail = () => {
         <div className={style.postWrapper}>
           <div className={style.userInfoContainer}>
             <div className={style.userInfoBox}>
-              <img
-                className={style.userImg}
-                // src={postDetail.boardCreatorInfo.profileImage}
-              ></img>
+              {userImgURL === null ? (
+                <Icon iconType='communityUserDefaultImgSmall' />
+              ) : (
+                <img
+                  className={style.userImg}
+                  src={postDetail?.boardCreatorInfo?.profileImage}
+                ></img>
+              )}
+
               <div className={style.flexBox}>
                 <div className={style.userName}>
                   {postDetail?.boardCreatorInfo?.userId}
@@ -140,8 +150,8 @@ const CommunityDetail = () => {
             <div className={style.activeBox}>
               {/* <Icon iconType='nullScrap' />
               <Icon iconType='nullHeart' /> */}
-              <ScrapButton />
-              <HeartButton />
+              <ScrapButton data={postDetail} />
+              <HeartButton data={postDetail} />
             </div>
           </div>
           <div className={style.postContainer}>
@@ -168,7 +178,15 @@ const CommunityDetail = () => {
             {commentData.map((item, idx) => (
               <div className={style.commentCard} key={idx}>
                 <div className={style.userInfoBox}>
-                  <img className={style.userImg} src={item.profileImage}></img>
+                  {item.profileImage === null ? (
+                    <Icon iconType='communityUserDefaultImg30px' />
+                  ) : (
+                    <img
+                      className={style.userImg}
+                      src={item.profileImage}
+                    ></img>
+                  )}
+
                   <div className={style.flexBox}>
                     <div className={style.userName}>{item.userId}</div>
                     <div className={style.postDate}>
@@ -196,15 +214,15 @@ const CommunityDetail = () => {
             <div className={style.buttonBox}>
               <button className={style.button}>
                 <Icon iconType='comment' />
-                <p className={style.buttonText}>1</p>
+                <p className={style.buttonText}>{commentCnt.commentCnt}</p>
               </button>
               <button className={style.button}>
                 <Icon iconType='heart' />
-                <p className={style.buttonText}>2</p>
+                <p className={style.buttonText}>{commentCnt.heartCnt}</p>
               </button>
               <button className={style.button}>
                 <Icon iconType='scrap' />
-                <p className={style.buttonText}>3</p>
+                <p className={style.buttonText}>{commentCnt.scrapCnt}</p>
               </button>
             </div>
           </div>

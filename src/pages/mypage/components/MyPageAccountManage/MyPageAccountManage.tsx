@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
 import style from './MyPageAccountManage.module.css';
 import Icon from '@components/ui/Icon';
 import Header from '@components/layouts/Header';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { useModal } from '@hooks/useModal';
-import { useFetch } from '@hooks/useFetch';
-import { END_POINT } from '@utils/endpoint/endpoint';
 
 interface User {
   memberSeq: number;
@@ -14,6 +11,7 @@ interface User {
   userId: string;
   birth: string;
   gender: string;
+  profileImage: string;
 }
 
 interface RouteState {
@@ -92,7 +90,14 @@ const MyPageAccountManage = () => {
             <Icon iconType='primaryRightArrow' />
           </div>
           <div className={style.userInfo}>
-            <Icon iconType='userDefaultImgBig' />
+            <div className={style.userImgBox}>
+              {userData.profileImage !== null ? (
+                <img src={userData.profileImage} className={style.userImg} />
+              ) : (
+                <Icon iconType='mypageUserDefaultImgBig' />
+              )}
+            </div>
+
             <div className={style.userTextBox}>
               <div className={style.userEmailBox}>
                 <div className={style.userEmail}>{userData.email}</div>

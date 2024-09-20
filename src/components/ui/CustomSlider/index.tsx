@@ -63,7 +63,7 @@ export default function CustomSlider(props: SliderProps) {
     moreBtnPath,
     ...rest
   } = props;
-
+  console.log(data);
   const navigation = useNavigate();
 
   const sliderSettings = {
@@ -130,14 +130,28 @@ export default function CustomSlider(props: SliderProps) {
 
       <div className={style.SliderContainer}>
         <Slider {...sliderSettings}>
-          {(data as PostData[]).map((item: PostData, index: number) => (
+          {data.map((item, index: number) => (
             <div key={index} className={style.SliderItem}>
-              <div className={style.SliderContent}>
+              <div
+                className={style.SliderContent}
+                style={{
+                  backgroundImage: `url(${item?.boardInfo?.imageURLs[0]})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat',
+                }}
+              >
                 <div className={style.userInfo}>
-                  <img className={style.userImg} alt='user' />
-                  <p className={style.userName}>{item.user} 님</p>
+                  <img
+                    className={style.userImg}
+                    src={item?.boardCreatorMemberInfo?.profileImage}
+                    alt='user'
+                  />
+                  <p className={style.userName}>
+                    {item?.boardCreatorMemberInfo?.userId} 님
+                  </p>
                 </div>
-                <p className={style.contentText}>{item.postTitle}</p>
+                <p className={style.contentText}>{item?.boardInfo?.title}</p>
               </div>
             </div>
           ))}

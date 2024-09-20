@@ -1,21 +1,40 @@
 import Header from '@components/layouts/Header';
 import style from './CommunityWrite.module.css';
 import Icon from '@components/ui/Icon';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { isValidStringLength } from '@utils/validation';
 import { useFetch } from '@hooks/useFetch';
 import { END_POINT } from '@utils/endpoint/endpoint';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 const CommunityWrite = () => {
+  const isLocation = useLocation();
+  const boardInfo = isLocation.state?.boardInfo;
+
   const memberSeq = localStorage.getItem('memberSeq');
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
 
+  const [mainTitle, setMainTitle] = useState('게시글 작성');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [location, setLocation] = useState('');
   const [contentError, setContentError] = useState('');
+  const [boardSeq, setBoardSeq] = useState(null);
+
+  useEffect(() => {
+    console.log(boardInfo);
+    if (boardInfo?.imageURLs) {
+      setMainTitle('게시글 수정');
+      setPreviewUrls(boardInfo.imageURLs);
+      setUploadedFiles(boardInfo.imageURLs);
+      setTitle(boardInfo.title);
+      setContent(boardInfo.content);
+      setLocation(boardInfo.location);
+      setBoardSeq(boardInfo.boardSeq);
+    }
+  }, [boardInfo]);
 
   // [x] 제목 입력
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,11 +77,14 @@ const CommunityWrite = () => {
         const newFiles = [...uploadedFiles, ...fileArray].slice(0, 10);
         setUploadedFiles(newFiles);
 
-        const newPreviewUrls = newFiles.map(file => URL.createObjectURL(file));
+        const newPreviewUrls = [
+          ...previewUrls,
+          ...fileArray.map(file => URL.createObjectURL(file)),
+        ].slice(0, 10);
         setPreviewUrls(newPreviewUrls);
       }
     },
-    [uploadedFiles]
+    [uploadedFiles, previewUrls]
   );
 
   // [ ] 파일 삭제
@@ -70,7 +92,7 @@ const CommunityWrite = () => {
     index: number,
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
-    event.preventDefault(); // 이벤트 전파 방지
+    event.preventDefault();
     const newFiles = uploadedFiles.filter((_, i) => i !== index);
     const newPreviewUrls = previewUrls.filter((_, i) => i !== index);
     setUploadedFiles(newFiles);
@@ -124,10 +146,60 @@ const CommunityWrite = () => {
     }
   };
 
+  const handleModify = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!isValidStringLength(title, 1, 50)) {
+      alert('제목은 1자 이상 50자 이하로 작성해주세요.');
+      return;
+    }
+    if (content.length < 5 || content.length > 5000) {
+      alert('내용은 5자 이상 5000자 이하로 작성해주세요.');
+      return;
+    }
+
+    // FormData 생성
+    const formData = new FormData();
+
+    // 텍스트 데이터 추가
+    if (memberSeq !== null && memberSeq !== '-1') {
+      formData.append('memberSeq', memberSeq);
+    } else {
+      alert('회원 정보를 찾을 수 없습니다.');
+      return;
+    }
+    formData.append('boardSeq', boardSeq);
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('location', '서울');
+    uploadedFiles.forEach(file => {
+      formData.append('images', file);
+    });
+
+    try {
+      const response = await axios.put(`${END_POINT}/board`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (response.status === 200) {
+        alert('게시글이 수정되었습니다.');
+        window.location.replace('/community');
+        return;
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('게시글 수정 중 오류가 발생했습니다.');
+    }
+  };
+
   return (
     <>
-      <Header type='back' title='게시글 작성' />
-      <form className={style.writeForm} onSubmit={handleSubmit}>
+      <Header type='back' title={mainTitle} />
+      <form
+        className={style.writeForm}
+        onSubmit={mainTitle === '게시글 작성' ? handleSubmit : handleModify}
+      >
         <input
           type='text'
           placeholder='제목'
@@ -152,7 +224,9 @@ const CommunityWrite = () => {
         <div className={style.fileUpLoadContainer}>
           <label htmlFor='imgFile' className={style.fileUpLoad}>
             <Icon iconType='imgUpload' />
-            <p>사진선택 ({uploadedFiles.length}/10)</p>
+            {/* <p>사진선택 ({uploadedFiles.length}/10)</p> */}
+            <p>사진선택</p>
+            <p style={{ color: 'blue' }}>(최대 10장 이내)</p>
             <input
               type='file'
               accept='image/*'
@@ -191,7 +265,7 @@ const CommunityWrite = () => {
 
         <div className={style.centerBox}>
           <button type='submit' className={style.submitBtn}>
-            게시하기
+            {mainTitle === '게시글 작성' ? '게시하기' : '수정하기'}
           </button>
         </div>
       </form>
