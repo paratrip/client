@@ -53,6 +53,15 @@
   gap: 8px;
 }
 
+.userInfo .userImgBox {
+}
+
+.userInfo .userImgBox img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
 .mypageMenu .menuItem {
   cursor: pointer;
   display: flex;

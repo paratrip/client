@@ -30,6 +30,17 @@
   margin: 27px 0 22px 0;
 }
 
+.accountContainer .userInfo .userImgBox {
+  display: flex;
+  justify-content: center;
+}
+
+.accountContainer .userInfo .userImgBox img {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+}
+
 .accountContainer .userInfo .userTextBox {
   display: flex;
   flex-direction: column;

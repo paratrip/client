@@ -13,6 +13,7 @@ interface User {
   userId: string;
   birth: string;
   gender: string;
+  profileImage: string;
 }
 
 const MypageHome = () => {
@@ -27,6 +28,7 @@ const MypageHome = () => {
     userId: '',
     birth: '',
     gender: '',
+    profileImage: '',
   });
 
   const hideParent =
@@ -93,8 +95,11 @@ const MypageHome = () => {
         <div className={style.mypageUserCard}>
           <div className={style.userInfo}>
             <div className={style.userImgBox}>
-              {/* <img className={style.userImg} /> */}
-              <Icon iconType='userDefaultImgSmall' />
+              {userData.profileImage !== null ? (
+                <img src={userData.profileImage} className={style.userImg} />
+              ) : (
+                <Icon iconType='mypageUserDefaultImgSmall' />
+              )}
             </div>
             <div className={style.userTextBox}>
               <div className={style.userId}>{userData.userId}</div>

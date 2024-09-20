@@ -17,6 +17,12 @@
 
 .accountContainer .userImgBox {
   position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.accountContainer .userImgBox img {
+  border-radius: 50%;
 }
 
 .accountContainer .userImgBox :nth-child(1) {
@@ -28,6 +34,11 @@
   right: 248px;
   bottom: 6px;
   cursor: pointer;
+}
+
+.profilePreview {
+  width: 92px;
+  height: 92px;
 }
 
 .accountContainer .userInfo .userTextBox {
