@@ -1,16 +1,14 @@
 import { useState } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import FunnelButton from '@components/auth/common/funnel-button';
 import FunnelHeader from '@components/auth/common/funnel-header';
-import FunnelInput from '@components/auth/common/funnel-input';
 
 import { type FunnelProps } from '@utils/funnel/types/funnel-types';
 import InformationPhone from './information-phone';
 
-import { getValueHandler } from '@utils/helpers/auth/get-value';
 import { useFetch } from '@hooks/useFetch';
-import { END_POINT, END_POINT_MEMBER } from '@utils/endpoint/endpoint';
+import { END_POINT_MEMBER } from '@utils/endpoint/endpoint';
 
 import {
   signUpBornState,
@@ -21,7 +19,6 @@ import {
   signUpPhonNumberState,
 } from '@store/sign-up';
 import styles from './information.module.css';
-import Select from '@components/ui/select/select';
 import InformationNickname from './information-nickname';
 import InformationBorn from './information-born';
 import InformationGender from './information-gender';

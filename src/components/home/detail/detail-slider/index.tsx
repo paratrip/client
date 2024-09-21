@@ -1,6 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-
-import Slider from 'react-slick';
+import { useState } from 'react';
 
 import next from '@assets/icons/next.svg';
 import prev from '@assets/icons/prev.svg';

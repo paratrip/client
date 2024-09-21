@@ -33,9 +33,9 @@ export default function EmailLogin() {
     }
   >();
 
-  const [accessToken, setAccessToken] = useRecoilState(loginAccessToken);
-  const [refreshToken, setRefreshToken] = useRecoilState(loginRefreshToken);
-  const [memberSeq, setMemberSeq] = useRecoilState(loginMemberSeq);
+  const [_accessToken, setAccessToken] = useRecoilState(loginAccessToken);
+  const [_refreshToken, setRefreshToken] = useRecoilState(loginRefreshToken);
+  const [_memberSeq, setMemberSeq] = useRecoilState(loginMemberSeq);
 
   const [isValid, setIsValid] = useState<boolean>(false);
 

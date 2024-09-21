@@ -3,7 +3,7 @@ import Select from '@components/ui/select/select';
 import { signUpGenderState } from '@store/sign-up';
 
 export default function InformationGender() {
-  const [gender, setGender] = useRecoilState(signUpGenderState);
+  const [_gender, setGender] = useRecoilState(signUpGenderState);
 
   function selectHandler(option: {
     value: 'MALE' | 'FEMALE';

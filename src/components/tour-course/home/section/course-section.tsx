@@ -7,15 +7,15 @@ import styles from './course-section.module.css';
 import { useState } from 'react';
 import FilterModal from '../filter-modal/filter-modal';
 
-type CourseSectionProps = {
-  resultsCount: number;
-};
+// type CourseSectionProps = {
+//   resultsCount: number;
+// };
 
 export default function CourseSection() {
   const [isModal, setIsModal] = useState<boolean>(false);
 
   // ! hashtag 목록
-  const [selectedList, setSelectedList] = useState();
+  // const [selectedList, setSelectedList] = useState();
 
   function modalHandler() {
     setIsModal(prev => !prev);

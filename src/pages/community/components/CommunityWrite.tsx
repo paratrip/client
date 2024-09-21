@@ -3,7 +3,6 @@ import style from './CommunityWrite.module.css';
 import Icon from '@components/ui/Icon';
 import React, { useState, useCallback, useEffect } from 'react';
 import { isValidStringLength } from '@utils/validation';
-import { useFetch } from '@hooks/useFetch';
 import { END_POINT } from '@utils/endpoint/endpoint';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';

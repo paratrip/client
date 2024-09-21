@@ -28,9 +28,9 @@ export default function RecoveryEmail() {
       <AuthHeader title='이메일 찾기' />
 
       <Funnel>
-        <Funnel.Step name='phone-number'>
+        {/* <Funnel.Step name='phone-number'>
           <PhoneNumber setStep={() => stepHandler('finish')} />
-        </Funnel.Step>
+        </Funnel.Step> */}
         <Funnel.Step name='finish'>
           <Finish />
         </Funnel.Step>
