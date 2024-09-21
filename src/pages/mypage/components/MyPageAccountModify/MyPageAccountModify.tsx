@@ -2,7 +2,7 @@ import Header from '@components/layouts/Header';
 import React, { useRef, useState, useEffect } from 'react';
 import style from './MyPageAccountModify.module.css';
 import Icon from '@components/ui/Icon';
-import { isValidBirth, isValidId } from '@utils/validation';
+import { isValidBirth } from '@utils/validation';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { END_POINT } from '@utils/endpoint/endpoint';
 import { useFetch } from '@hooks/useFetch';

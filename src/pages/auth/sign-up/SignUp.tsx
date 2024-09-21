@@ -1,10 +1,9 @@
-import { useEffect, useReducer, useState } from 'react';
-import { useNavigate, useLocation, useNavigationType } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useFunnel } from '@xionhub/funnel-react-router-dom-adapter';
 import { useFunnelDefaultStep } from '@xionhub/funnel-core';
 
 import { signUpFunnelOptions } from '@utils/funnel/option';
-import { signUpInitialState, signUpReducer } from '@utils/reducer/auth-reducer';
 
 import Email from '@components/auth/sign-up/email';
 import AuthHeader from '@components/auth/common/auth-header';
@@ -22,8 +21,6 @@ export default function SingUp() {
   const [customBack, setCustomBack] = useState<string>('');
 
   const navigate = useNavigate();
-
-  const [authState, dispatch] = useReducer(signUpReducer, signUpInitialState);
 
   useEffect(() => {
     switch (step) {

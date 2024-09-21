@@ -1,5 +1,5 @@
 import FunnelHeader from '@components/auth/common/funnel-header';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import information from '@assets/icons/information.svg';
 import course from '@assets/icons/course.svg';

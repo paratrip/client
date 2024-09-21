@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useState } from 'react';
 import { Response } from '@utils/types/response';
 
 export type fetchHandlerParameter<T> = {

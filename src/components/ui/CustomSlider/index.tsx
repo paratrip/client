@@ -61,7 +61,6 @@ export default function CustomSlider(props: SliderProps) {
     sliderType = '',
     moreBtn = false,
     moreBtnPath,
-    ...rest
   } = props;
   console.log(data);
   const navigation = useNavigate();

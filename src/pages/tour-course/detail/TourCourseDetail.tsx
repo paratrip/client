@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Map,
   MapMarker,
@@ -22,7 +22,7 @@ const mapCenterValue: MapCenter = {
 };
 
 const TourCourseDetail: React.FC = () => {
-  const [path, setPath] = useState([
+  const [path, _setPath] = useState([
     { name: '테스트', lat: 37.5665, lng: 126.978 },
     { name: '테스트', lat: 37.5667, lng: 126.9785 },
     { name: '테스트', lat: 37.5669, lng: 126.979 },
@@ -32,9 +32,8 @@ const TourCourseDetail: React.FC = () => {
   useKakaoLoader();
 
   const [isMinimized, setIsMinimized] = useState<boolean>(false);
-  const [mapCenter, setIsMepCenter] = useState<MapCenter>(mapCenterValue);
+  const [mapCenter] = useState<MapCenter>(mapCenterValue);
 
-  const [mapHight, setMapHeight] = useState<string>('10%');
   const sectionRef = useRef<HTMLElement | null>(null);
   const startY = useRef<number>(0);
   const currentY = useRef<number>(0);

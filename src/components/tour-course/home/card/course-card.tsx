@@ -1,4 +1,5 @@
 import Hashtag from '@components/ui/hashtag';
+
 import styles from './course-card.module.css';
 import { Link } from 'react-router-dom';
 
