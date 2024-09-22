@@ -6,9 +6,9 @@ import AuthContainer from '@components/auth/common/auth-container';
 import AuthHeader from '@components/auth/common/auth-header';
 
 import { recoveryEmailFunnelOption } from '@utils/funnel/option';
-import PhoneNumber from '@components/auth/account-recovery__email/phone-number';
+// import PhoneNumber from '@components/auth/account-recovery__email/phone-number';
 import Finish from '@components/auth/account-recovery__email/finish';
-import { type RecoveryEmailStep } from '@utils/funnel/types/funnel-types';
+// import { type RecoveryEmailStep } from '@utils/funnel/types/funnel-types';
 
 export default function RecoveryEmail() {
   const [Funnel, { createStep, step }] = useFunnel(recoveryEmailFunnelOption());
@@ -19,9 +19,9 @@ export default function RecoveryEmail() {
     navigate(createStep('phone-number'), { replace: true });
   });
 
-  function stepHandler(step: RecoveryEmailStep) {
-    navigate(createStep(step, {}));
-  }
+  // function stepHandler(step: RecoveryEmailStep) {
+  //   navigate(createStep(step, {}));
+  // }
 
   return (
     <AuthContainer type='funnel'>
