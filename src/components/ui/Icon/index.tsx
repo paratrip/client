@@ -719,7 +719,15 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           viewBox='0 0 32 32'
           fill='none'
         >
-          <circle cx='16' cy='16' r='16' fill='#D9D9D9' />
+          <circle cx='16' cy='16' r='15.5' fill='#9DA0A8' stroke='#EFF1F4' />
+          <circle cx='15.9999' cy='12.4706' r='5.73529' fill='#EFF1F4' />
+          <ellipse
+            cx='15.7798'
+            cy='25.4854'
+            rx='10.3676'
+            ry='5.51471'
+            fill='#EFF1F4'
+          />
         </svg>
       );
     case 'userModifyImg':

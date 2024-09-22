@@ -104,6 +104,7 @@ const CustomPost = (props: any) => {
     });
   };
 
+  console.log(postData);
   return (
     <div className={style.container}>
       {postType === 'MY' && <p className={style.myPageTitle}>{myTitle}</p>}
@@ -124,11 +125,16 @@ const CustomPost = (props: any) => {
               >
                 <div className={style.textInfo}>
                   <div className={style.userInfo}>
-                    <img
-                      className={style.userImg}
-                      src={post.memberInfo?.imgURL}
-                      alt='userImg'
-                    />
+                    {post.memberInfo.imgURL ? (
+                      <img
+                        className={style.userImg}
+                        src={post.memberInfo?.imgURL}
+                        alt='userImg'
+                      />
+                    ) : (
+                      <Icon iconType='communityUserDefaultImg30px' />
+                    )}
+
                     <div className={style.userTextBox}>
                       <p className={style.userName}>
                         {post.memberInfo.userId} 님
