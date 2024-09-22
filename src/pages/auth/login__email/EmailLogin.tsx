@@ -24,7 +24,7 @@ import styles from './EmailLogin.module.css';
 export default function EmailLogin() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [fetchData, fetchHandler] = useFetch<
+  const fetchHandler = useFetch<
     { email: string; password: string },
     {
       accessToken: string;
@@ -33,9 +33,9 @@ export default function EmailLogin() {
     }
   >();
 
-  const [accessToken, setAccessToken] = useRecoilState(loginAccessToken);
-  const [refreshToken, setRefreshToken] = useRecoilState(loginRefreshToken);
-  const [memberSeq, setMemberSeq] = useRecoilState(loginMemberSeq);
+  const [_accessToken, setAccessToken] = useRecoilState(loginAccessToken);
+  const [_refreshToken, setRefreshToken] = useRecoilState(loginRefreshToken);
+  const [_memberSeq, setMemberSeq] = useRecoilState(loginMemberSeq);
 
   const [isValid, setIsValid] = useState<boolean>(false);
 

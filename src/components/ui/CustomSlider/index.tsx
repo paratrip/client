@@ -24,24 +24,47 @@ type HomeData = {
   price: number;
 } & Post;
 
-type SliderProps = {
-  data: PostData[] | HomeData[] | Post[];
-  sliderType: 'communityTopPost' | 'homeRecommendPost' | 'homeLocation';
+interface BoardCreatorMemberInfo {
+  memberSeq: number;
+  userId: string;
+  profileImage: string;
+}
+
+interface BoardInfo {
+  boardSeq: number;
+  title: string;
+  content: string;
+  location: string;
+  updatedAt: string;
+  imageURLs: string[];
+}
+interface PopularPostData {
+  boardCreatorMemberInfo: BoardCreatorMemberInfo;
+  boardInfo: BoardInfo;
+}
+
+type SliderProps<T> = {
+  data: T[];
+  sliderType:
+    | 'communityTopPost'
+    | 'homeRecommendPost'
+    | 'homeLocation'
+    | 'popularPost';
   filter: boolean;
   moreBtn: boolean;
   moreBtnPath: string;
 };
 
-export default function CustomSlider(props: SliderProps) {
+export default function CustomSlider<
+  T extends PostData | HomeData | Post | PopularPostData
+>(props: SliderProps<T>) {
   const {
     data = [],
     filter = false,
     sliderType = '',
     moreBtn = false,
     moreBtnPath,
-    ...rest
   } = props;
-
   const navigation = useNavigate();
 
   const sliderSettings = {
@@ -90,6 +113,10 @@ export default function CustomSlider(props: SliderProps) {
     );
   }
 
+  function isPopularPostData(item: any): item is PopularPostData {
+    return item && 'boardInfo' in item && 'boardCreatorMemberInfo' in item;
+  }
+
   return (
     <div className={style.sliderMainContainer}>
       <div className={style.titleContainer}>
@@ -108,15 +135,31 @@ export default function CustomSlider(props: SliderProps) {
 
       <div className={style.SliderContainer}>
         <Slider {...sliderSettings}>
-          {(data as PostData[]).map((item: PostData, index: number) => (
+          {data.map((item, index: number) => (
             <div key={index} className={style.SliderItem}>
-              <div className={style.SliderContent}>
-                <div className={style.userInfo}>
-                  <img className={style.userImg} alt='user' />
-                  <p className={style.userName}>{item.user} 님</p>
+              {isPopularPostData(item) && (
+                <div
+                  className={style.SliderContent}
+                  style={{
+                    backgroundImage: `url(${item?.boardInfo?.imageURLs[0]})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                  }}
+                >
+                  <div className={style.userInfo}>
+                    <img
+                      className={style.userImg}
+                      src={item?.boardCreatorMemberInfo?.profileImage}
+                      alt='user'
+                    />
+                    <p className={style.userName}>
+                      {item?.boardCreatorMemberInfo?.userId} 님
+                    </p>
+                  </div>
+                  <p className={style.contentText}>{item?.boardInfo?.title}</p>
                 </div>
-                <p className={style.contentText}>{item.postTitle}</p>
-              </div>
+              )}
             </div>
           ))}
         </Slider>

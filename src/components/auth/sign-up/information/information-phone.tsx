@@ -5,11 +5,13 @@ import FunnelInput from '@components/auth/common/funnel-input';
 
 import { signUpPhonNumberState } from '@store/sign-up';
 
-import { getValueHandler } from '../utils/get-value';
+import { getValueHandler } from '../../../../utils/helpers/auth/get-value';
 
 import { useFetch } from '@hooks/useFetch';
 import { END_POINT, END_POINT_MEMBER } from '@utils/endpoint/endpoint';
 import ValidationMessage from '@components/auth/common/validation-message';
+
+export const mobileRegex = /^01[016789]-\d{3,4}-\d{4}$/;
 
 type InformationPhoneProps = {
   isCertification: boolean;
@@ -21,26 +23,36 @@ export default function InformationPhone(props: InformationPhoneProps) {
 
   const [phoneNumber, setPhoneNumber] = useRecoilState(signUpPhonNumberState);
 
-  console.log(phoneNumber);
-
-  const [isPhone, setIsPhone] = useState<boolean>(false);
-  const [phoneValidation, setPhoneValidation] = useState<boolean>(false);
+  const [isMessage, setIsMessage] = useState<boolean>(false);
+  const [phoneValidation, setPhoneValidation] = useState<boolean>(true);
 
   const [certification, setCertification] = useState<string>('');
 
-  console.log(certification);
+  const fetchHandler = useFetch();
 
-  const [fetchData, fetchHandler] = useFetch();
+  const regexTest = mobileRegex.test(phoneNumber);
 
   async function getCertificationHandler() {
-    setIsPhone(true);
     setPhoneValidation(true);
 
-    await fetchHandler({
-      url: END_POINT + '/sms-certification/send',
+    const response = await fetchHandler({
+      url: END_POINT_MEMBER + '/verify-phone',
       method: 'post',
       data: { phoneNumber },
     });
+
+    if (response.status === 200) {
+      await fetchHandler({
+        url: END_POINT + '/sms-certification/send',
+        method: 'post',
+        data: { phoneNumber },
+      });
+      setIsMessage(true);
+      return;
+    }
+
+    setIsMessage(false);
+    setPhoneValidation(false);
   }
 
   async function certificationCheckHandler() {
@@ -59,6 +71,15 @@ export default function InformationPhone(props: InformationPhoneProps) {
       onIsCertification(false);
     }
   }
+
+  useEffect(() => {
+    if (regexTest) {
+      setPhoneValidation(false);
+    } else {
+      setPhoneValidation(true);
+    }
+  }, [phoneNumber]);
+
   return (
     <>
       <FunnelInput
@@ -67,11 +88,12 @@ export default function InformationPhone(props: InformationPhoneProps) {
         onChange={e => getValueHandler(e, setPhoneNumber)}
         onClick={getCertificationHandler}
         disabled={phoneValidation}
+        inputDisabled={isCertification}
         value={phoneNumber}
         buttonContentFalse='인증요청'
         buttonContentTrue='요청완료'
       />
-      {isPhone && (
+      {isMessage && (
         <>
           <FunnelInput
             inputStyle='certification'
@@ -79,10 +101,12 @@ export default function InformationPhone(props: InformationPhoneProps) {
             type='number'
             onChange={e => getValueHandler(e, setCertification)}
             onClick={certificationCheckHandler}
-            disabled={certification.length !== 4}
+            disabled={isCertification}
             value={certification}
+            inputDisabled={isCertification}
             buttonContentFalse='인증요청'
             buttonContentTrue='요청완료'
+            maxLength={4}
           />
           {!isCertification && (
             <ValidationMessage

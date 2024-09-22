@@ -1,0 +1,15 @@
+.course__section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section__article {
+  display: flex;
+  align-items: center;
+}
+
+.section__count strong {
+  color: var(--primary-primary);
+  margin: 8px;
+}

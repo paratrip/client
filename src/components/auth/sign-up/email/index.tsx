@@ -10,7 +10,7 @@ import { type FunnelProps } from '@utils/funnel/types/funnel-types';
 import { type Response } from '@utils/types/response';
 
 import { signUpEmailState } from '@store/sign-up';
-import { getValueHandler } from '@components/auth/sign-up/utils/get-value';
+import { getValueHandler } from '@utils/helpers/auth/get-value';
 import { END_POINT_MEMBER } from '@utils/endpoint/endpoint';
 import { useFetch } from '@hooks/useFetch';
 
@@ -23,10 +23,7 @@ export default function Email(props: FunnelProps) {
   const [messageType, setMessageType] = useState<MessageType>('null');
   const [isNext, setIsNext] = useState<boolean>(true);
 
-  const [fetchData, fetchHandler] = useFetch<
-    { email: string },
-    Response<string>
-  >();
+  const fetchHandler = useFetch<{ email: string }, Response<string>>();
 
   async function duplicationCheckHandler() {
     const response = await fetchHandler({

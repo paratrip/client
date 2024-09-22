@@ -1,33 +1,50 @@
-import React from 'react';
 import style from './MyPageAccountManage.module.css';
 import Icon from '@components/ui/Icon';
 import Header from '@components/layouts/Header';
-import { useNavigate, Outlet } from 'react-router-dom';
+import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { useModal } from '@hooks/useModal';
 
-const MyPageAccountManage = () => {
-  const { openModal } = useModal();
+interface User {
+  memberSeq: number;
+  email: string;
+  phoneNumber: string;
+  userId: string;
+  birth: string;
+  gender: string;
+  profileImage: string;
+}
 
-  const naivgate = useNavigate();
+interface RouteState {
+  state: User;
+}
+
+const MyPageAccountManage = () => {
+  const { openModal, closeModal } = useModal();
+
+  const navigate = useNavigate();
+  const userData = (useLocation() as RouteState).state;
 
   const hideParent = location.pathname.includes('/mypage/account/modify');
 
   // [x] 계정 수정 페이지로 이동
   const goAccountModify = () => {
-    console.log('goAccountModify');
-    naivgate('/mypage/account/modify');
+    navigate('/mypage/account/modify', { state: userData });
   };
 
   // [ ] 로그아웃 핸들러
   const handleLogout = () => {
-    console.log('로그아웃 처리');
-    // navigate('/home');
+    localStorage.removeItem('memberSeq');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    closeModal();
+    navigate('/home');
   };
 
   // [ ] 회원탈퇴 핸들러
   const handleWithdraw = () => {
     console.log('회원탈퇴 처리');
-    // navigate('/home');
+    closeModal();
+    navigate('/home');
   };
 
   // [x] 로그아웃, 회원탈퇴 모달 오픈
@@ -44,15 +61,20 @@ const MyPageAccountManage = () => {
   const userInputMapping = [
     {
       title: '아이디(닉네임)',
-      value: 'qwerasdf1234',
+      value: userData.userId,
     },
     {
       title: '생년월일',
-      value: '19990909',
+      value: userData.birth,
     },
     {
       title: '성별',
-      value: '남자',
+      value:
+        userData.gender === 'MALE'
+          ? '남자'
+          : userData.gender === 'FEMALE'
+          ? '여자'
+          : '',
     },
   ];
 
@@ -68,14 +90,23 @@ const MyPageAccountManage = () => {
             <Icon iconType='primaryRightArrow' />
           </div>
           <div className={style.userInfo}>
-            <Icon iconType='userDefaultImg' />
+            <div className={style.userImgBox}>
+              {userData.profileImage !== null ? (
+                <img src={userData.profileImage} className={style.userImg} />
+              ) : (
+                <Icon iconType='mypageUserDefaultImgBig' />
+              )}
+            </div>
+
             <div className={style.userTextBox}>
               <div className={style.userEmailBox}>
-                <div className={style.userEmail}>email@email.com</div>
-                <Icon iconType='kakaoTalk' />
+                <div className={style.userEmail}>{userData.email}</div>
+                {/* <Icon iconType='kakaoTalk' /> */}
               </div>
 
-              <div className={style.userPhoneNumber}>010-0000-0000</div>
+              <div className={style.userPhoneNumber}>
+                {userData.phoneNumber}
+              </div>
             </div>
           </div>
           <div className={style.userBox}>

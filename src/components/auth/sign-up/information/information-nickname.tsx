@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 
-import { getValueHandler } from '../utils/get-value';
+import { getValueHandler } from '@utils/helpers/auth/get-value';
 import { signUpNicknameState } from '@store/sign-up';
 import { useFetch } from '@hooks/useFetch';
 
@@ -22,10 +22,7 @@ export default function InformationNickname(props: InformationNickname) {
   const [isClick, setIsClick] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<'true' | 'false' | 'null'>('null');
 
-  const [fetchData, fetchHandler] = useFetch<
-    { userId: string },
-    Response<string>
-  >();
+  const fetchHandler = useFetch<{ userId: string }, Response<string>>();
 
   async function nicknameCheckHandler() {
     setIsClick(true);

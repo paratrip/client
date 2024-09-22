@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import {
   AUTH_ROUTES,
@@ -6,10 +6,11 @@ import {
   COMMUNITY_ROUTES,
   TOUR_COURSE_ROUTES,
   MY_PAGE_ROUTES,
+  TERMS_ROUTES,
 } from './path';
 
 import Layout from '@components/layouts/layout';
-import Home from '@pages/home/home/Home';
+import Notification from '@pages/Notification';
 
 export const routes = createBrowserRouter([
   ...AUTH_ROUTES,
@@ -17,10 +18,12 @@ export const routes = createBrowserRouter([
     path: '/',
     element: <Layout />,
     children: [
+      { index: true, element: <Navigate to='/home' replace /> },
       ...HOME_ROUTES,
       ...COMMUNITY_ROUTES,
       ...TOUR_COURSE_ROUTES,
       ...MY_PAGE_ROUTES,
+      ...TERMS_ROUTES,
       { path: 'notification', element: <Notification /> },
     ],
   },

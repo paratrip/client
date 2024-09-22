@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.container section {
+  margin-bottom: 28px;
+}
+
+.container h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.container p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.container p ul {
+  margin-top: 20px;
+}
+
+.container p ul li {
+  padding-bottom: 6px;
+}
+
+.container p ul li ul {
+  margin-left: 20px;
+}

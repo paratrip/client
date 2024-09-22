@@ -1,0 +1,12 @@
+.ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 90px;
+  width: 100%;
+}
+
+.ul li:first-child {
+  background-color: var(--Gray-Scale-gray2);
+}

@@ -534,7 +534,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'commentWrite':
+    case 'commentWriteOff':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -558,7 +558,85 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'userDefaultImg':
+    case 'commentWriteOn':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='32'
+          height='32'
+          viewBox='0 0 32 32'
+          fill='none'
+        >
+          <circle cx='16' cy='16' r='16' fill='#3434FF' />
+          <path
+            d='M16 23V10'
+            stroke='white'
+            strokeWidth='2'
+            strokeLinecap='round'
+          />
+          <path
+            d='M10 16L16 10L22 16'
+            stroke='white'
+            strokeWidth='2'
+            strokeLinecap='round'
+          />
+        </svg>
+      );
+    case 'mypageUserDefaultImgBig':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='102'
+          height='102'
+          viewBox='0 0 102 102'
+          fill='none'
+        >
+          <g filter='url(#filter0_d_249_1041)'>
+            <circle cx='51' cy='49' r='43' fill='#3434FF' />
+            <circle cx='51' cy='49' r='44' stroke='white' strokeWidth='2' />
+          </g>
+          <circle cx='50.9998' cy='38.8826' r='16.4412' fill='white' />
+          <ellipse cx='50.5' cy='76.5' rx='30.5' ry='16.5' fill='white' />
+          <defs>
+            <filter
+              id='filter0_d_249_1041'
+              x='0'
+              y='0'
+              width='102'
+              height='102'
+              filterUnits='userSpaceOnUse'
+              colorInterpolationFilters='sRGB'
+            >
+              <feFlood floodOpacity='0' result='BackgroundImageFix' />
+              <feColorMatrix
+                in='SourceAlpha'
+                type='matrix'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
+                result='hardAlpha'
+              />
+              <feOffset dy='2' />
+              <feGaussianBlur stdDeviation='3' />
+              <feComposite in2='hardAlpha' operator='out' />
+              <feColorMatrix
+                type='matrix'
+                values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0'
+              />
+              <feBlend
+                mode='normal'
+                in2='BackgroundImageFix'
+                result='effect1_dropShadow_249_1041'
+              />
+              <feBlend
+                mode='normal'
+                in='SourceGraphic'
+                in2='effect1_dropShadow_249_1041'
+                result='shape'
+              />
+            </filter>
+          </defs>
+        </svg>
+      );
+    case 'mypageUserDefaultImgSmall':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -610,6 +688,57 @@ const renderIcon = (iconType: string, isActive: boolean) => {
               />
             </filter>
           </defs>
+        </svg>
+      );
+    case 'communityUserDefaultImgSmall':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='40'
+          height='40'
+          viewBox='0 0 40 40'
+          fill='none'
+        >
+          <circle cx='20' cy='20' r='19.5' fill='#9DA0A8' stroke='#EFF1F4' />
+          <circle cx='20.0001' cy='15.5294' r='7.26471' fill='#EFF1F4' />
+          <ellipse
+            cx='19.7212'
+            cy='32.0151'
+            rx='13.1324'
+            ry='6.98529'
+            fill='#EFF1F4'
+          />
+        </svg>
+      );
+    case 'communityUserDefaultImg30px':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='32'
+          height='32'
+          viewBox='0 0 32 32'
+          fill='none'
+        >
+          <circle cx='16' cy='16' r='16' fill='#D9D9D9' />
+        </svg>
+      );
+    case 'userModifyImg':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='30'
+          height='30'
+          viewBox='0 0 30 30'
+          fill='none'
+        >
+          <circle cx='15' cy='15' r='14' fill='white' stroke='#D5D8DC' />
+          <path
+            d='M8 21H22M8 21V17.407L15 10.2211M8 21L11.5 21L18.5 13.8141M15 10.2211L17.51 7.6444L17.5116 7.64287C17.8571 7.28817 18.0302 7.11051 18.2297 7.04396C18.4054 6.98535 18.5947 6.98535 18.7704 7.04396C18.9698 7.11046 19.1427 7.28792 19.4877 7.64212L21.01 9.20487C21.3565 9.56059 21.5299 9.73853 21.5948 9.94362C21.6519 10.124 21.6519 10.3184 21.5948 10.4988C21.5299 10.7037 21.3568 10.8814 21.0108 11.2366L21.0101 11.2374L18.5 13.8141M15 10.2211L18.5 13.8141'
+            stroke='#7F828C'
+            strokeWidth='1.5'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          />
         </svg>
       );
     case 'kakaoTalk':

@@ -119,8 +119,10 @@
 }
 
 .fileUpLoadContainer .previewImg {
-  width: 102px;
-  height: 102px;
+  width: 160px;
+  height: 113px;
+  flex-shrink: 0;
+  border-radius: 10px;
 }
 
 /* submit btn */
