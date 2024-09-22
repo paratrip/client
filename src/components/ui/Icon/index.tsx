@@ -534,7 +534,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'commentWrite':
+    case 'commentWriteOff':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -544,6 +544,30 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           fill='none'
         >
           <circle cx='16' cy='16' r='16' fill='#9DA0A8' />
+          <path
+            d='M16 23V10'
+            stroke='white'
+            strokeWidth='2'
+            strokeLinecap='round'
+          />
+          <path
+            d='M10 16L16 10L22 16'
+            stroke='white'
+            strokeWidth='2'
+            strokeLinecap='round'
+          />
+        </svg>
+      );
+    case 'commentWriteOn':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='32'
+          height='32'
+          viewBox='0 0 32 32'
+          fill='none'
+        >
+          <circle cx='16' cy='16' r='16' fill='#3434FF' />
           <path
             d='M16 23V10'
             stroke='white'

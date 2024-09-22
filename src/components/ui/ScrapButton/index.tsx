@@ -4,7 +4,6 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { useFetch } from '@hooks/useFetch';
 import { END_POINT } from '@utils/endpoint/endpoint';
-
 interface BoardCreatorInfo {
   memberSeq: number;
   userId: string;
@@ -13,10 +12,20 @@ interface BoardCreatorInfo {
 
 interface BoardInfo {
   boardSeq: number;
-  imageURLs: string[];
+  title: string;
+  content: string;
   location: string;
   updatedAt: string;
-  content: string;
+  imageURLs: string[];
+}
+
+interface CommentInfo {
+  commentSeq: number;
+  comment: string;
+  updatedAt: string;
+  memberSeq: number;
+  userId: string;
+  profileImage: string;
 }
 
 interface CountInfo {
@@ -27,24 +36,14 @@ interface CountInfo {
   scrap: boolean;
 }
 
-interface CommentInfos {
-  commentSeq: number;
-  comment: string;
-  updatedAt: string;
-  memberSeq: number;
-  userId: string;
-  profileImage: string;
-}
-
 interface PostData {
-  boardCreatorInfo: BoardCreatorInfo;
   boardInfo: BoardInfo;
+  boardCreatorInfo: BoardCreatorInfo;
+  commentInfos: CommentInfo[];
   countInfo: CountInfo;
-  commentInfos: CommentInfos;
 }
 
-const ScrapButton = (data: PostData) => {
-  console.log(data);
+const ScrapButton = ({ data }: { data: PostData | null }) => {
   const [isScraped, setIsScraped] = useState(false);
 
   const memberSeq = localStorage.getItem('memberSeq');
@@ -76,7 +75,6 @@ const ScrapButton = (data: PostData) => {
             boardSeq: boardSeq,
           },
         });
-
         console.log(response);
         return;
       } else {
@@ -88,7 +86,6 @@ const ScrapButton = (data: PostData) => {
             boardSeq: boardSeq,
           },
         });
-
         console.log(response);
         return;
       }

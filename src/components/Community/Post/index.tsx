@@ -71,8 +71,6 @@ const CustomPost = (props: any) => {
   // [ ] 게시글 수정 핸들러
   const handleEdit = (post: PostData) => {
     console.log('수정');
-    console.log(post);
-    const boardSeq = post.boardInfo.boardSeq;
     navigate(`/community/write`, { state: post });
   };
 
