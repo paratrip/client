@@ -15,6 +15,7 @@ interface User {
   userId: string;
   birth: string;
   gender: string;
+  profileImage: string;
 }
 
 interface RouteState {
@@ -27,13 +28,13 @@ interface Request {
   };
 }
 
-interface ModifyUser {
-  memberSeq: number;
-  userId: string;
-  birth: string;
-  gender: string;
-  profileImage: string;
-}
+// interface ModifyUser {
+//   memberSeq: number;
+//   userId: string;
+//   birth: string;
+//   gender: string;
+//   profileImage: string;
+// }
 
 interface ServiceText {
   title: string;
@@ -45,7 +46,7 @@ const MyPageAccountModify = () => {
   const userData = (useLocation() as RouteState).state;
 
   const fetchVerifyUserId = useFetch<{ userId: string }, Request>();
-  const fetchModifyUser = useFetch<ModifyUser, ModifyUser>();
+  // const fetchModifyUser = useFetch<ModifyUser, ModifyUser>();
 
   const [isDuplicateCheckActive, setIsDuplicateCheckActive] = useState(false);
   const [isModifyActive, setIsModifyActive] = useState(false);
@@ -61,7 +62,7 @@ const MyPageAccountModify = () => {
 
   // 이미지
   const [imgPreview, setImgPreview] = useState('');
-  const [imgValue, setImgValue] = useState('');
+  const [imgValue, setImgValue] = useState<File | null>(null);
   const [isImageChanged, setIsImageChanged] = useState(false);
 
   useEffect(() => {
@@ -97,7 +98,7 @@ const MyPageAccountModify = () => {
             userId: idValue,
           },
         });
-        const { status, data } = response;
+        const { status } = response;
         if (status === 200) {
           setWraningText({
             title: '사용 가능한 아이디입니다.',
@@ -135,19 +136,20 @@ const MyPageAccountModify = () => {
   };
 
   // [ ] 이미지 변경 핸들러
-  const handleImageChange = e => {
-    const file = e.target.files[0];
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setImgPreview(reader.result);
+        setImgPreview(reader.result as string);
         setImgValue(file);
-        setIsImageChanged(true); // 이미지가 변경되었음을 표시
+        setIsImageChanged(true);
       };
       reader.readAsDataURL(file);
     }
   };
 
+  // [ ] 계정 수정 핸들러
   // [ ] 계정 수정 핸들러
   const handleAccountModify: React.MouseEventHandler<
     HTMLButtonElement
@@ -155,12 +157,12 @@ const MyPageAccountModify = () => {
     e.preventDefault();
     if (isModifyActive) {
       const formData = new FormData();
-      formData.append('memberSeq', userData.memberSeq);
+      formData.append('memberSeq', userData.memberSeq.toString());
       formData.append('userId', isCheckedId || idValue);
       formData.append('birth', birthValue);
       formData.append('gender', genderValue);
-      if (isImageChanged) {
-        formData.append('profileImage', imgValue);
+      if (isImageChanged && imgValue) {
+        formData.append('profileImage', imgValue as File);
       }
 
       try {

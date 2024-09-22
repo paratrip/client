@@ -10,23 +10,43 @@ import { useFetch } from '@hooks/useFetch';
 import { END_POINT } from '@utils/endpoint/endpoint';
 import { timetoString } from '@utils/validation';
 
-interface PostDetail {
-  boardInfo: {
-    imageURLs: string[];
-    title: string;
-    content: string;
-    location: string;
-    updatedAt: string;
-  };
-  boardCreatorInfo: {
-    userId: string;
-    profileImage: string;
-  };
-  commentInfos: Array<{
-    userName: string;
-    date: string;
-    content: string;
-  }>;
+interface BoardCreatorInfo {
+  memberSeq: number;
+  userId: string;
+  profileImage: string;
+}
+
+interface BoardInfo {
+  boardSeq: number;
+  title: string;
+  content: string;
+  location: string;
+  updatedAt: string;
+  imageURLs: string[];
+}
+
+interface CommentInfo {
+  commentSeq: number;
+  comment: string;
+  updatedAt: string;
+  memberSeq: number;
+  userId: string;
+  profileImage: string;
+}
+
+interface CountInfo {
+  commentCnt: number;
+  heartCnt: number;
+  scrapCnt: number;
+  heart: boolean;
+  scrap: boolean;
+}
+
+interface PostData {
+  boardInfo: BoardInfo;
+  boardCreatorInfo: BoardCreatorInfo;
+  commentInfos: CommentInfo[];
+  countInfo: CountInfo;
 }
 
 const CommunityDetail = () => {
@@ -34,20 +54,20 @@ const CommunityDetail = () => {
   const memberSeq = localStorage.getItem('memberSeq');
   const boardSeq = location.pathname.split('/:').pop();
 
-  const [postDetail, setPostDetail] = useState<PostDetail | null>(null);
-  const [userImgURL, setUserImgURL] = useState(null);
-  const [slidesData, setSlidesData] = useState([]);
-  const [commentData, setCommentData] = useState<
-    Array<{
-      userName: string;
-      date: string;
-      content: string;
-    }>
-  >([]);
-  const [commentCnt, setCommentCnt] = useState(0);
+  const [postDetail, setPostDetail] = useState<PostData | null>(null);
+  const [userImgURL, setUserImgURL] = useState<string | null>(null);
+  const [slidesData, setSlidesData] = useState<string[]>([]);
+  const [commentData, setCommentData] = useState<CommentInfo[]>([]);
+  const [commentCnt, setCommentCnt] = useState<CountInfo>({
+    commentCnt: 0,
+    heartCnt: 0,
+    scrapCnt: 0,
+    heart: false,
+    scrap: false,
+  });
 
   const [commentInputValue, setCommentInputValue] = useState('');
-  const fetchPostDetail = useFetch(true);
+  const fetchPostDetail = useFetch<void, PostData>(true);
   const fetchComment = useFetch(true);
 
   useEffect(() => {
@@ -58,13 +78,13 @@ const CommunityDetail = () => {
   const getPostDetail = async () => {
     try {
       const response = await fetchPostDetail({
-        url: `${END_POINT}/board?boardSeq=${boardSeq}`,
+        url: `${END_POINT}/board?memberSeq=${memberSeq}&boardSeq=${boardSeq}`,
         method: 'get',
       });
       console.log(response);
       if (response.status === 200) {
         const { data } = response;
-        setPostDetail((data as PostDetail) || null);
+        setPostDetail(data);
         setUserImgURL(data.boardCreatorInfo.profileImage);
         setSlidesData(data.boardInfo.imageURLs || []);
         setCommentData(data.commentInfos || []);
@@ -148,8 +168,6 @@ const CommunityDetail = () => {
               </div>
             </div>
             <div className={style.activeBox}>
-              {/* <Icon iconType='nullScrap' />
-              <Icon iconType='nullHeart' /> */}
               <ScrapButton data={postDetail} />
               <HeartButton data={postDetail} />
             </div>
@@ -208,7 +226,11 @@ const CommunityDetail = () => {
                 onChange={handleCommentInput}
               />
               <button className={style.commentBtn} onClick={handleComment}>
-                <Icon iconType='commentWrite' />
+                <Icon
+                  iconType={
+                    commentInputValue ? 'commentWriteOn' : 'commentWriteOff'
+                  }
+                />
               </button>
             </div>
             <div className={style.buttonBox}>

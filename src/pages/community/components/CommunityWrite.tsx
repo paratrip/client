@@ -6,10 +6,13 @@ import { isValidStringLength } from '@utils/validation';
 import { END_POINT } from '@utils/endpoint/endpoint';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import FilterModal from '@components/tour-course/home/filter-modal/filter-modal';
 
 const CommunityWrite = () => {
   const isLocation = useLocation();
   const boardInfo = isLocation.state?.boardInfo;
+
+  const [isModal, setIsModal] = useState<boolean>(false);
 
   const memberSeq = localStorage.getItem('memberSeq');
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
@@ -18,9 +21,10 @@ const CommunityWrite = () => {
   const [mainTitle, setMainTitle] = useState('게시글 작성');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [location, setLocation] = useState('');
+  // const [location, setLocation] = useState('');
+  const [_, setLocation] = useState('');
   const [contentError, setContentError] = useState('');
-  const [boardSeq, setBoardSeq] = useState(null);
+  const [boardSeq, setBoardSeq] = useState<number | null>(null);
 
   useEffect(() => {
     console.log(boardInfo);
@@ -54,10 +58,9 @@ const CommunityWrite = () => {
     setContent(inputValue);
   };
 
-  // [ ] 지역 선택
-  const handleLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setLocation(inputValue);
+  // [ ] 지역 선택 모달 오픈
+  const openLocationModal = () => {
+    setIsModal(prev => !prev);
   };
 
   // [x] 파일 업로드
@@ -166,7 +169,9 @@ const CommunityWrite = () => {
       alert('회원 정보를 찾을 수 없습니다.');
       return;
     }
-    formData.append('boardSeq', boardSeq);
+    if (boardSeq !== null) {
+      formData.append('boardSeq', boardSeq.toString());
+    }
     formData.append('title', title);
     formData.append('content', content);
     formData.append('location', '서울');
@@ -219,7 +224,10 @@ const CommunityWrite = () => {
           {contentError && <p className={style.errorMessage}>{contentError}</p>}
         </div>
 
-        <p className={style.locaitonInput}>지역을 선택해주세요!</p>
+        <div className={style.locaitonInput} onClick={openLocationModal}>
+          지역을 선택해주세요!
+        </div>
+        {isModal && <FilterModal closeHandler={openLocationModal} />}
         <div className={style.fileUpLoadContainer}>
           <label htmlFor='imgFile' className={style.fileUpLoad}>
             <Icon iconType='imgUpload' />

@@ -15,6 +15,7 @@ import { END_POINT } from '@utils/endpoint/endpoint';
 interface BoardCreatorMemberInfo {
   memberSeq: number;
   userId: string;
+  profileImage: string;
 }
 
 interface BoardInfo {
@@ -98,6 +99,7 @@ export default function CommunityHome() {
         method: 'get',
       });
 
+      console.log(response.data);
       if (response.status === 200) {
         setPostData(response.data as PostData[]);
       }
@@ -114,7 +116,7 @@ export default function CommunityHome() {
         method: 'get',
       });
 
-      // console.log(response);
+      console.log(response.data);
       if (response.status === 200) {
         setPostMineData(response.data as PostData[]);
       }
@@ -132,17 +134,12 @@ export default function CommunityHome() {
     }
   }, []);
 
-  // [ ] 검색 핸들러
-  const handleSearch = () => {
-    console.log('검색');
-  };
-
   return hideParent ? (
     <Outlet />
   ) : (
     <>
       <Header type='main' />
-      <SearchInput onClick={handleSearch} />
+      <SearchInput />
       <CustomSlider
         data={popularPostData}
         sliderType={'communityTopPost'}

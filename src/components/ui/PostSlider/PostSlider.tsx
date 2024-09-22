@@ -2,22 +2,14 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styles from './PostSlider.module.css';
-import { useState } from 'react';
 
-type SlideCounterProps = {
-  currentSlide: number;
-  slideCount: number;
-};
+interface PostSliderProps {
+  data: string[];
+}
 
-const SlideCounter = ({ currentSlide, slideCount }: SlideCounterProps) => (
-  <div className={styles.slideCounter}>
-    {currentSlide + 1} / {slideCount}
-  </div>
-);
-
-const PostSlider = ({ data }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
+const PostSlider = (props: PostSliderProps) => {
+  const { data } = props;
+  console.log('data', data);
   const settings = {
     arrows: true,
     dots: true,
@@ -25,14 +17,13 @@ const PostSlider = ({ data }) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    beforeChange: (current: number, next: number) => setCurrentSlide(next),
   };
 
   return (
     <div className={styles.sliderContainer}>
       {data.length === 1 && (
         <div className={styles.onlyImg}>
-          <img src={data} alt={`postImg`} />
+          <img src={data[0]} alt={`postImg`} />
         </div>
       )}
       {data.length >= 2 && (
@@ -44,7 +35,6 @@ const PostSlider = ({ data }) => {
               </div>
             ))}
           </Slider>
-          {/* <SlideCounter currentSlide={currentSlide} slideCount={data.length} /> */}
         </>
       )}
     </div>
