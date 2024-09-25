@@ -7,6 +7,7 @@ import { END_POINT } from '@utils/endpoint/endpoint';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import FilterModal from '@components/tour-course/home/filter-modal/filter-modal';
+import { useFetch } from '@hooks/useFetch';
 
 const CommunityWrite = () => {
   const isLocation = useLocation();
@@ -21,10 +22,30 @@ const CommunityWrite = () => {
   const [mainTitle, setMainTitle] = useState('게시글 작성');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  // const [location, setLocation] = useState('');
-  const [_, setLocation] = useState('');
+  const [location, setLocation] = useState<string[]>([]);
+  const [locationTag, setLocationTag] = useState([]);
   const [contentError, setContentError] = useState('');
   const [boardSeq, setBoardSeq] = useState<number | null>(null);
+
+  const [isActiveButton, setIsActiveButton] = useState(false);
+
+  const fetchLocation = useFetch();
+
+  // [ ] 지역태그 조회
+  const getLocationTag = async () => {
+    const response = await fetchLocation({
+      url: `${END_POINT}/api/paragliding/region`,
+      method: 'get',
+    });
+    console.log(response);
+    if (response.length >= 1) {
+      setLocationTag(response);
+    }
+  };
+
+  useEffect(() => {
+    getLocationTag();
+  }, []);
 
   useEffect(() => {
     console.log(boardInfo);
@@ -34,10 +55,39 @@ const CommunityWrite = () => {
       setUploadedFiles(boardInfo.imageURLs);
       setTitle(boardInfo.title);
       setContent(boardInfo.content);
-      setLocation(boardInfo.location);
+      setLocation([boardInfo.location]);
       setBoardSeq(boardInfo.boardSeq);
     }
   }, [boardInfo]);
+
+  useEffect(() => {
+    const isTitleValid = title.length >= 1;
+    const isContentValid = content.length >= 5;
+    const isLocationSelected = location.length > 0;
+
+    setIsActiveButton(isTitleValid && isContentValid && isLocationSelected);
+  }, [title, content, location]);
+
+  // [ ] 지역 선택 핸들러
+  const onSelectLocation = (selectedRegion: string) => {
+    setLocation(prevLocations => {
+      let newLocations;
+      if (prevLocations.includes(selectedRegion)) {
+        newLocations = prevLocations.filter(loc => loc !== selectedRegion);
+      } else {
+        if (prevLocations.length >= 1) {
+          alert('1개의 지역만 선택할 수 있습니다.');
+          return prevLocations;
+        }
+        newLocations = [...prevLocations, selectedRegion];
+      }
+      return newLocations;
+    });
+  };
+
+  const onClearLocations = () => {
+    setLocation([]);
+  };
 
   // [x] 제목 입력
   const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -125,7 +175,12 @@ const CommunityWrite = () => {
     }
     formData.append('title', title);
     formData.append('content', content);
-    formData.append('location', '서울');
+    if (!location[0]) {
+      alert('지역을 선택해주세요.');
+      return;
+    } else if (location[0]) {
+      formData.append('location', location[0]);
+    }
     uploadedFiles.forEach(file => {
       formData.append('images', file);
     });
@@ -148,6 +203,7 @@ const CommunityWrite = () => {
     }
   };
 
+  // [ ] 게시글 수정 핸들러
   const handleModify = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isValidStringLength(title, 1, 50)) {
@@ -174,10 +230,17 @@ const CommunityWrite = () => {
     }
     formData.append('title', title);
     formData.append('content', content);
-    formData.append('location', '서울');
+    if (!location[0]) {
+      alert('지역을 선택해주세요.');
+      return;
+    } else if (location[0]) {
+      formData.append('location', location[0]);
+    }
     uploadedFiles.forEach(file => {
       formData.append('images', file);
     });
+
+    console.log(formData.get('location'));
 
     try {
       const response = await axios.put(`${END_POINT}/board`, formData, {
@@ -225,13 +288,30 @@ const CommunityWrite = () => {
         </div>
 
         <div className={style.locaitonInput} onClick={openLocationModal}>
-          지역을 선택해주세요!
+          {location.length > 0 ? (
+            <div className={style.locationButtonBox}>
+              {location.map((item, index) => (
+                <div key={index} className={style.tagButton}>
+                  {item}
+                </div>
+              ))}
+            </div>
+          ) : (
+            '지역을 선택해주세요!'
+          )}
         </div>
-        {isModal && <FilterModal closeHandler={openLocationModal} />}
+        {isModal && (
+          <FilterModal
+            closeHandler={openLocationModal}
+            data={locationTag}
+            onSelectLocation={onSelectLocation}
+            onClearLocations={onClearLocations}
+            selectedLocations={location}
+          />
+        )}
         <div className={style.fileUpLoadContainer}>
           <label htmlFor='imgFile' className={style.fileUpLoad}>
             <Icon iconType='imgUpload' />
-            {/* <p>사진선택 ({uploadedFiles.length}/10)</p> */}
             <p>사진선택</p>
             <p style={{ color: 'blue' }}>(최대 10장 이내)</p>
             <input
@@ -271,7 +351,12 @@ const CommunityWrite = () => {
         </div>
 
         <div className={style.centerBox}>
-          <button type='submit' className={style.submitBtn}>
+          <button
+            type='submit'
+            className={`${style.submitBtn} ${
+              isActiveButton ? style.isActive : ''
+            }`}
+          >
             {mainTitle === '게시글 작성' ? '게시하기' : '수정하기'}
           </button>
         </div>

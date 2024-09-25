@@ -4,6 +4,8 @@ import { TITLE } from '@constants/texts';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { timetoString } from '@utils/validation';
+import { useFetch } from '@hooks/useFetch';
+import { END_POINT } from '@utils/endpoint/endpoint';
 
 interface BoardCreatorInfo {
   memberSeq: number;
@@ -44,12 +46,15 @@ interface PostData {
 }
 
 const CustomPost = (props: any) => {
-  const { data, postType, myTitle } = props;
+  const { data, postType, myTitle, iconShow = true, onPostDeleted } = props;
   const postData = data.content;
 
   const navigate = useNavigate();
 
   const [isCheckdScroll, setIsCheckdScroll] = useState(false);
+
+  const memberSeq = localStorage.getItem('memberSeq');
+  const fetchDeletePost = useFetch();
 
   // [x] 스크롤 이벤트 등록
   useEffect(() => {
@@ -75,9 +80,26 @@ const CustomPost = (props: any) => {
   };
 
   // [ ] 게시글 삭제 핸들러
-  const handleDelete = () => {
-    console.log('삭제');
-    // TODO: 게시글 삭제 기능 추가
+  const handleDelete = async (post: PostData) => {
+    const boardSeq = post.boardInfo.boardSeq;
+
+    try {
+      const response = await fetchDeletePost({
+        url: `${END_POINT}/board`,
+        method: 'delete',
+        data: {
+          memberSeq,
+          boardSeq,
+        },
+      });
+
+      if (response.status === 200) {
+        alert('게시글이 삭제되었습니다.');
+        onPostDeleted();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // [ ] 게시글 상세 페이지로 이동 핸들러
@@ -85,7 +107,7 @@ const CustomPost = (props: any) => {
     const postDetailData = postData.find(
       (post: any) => post.boardInfo.boardSeq === boardSeq
     );
-
+    console.log(postDetailData);
     navigate(`/community/detail/:${boardSeq}`, { state: { postDetailData } });
   };
 
@@ -104,7 +126,6 @@ const CustomPost = (props: any) => {
     });
   };
 
-  console.log(postData);
   return (
     <div className={style.container}>
       {postType === 'MY' && <p className={style.myPageTitle}>{myTitle}</p>}
@@ -214,7 +235,7 @@ const CustomPost = (props: any) => {
                     </button>
                     <button
                       className={`${style.button} ${style.myPostBtn}`}
-                      onClick={handleDelete}
+                      onClick={() => handleDelete(post)}
                     >
                       <p className={style.buttonText}>삭제</p>
                     </button>
@@ -226,16 +247,18 @@ const CustomPost = (props: any) => {
         ))
       )}
 
-      <div className={style.toolBtnBox}>
-        <button onClick={handleWritePost}>
-          <Icon iconType='write'></Icon>
-        </button>
-        {isCheckdScroll && (
-          <button onClick={handleOnTop}>
-            <Icon iconType='topArrow'></Icon>
+      {iconShow && (
+        <div className={style.toolBtnBox}>
+          <button onClick={handleWritePost}>
+            <Icon iconType='write'></Icon>
           </button>
-        )}
-      </div>
+          {isCheckdScroll && (
+            <button onClick={handleOnTop}>
+              <Icon iconType='topArrow'></Icon>
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

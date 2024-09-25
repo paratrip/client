@@ -73,8 +73,8 @@ export default function CommunityHome() {
 
   // [ ] 게시글 탭 변경 핸들러
   const handlePostToggle = (postType: string) => {
-    console.log(postType);
-    console.log(postToggle);
+    // console.log(postType);
+    // console.log(postToggle);
     if (postToggle !== postType) {
       if (postToggle === 'all') {
         setPostToggle('my');
@@ -95,7 +95,7 @@ export default function CommunityHome() {
         method: 'get',
       });
 
-      console.log('인기 게시글', response);
+      // console.log('인기 게시글', response);
       const { status, data } = response;
       if (status === 200) {
         setPopularPostData(data as PopularPostData[]);
@@ -114,7 +114,7 @@ export default function CommunityHome() {
         method: 'get',
       });
 
-      console.log('전체 게시글', response.data);
+      // console.log('전체 게시글', response.data);
       const { status, data } = response;
       if (status === 200) {
         setPostData(data as PostData[]);
@@ -133,7 +133,7 @@ export default function CommunityHome() {
         method: 'get',
       });
 
-      console.log('내가 쓴 게시글', response.data);
+      // console.log('내가 쓴 게시글', response.data);
       const { status, data } = response;
       if (status === 200) {
         setPostMineData(data as PostData[]);
@@ -144,24 +144,37 @@ export default function CommunityHome() {
     }
   };
 
-  useEffect(() => {
-    if (memberSeq === null || memberSeq === '-1') {
-      setIsLogIn(false);
-    } else {
-      setIsLogIn(true);
-      getMyPostData();
-    }
-
-    getPopularPostData();
+  const handlePostDeleted = () => {
     getAllPostData();
-  }, []);
+    getPopularPostData();
+    getMyPostData();
+  };
+
+  const handleSearchResult = (searchData: PostData[]) => {
+    setPostData(searchData);
+    setPostToggle('all'); // 검색 결과를 표시할 때 '전체 게시글' 탭으로 전환
+  };
+
+  useEffect(() => {
+    if (location.pathname === '/community') {
+      if (memberSeq === null || memberSeq === '-1') {
+        setIsLogIn(false);
+      } else {
+        setIsLogIn(true);
+        getMyPostData();
+      }
+
+      getPopularPostData();
+      getAllPostData();
+    }
+  }, [location.pathname, memberSeq]);
 
   return hideParent ? (
     <Outlet />
   ) : (
     <>
       <Header type='main' />
-      <SearchInput />
+      <SearchInput onSearchResult={handleSearchResult} />
       <CustomSlider
         data={popularPostData}
         sliderType={'communityTopPost'}
@@ -195,7 +208,11 @@ export default function CommunityHome() {
         {postToggle === 'all' ? (
           <CustomPost data={postData} postType={'ALL'} />
         ) : postToggle === 'my' ? (
-          <CustomPost data={postMineData} postType={'MY'} />
+          <CustomPost
+            data={postMineData}
+            postType={'MY'}
+            onPostDeleted={handlePostDeleted}
+          />
         ) : null}
       </div>
       <Outlet />
