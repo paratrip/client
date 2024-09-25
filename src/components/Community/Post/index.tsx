@@ -47,7 +47,7 @@ interface PostData {
 
 const CustomPost = (props: any) => {
   const { data, postType, myTitle, iconShow = true, onPostDeleted } = props;
-  const postData = data.content;
+  const postData = data;
 
   const navigate = useNavigate();
 

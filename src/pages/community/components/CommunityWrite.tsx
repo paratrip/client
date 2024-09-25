@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import FilterModal from '@components/tour-course/home/filter-modal/filter-modal';
 import { useFetch } from '@hooks/useFetch';
+import { convertLocationItems } from '@utils/helpers/trasformLocation';
 
 const CommunityWrite = () => {
   const isLocation = useLocation();
@@ -39,7 +40,7 @@ const CommunityWrite = () => {
     });
     console.log(response);
     if (response.length >= 1) {
-      setLocationTag(response);
+      setLocationTag(convertLocationItems(response));
     }
   };
 

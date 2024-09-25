@@ -24,7 +24,7 @@ const MyPageScrapPost = () => {
       const { status, data } = response;
 
       if (status === 200) {
-        setScrapPostMineData(data);
+        setScrapPostMineData((data as any).content);
       }
     } catch (error) {
       console.log(error);
