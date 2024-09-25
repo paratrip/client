@@ -6,7 +6,7 @@ import CustomSlider from '@components/ui/CustomSlider';
 import CustomPost from '@components/Community/Post';
 import style from './CommunityHome.module.css';
 import SearchInput from '@components/ui/SearchInput';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Header from '@components/layouts/Header';
 
 import { useFetch } from '@hooks/useFetch';
@@ -54,12 +54,13 @@ interface PopularPostData {
 }
 
 export default function CommunityHome() {
+  const navigate = useNavigate();
   const location = useLocation();
   const hideParent =
     location.pathname.includes('/community/detail') ||
     location.pathname.includes('/community/write');
 
-  const [postToggle, setPostToggle] = useState(true);
+  const [postToggle, setPostToggle] = useState('all');
 
   const [popularPostData, setPopularPostData] = useState<PopularPostData[]>([]); // 이번주 인기 게시물
   const [postData, setPostData] = useState<PostData[]>([]); // 전체 게시물
@@ -68,78 +69,112 @@ export default function CommunityHome() {
   const fetchPost = useFetch();
 
   const memberSeq = localStorage.getItem('memberSeq');
+  const [isLogIn, setIsLogIn] = useState<boolean>(false);
 
   // [ ] 게시글 탭 변경 핸들러
-  const handlePostToggle = () => {
-    setPostToggle(!postToggle);
+  const handlePostToggle = (postType: string) => {
+    // console.log(postType);
+    // console.log(postToggle);
+    if (postToggle !== postType) {
+      if (postToggle === 'all') {
+        setPostToggle('my');
+      } else {
+        setPostToggle('all');
+      }
+    }
+    // if (postToggle === 'my' && !isLogIn) {
+    //   navigate('/auth');
+    // }
   };
 
   // [ ] 인기 게시물 데이터 가져오기
-  const getPopularPostData = () => {
-    const fetchData = async () => {
+  const getPopularPostData = async () => {
+    try {
       const response = await fetchPost({
         url: `${END_POINT}/board/popularity?page=0&size=10`,
         method: 'get',
       });
 
-      // console.log(response);
-      if (response.status === 200) {
-        setPopularPostData(response.data as PopularPostData[]);
+      // console.log('인기 게시글', response);
+      const { status, data } = response;
+      if (status === 200) {
+        setPopularPostData(data as PopularPostData[]);
       }
-    };
-
-    fetchData();
+    } catch (error) {
+      console.log(error);
+      setPopularPostData([]);
+    }
   };
 
   // [ ] 전체 게시물 데이터 가져오기
-  const getAllPostData = () => {
-    const fetchData = async () => {
+  const getAllPostData = async () => {
+    try {
       const response = await fetchPost({
         url: `${END_POINT}/board/all?page=0&size=10`,
         method: 'get',
       });
 
-      console.log(response.data);
-      if (response.status === 200) {
-        setPostData(response.data as PostData[]);
+      // console.log('전체 게시글', response.data);
+      const { status, data } = response;
+      if (status === 200) {
+        setPostData(data as PostData[]);
       }
-    };
-
-    fetchData();
+    } catch (error) {
+      console.log(error);
+      setPostData([]);
+    }
   };
 
   // [ ] 내가 쓴 게시물 데이터 가져오기
-  const getMyPostData = () => {
-    const fetchData = async () => {
+  const getMyPostData = async () => {
+    try {
       const response = await fetchPost({
         url: `${END_POINT}/board/my?page=0&size=10&memberSeq=${memberSeq}`,
         method: 'get',
       });
 
-      console.log(response.data);
-      if (response.status === 200) {
-        setPostMineData(response.data as PostData[]);
+      // console.log('내가 쓴 게시글', response.data);
+      const { status, data } = response;
+      if (status === 200) {
+        setPostMineData(data as PostData[]);
       }
-    };
+    } catch (error) {
+      console.log(error);
+      setPostMineData([]);
+    }
+  };
 
-    fetchData();
+  const handlePostDeleted = () => {
+    getAllPostData();
+    getPopularPostData();
+    getMyPostData();
+  };
+
+  const handleSearchResult = (searchData: PostData[]) => {
+    setPostData(searchData);
+    setPostToggle('all'); // 검색 결과를 표시할 때 '전체 게시글' 탭으로 전환
   };
 
   useEffect(() => {
-    getPopularPostData();
-    getAllPostData();
+    if (location.pathname === '/community') {
+      if (memberSeq === null || memberSeq === '-1') {
+        setIsLogIn(false);
+      } else {
+        setIsLogIn(true);
+        getMyPostData();
+      }
 
-    if (memberSeq !== '-1') {
-      getMyPostData();
+      getPopularPostData();
+      getAllPostData();
     }
-  }, []);
+  }, [location.pathname, memberSeq]);
 
   return hideParent ? (
     <Outlet />
   ) : (
     <>
       <Header type='main' />
-      <SearchInput />
+      <SearchInput onSearchResult={handleSearchResult} />
       <CustomSlider
         data={popularPostData}
         sliderType={'communityTopPost'}
@@ -151,30 +186,34 @@ export default function CommunityHome() {
         <div className={style.buttonWrap}>
           <button
             className={
-              postToggle
+              postToggle === 'all'
                 ? `${style.postButton} ${style.active}`
                 : `${style.postButton}`
             }
-            onClick={handlePostToggle}
+            onClick={() => handlePostToggle('all')}
           >
             전체 게시글
           </button>
           <button
             className={
-              postToggle
+              postToggle === 'all'
                 ? `${style.postButton}`
                 : `${style.postButton} ${style.active}`
             }
-            onClick={handlePostToggle}
+            onClick={() => handlePostToggle('my')}
           >
             내가 쓴 게시글
           </button>
         </div>
-        {postToggle ? (
+        {postToggle === 'all' ? (
           <CustomPost data={postData} postType={'ALL'} />
-        ) : (
-          <CustomPost data={postMineData} postType={'MY'} />
-        )}
+        ) : postToggle === 'my' ? (
+          <CustomPost
+            data={postMineData}
+            postType={'MY'}
+            onPostDeleted={handlePostDeleted}
+          />
+        ) : null}
       </div>
       <Outlet />
     </>

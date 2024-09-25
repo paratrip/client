@@ -9,7 +9,7 @@ interface PostSliderProps {
 
 const PostSlider = (props: PostSliderProps) => {
   const { data } = props;
-  console.log('data', data);
+
   const settings = {
     arrows: true,
     dots: true,

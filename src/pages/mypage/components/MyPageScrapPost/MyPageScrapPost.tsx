@@ -1,45 +1,49 @@
 import Header from '@components/layouts/Header';
 import style from './MyPageScrapPost.module.css';
 import CustomPost from '@components/Community/Post';
+import { useEffect, useState } from 'react';
+import { useFetch } from '@hooks/useFetch';
+import { END_POINT } from '@utils/endpoint/endpoint';
 
 const MyPageScrapPost = () => {
-  const postMineData: any[] = [
-    // {
-    //   userName: '나무의자1',
-    //   userImg: '',
-    //   postImg: '',
-    //   postTitle:
-    //     '1이 풍경 보세요!! 정말 좋은 경험을 간직해보세요11이 풍경 보세요!! 정말 좋은 경험을 간직해보세요11이 풍경 보세요!! 정말 좋은 경험을 간직해보세요11이 풍경 보세요!! 정말 좋은 경험을 간직해보세요1',
-    //   postDate: '1일 전',
-    //   location: '지역1',
-    //   postStatus: {
-    //     comment: 1,
-    //     heart: 2,
-    //     scrap: 3,
-    //   },
-    // },
-    // {
-    //   userName: '나무의자2',
-    //   userImg: '',
-    //   postImg: '',
-    //   postTitle: '2이 풍경 보세요!! 정말 좋은 경험을 간직해보세요2',
-    //   postDate: '2일 전',
-    //   location: '지역2',
-    //   postStatus: {
-    //     comment: 1,
-    //     heart: 2,
-    //     scrap: 3,
-    //   },
-    // },
-  ];
+  const [scrapPostMineData, setScrapPostMineData] = useState([]);
+
+  const memberSeq = localStorage.getItem('memberSeq');
+
+  const fetchScrapMineData = useFetch();
+
+  // [ ] 스크렙한 게시글 조회 핸들러
+  const getScrapPostMineData = async () => {
+    try {
+      const response = await fetchScrapMineData({
+        url: `${END_POINT}/board-scrap?memberSeq=${memberSeq}`,
+        method: 'get',
+      });
+
+      console.log(response);
+      const { status, data } = response;
+
+      if (status === 200) {
+        setScrapPostMineData(data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getScrapPostMineData();
+  }, []);
+
   return (
     <>
       <Header type='back' title='스크랩 게시글' />
       <div className={style.postContainer}>
         <CustomPost
-          data={postMineData}
+          data={scrapPostMineData}
           postType={'MY'}
           myTitle={'스크랩 게시글'}
+          iconShow={false}
         />
       </div>
     </>

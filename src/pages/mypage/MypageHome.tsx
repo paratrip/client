@@ -14,6 +14,7 @@ interface User {
   birth: string;
   gender: string;
   profileImage: string;
+  kakao: boolean;
 }
 
 const MypageHome = () => {
@@ -105,7 +106,7 @@ const MypageHome = () => {
               <div className={style.userId}>{userData.userId}</div>
               <div className={style.userEmailBox}>
                 <div className={style.userEmail}>{userData.email}</div>
-                {/* <Icon iconType='kakaoTalk' /> */}
+                {userData.kakao && <Icon iconType='kakaoTalk' />}
               </div>
             </div>
           </div>
