@@ -7,8 +7,11 @@ import AuthContainer from '@components/auth/common/auth-container';
 import Button from '@components/ui/button';
 
 import style from './AuthHome.module.css';
+import { useKakao } from '@hooks/useKakao';
 
 export default function AuthHome() {
+  const kakaoLoginHandler = useKakao();
+
   return (
     <AuthContainer type='default'>
       <header className={style.container__header}>
@@ -17,7 +20,7 @@ export default function AuthHome() {
         <h1>로그인하고 더 많은 소식을 만나보세요!</h1>
       </header>
 
-      <Button className={style.container__kakao}>
+      <Button className={style.container__kakao} onClick={kakaoLoginHandler}>
         <img src={kakao} alt='카카오 로그인' />
         <span>카카오 로그인</span>
       </Button>
