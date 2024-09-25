@@ -16,6 +16,7 @@
 .location__filter {
   display: flex;
   margin-bottom: 24px;
+  overflow: hidden;
 }
 .location__filter button {
   margin-right: 8px;

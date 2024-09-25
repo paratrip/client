@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { getValueHandler } from '@utils/helpers/auth/get-value';
 
 import { passwordRegex } from '@utils/validation';
+import { END_POINT_MEMBER } from '@utils/endpoint/endpoint';
 
 export default function Password(props: FunnelProps) {
   const { setStep } = props;
@@ -22,7 +23,7 @@ export default function Password(props: FunnelProps) {
 
   async function submitHandler() {
     await fetchHandler({
-      url: '',
+      url: END_POINT_MEMBER + '/reset-password',
       method: 'post',
       data: {
         phoneNumber,

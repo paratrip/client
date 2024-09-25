@@ -1,10 +1,16 @@
 import style from './slide.module.css';
 import Slider from 'react-slick';
 import { TITLE } from '@constants/texts';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Card from '../card';
 import RecommendLocationCard from '@components/home/recommend-location-card/RecommendCard';
+import Button from '../button';
+import { transformRegion } from '@utils/helpers/auth/transform-region';
+
+type Region = {
+  region: string;
+};
 
 type Post = {
   postImg: string;
@@ -49,14 +55,16 @@ type SliderProps<T> = {
     | 'communityTopPost'
     | 'homeRecommendPost'
     | 'homeLocation'
+    | 'homeTag'
     | 'popularPost';
+
   filter: boolean;
   moreBtn: boolean;
   moreBtnPath: string;
 };
 
 export default function CustomSlider<
-  T extends PostData | HomeData | Post | PopularPostData
+  T extends PostData | HomeData | Post | PopularPostData | Region
 >(props: SliderProps<T>) {
   const {
     data = [],
@@ -78,7 +86,6 @@ export default function CustomSlider<
   };
 
   const handleMoreView = () => {
-    console.log('더보기 클릭');
     // navigetion('/'); //TODO: 더보기 클릭시 이동할 페이지 추가
     navigation(moreBtnPath);
   };
@@ -103,10 +110,31 @@ export default function CustomSlider<
     return (
       <div className={style.SliderContainer}>
         <Slider {...sliderSettings}>
-          {(data as Post[]).map((item: Post, index: number) => (
+          {(data as Region[]).map((item, index: number) => (
             <div key={'*' + index} className={style.SliderItem}>
               <RecommendLocationCard {...item} />
             </div>
+          ))}
+        </Slider>
+      </div>
+    );
+  }
+
+  if (sliderType === 'homeTag') {
+    return (
+      <div className={style.SliderContainer}>
+        <Slider {...sliderSettings}>
+          <Button className={style.SliderItem}>
+            <Link to=''>전체</Link>
+          </Button>
+          {(data as Region[]).map((item, index: number) => (
+            <Button
+              key={'*' + index}
+              className={style.SliderItem}
+              onClick={() => {}}
+            >
+              {transformRegion(item.region)}
+            </Button>
           ))}
         </Slider>
       </div>

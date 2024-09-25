@@ -6,6 +6,7 @@ import Image from '../image';
 import LocationTitle from '../location-title';
 
 import style from './style.module.css';
+import { transformPrice } from '@utils/helpers/auth/transform-price';
 
 type ListCardProps = {
   title: string;
@@ -34,7 +35,7 @@ const ListCard = memo(function ListCard(props: ListCardProps) {
           </p>
 
           <strong className={style.information__price}>
-            {price} <span>원</span>
+            {transformPrice(price)} <span>원</span>
           </strong>
 
           <LocationTitle title={location} />
