@@ -1,0 +1,31 @@
+.paggleContainer {
+  padding: 20px 18px;
+}
+
+.mainTitle {
+  color: var(--Gray-Scale-black, #000);
+  font-family: Pretendard;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 25.2px */
+}
+
+.noData {
+  color: var(--Gray-Scale-gray8, #5a5e6a);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%; /* 22px */
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

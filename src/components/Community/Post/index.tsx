@@ -75,7 +75,6 @@ const CustomPost = (props: any) => {
 
   // [ ] 게시글 수정 핸들러
   const handleEdit = (post: PostData) => {
-    console.log('수정');
     navigate(`/community/write`, { state: post });
   };
 
@@ -132,9 +131,9 @@ const CustomPost = (props: any) => {
 
       {postData?.length === 0 ? (
         <div className={style.noData}>
-          {postType === 'ALL'
+          {postType !== 'SCRAP'
             ? TITLE.COMMUNITY.NODATA.ALL
-            : TITLE.COMMUNITY.NODATA.ALL}
+            : TITLE.COMMUNITY.NODATA.SCRAP}
         </div>
       ) : (
         postData?.map((post: any, index: any) => (
@@ -169,7 +168,7 @@ const CustomPost = (props: any) => {
                   <p className={style.postLocation}>
                     {post.boardInfo.location}
                   </p>
-                  {postType === 'MY' && (
+                  {postType !== 'ALL' && (
                     <div className={style.postStatusContainer}>
                       <div className={style.postStatus}>
                         <Icon iconType='comment' />
@@ -197,9 +196,10 @@ const CustomPost = (props: any) => {
                   <></>
                 ) : (
                   <img
-                    className={postType === 'MY' ? style.myPostImg : ''}
+                    className={postType !== 'ALL' ? style.myPostImg : ''}
                     src={post.boardInfo.imageURLs[0]}
                     alt='postImg'
+                    style={{ borderRadius: '5px' }}
                   />
                 )}
               </div>
@@ -225,7 +225,7 @@ const CustomPost = (props: any) => {
                       </p>
                     </button>
                   </>
-                ) : (
+                ) : postType === 'MY' ? (
                   <>
                     <button
                       className={`${style.button} ${style.myPostBtn}`}
@@ -240,7 +240,7 @@ const CustomPost = (props: any) => {
                       <p className={style.buttonText}>삭제</p>
                     </button>
                   </>
-                )}
+                ) : null}
               </div>
             </div>
           </div>

@@ -10,6 +10,10 @@ import FilterModal from '@components/tour-course/home/filter-modal/filter-modal'
 import { useFetch } from '@hooks/useFetch';
 import { convertLocationItems } from '@utils/helpers/trasformLocation';
 
+interface LocationItem {
+  region: string;
+}
+
 const CommunityWrite = () => {
   const isLocation = useLocation();
   const boardInfo = isLocation.state?.boardInfo;
@@ -24,7 +28,7 @@ const CommunityWrite = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [location, setLocation] = useState<string[]>([]);
-  const [locationTag, setLocationTag] = useState([]);
+  const [locationTag, setLocationTag] = useState<LocationItem[]>([]);
   const [contentError, setContentError] = useState('');
   const [boardSeq, setBoardSeq] = useState<number | null>(null);
 
@@ -34,13 +38,26 @@ const CommunityWrite = () => {
 
   // [ ] 지역태그 조회
   const getLocationTag = async () => {
-    const response = await fetchLocation({
-      url: `${END_POINT}/api/paragliding/region`,
-      method: 'get',
-    });
-    console.log(response);
-    if (response.length >= 1) {
-      setLocationTag(convertLocationItems(response));
+    try {
+      const response = await fetchLocation({
+        url: `${END_POINT}/api/paragliding/region`,
+        method: 'get',
+      });
+
+      if (Array.isArray(response)) {
+        const locationItems: LocationItem[] = response.map(item => ({
+          region: item.region,
+        }));
+
+        if (locationItems.length >= 1) {
+          const convertedItems = convertLocationItems(locationItems);
+          setLocationTag(convertedItems);
+        }
+      } else {
+        console.error('응답이 배열 형식이 아닙니다.');
+      }
+    } catch (error) {
+      console.error('지역 태그 조회 중 오류 발생:', error);
     }
   };
 
@@ -50,7 +67,7 @@ const CommunityWrite = () => {
 
   useEffect(() => {
     console.log(boardInfo);
-    if (boardInfo?.imageURLs) {
+    if (boardInfo) {
       setMainTitle('게시글 수정');
       setPreviewUrls(boardInfo.imageURLs);
       setUploadedFiles(boardInfo.imageURLs);

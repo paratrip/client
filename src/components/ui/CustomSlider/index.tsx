@@ -74,7 +74,6 @@ export default function CustomSlider<
     moreBtn = false,
     moreBtnPath,
   } = props;
-  console.log(data);
   const navigate = useNavigate();
 
   const sliderSettings = {

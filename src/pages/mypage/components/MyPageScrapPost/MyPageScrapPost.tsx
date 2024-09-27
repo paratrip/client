@@ -37,11 +37,12 @@ const MyPageScrapPost = () => {
 
   return (
     <>
-      <Header type='back' title='스크랩 게시글' />
+      <Header type='back' />
       <div className={style.postContainer}>
+        <p className={style.mainTitle}>스크랩 게시글</p>
         <CustomPost
           data={scrapPostMineData}
-          postType={'MY'}
+          postType={'SCRAP'}
           myTitle={'스크랩 게시글'}
           iconShow={false}
         />

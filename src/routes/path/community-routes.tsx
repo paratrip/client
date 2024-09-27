@@ -1,6 +1,7 @@
 import CommunityHome from '@pages/community/CommunityHome';
 import CommunityWrite from '@pages/community/components/CommunityWrite';
 import CommunityDetail from '@pages/community/components/CommunityDetail';
+import CommunityPopularity from '@pages/community/components/CommunityPopularity';
 
 export const COMMUNITY_ROUTES = [
   {
@@ -11,6 +12,10 @@ export const COMMUNITY_ROUTES = [
       {
         path: 'write',
         element: <CommunityWrite />,
+      },
+      {
+        path: 'popularity',
+        element: <CommunityPopularity />,
       },
     ],
   },

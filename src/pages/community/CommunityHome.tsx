@@ -69,7 +69,8 @@ export default function CommunityHome() {
   const location = useLocation();
   const hideParent =
     location.pathname.includes('/community/detail') ||
-    location.pathname.includes('/community/write');
+    location.pathname.includes('/community/write') ||
+    location.pathname.includes('/community/popularity');
 
   const [postToggle, setPostToggle] = useState('all');
 
@@ -208,7 +209,7 @@ export default function CommunityHome() {
         sliderType={'communityTopPost'}
         filter={false}
         moreBtn={true}
-        moreBtnPath={'/community'}
+        moreBtnPath={'/community/popularity'}
       />
       <div className={style.postContainer}>
         <div className={style.buttonWrap}>
