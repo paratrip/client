@@ -83,21 +83,6 @@ export default function CustomSlider<
     navigation(moreBtnPath);
   };
 
-  // 지역별 패러글라이딩 장소 추천
-  if (sliderType === 'homeRecommendPost') {
-    return (
-      <div className={style.SliderContainer}>
-        <Slider {...sliderSettings}>
-          {(data as HomeData[]).map((item: HomeData, index: number) => (
-            <div key={'*' + index} className={style.SliderItem}>
-              <Card {...item} />
-            </div>
-          ))}
-        </Slider>
-      </div>
-    );
-  }
-
   // 지역 추천
   if (sliderType === 'homeLocation') {
     return (

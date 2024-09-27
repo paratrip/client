@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
-import { getValueHandler } from '@utils/helpers/auth/get-value';
+import { getValueHandler } from '@utils/helpers/get-value';
 
 import { useFetch } from '@hooks/useFetch';
 import { END_POINT, END_POINT_MEMBER } from '@utils/endpoint/endpoint';

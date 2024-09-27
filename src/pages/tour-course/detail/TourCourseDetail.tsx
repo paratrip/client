@@ -5,7 +5,7 @@ import {
   Polyline,
   CustomOverlayMap,
 } from 'react-kakao-maps-sdk';
-import { useKakaoLoader } from '@hooks/useKaKaoLoader';
+
 import AuthHeader from '@components/auth/common/auth-header';
 import Hashtag from '@components/ui/hashtag';
 import styles from './TourCourseDetail.module.css';
@@ -28,8 +28,6 @@ const TourCourseDetail: React.FC = () => {
     { name: '테스트', lat: 37.5669, lng: 126.979 },
     { name: '테스트', lat: 37.5671, lng: 126.9795 },
   ]);
-
-  useKakaoLoader();
 
   const [isMinimized, setIsMinimized] = useState<boolean>(false);
   const [mapCenter] = useState<MapCenter>(mapCenterValue);

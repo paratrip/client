@@ -1,24 +1,68 @@
-import chevron_down from '@assets/icons/chevron_down.svg';
+import ContentInformation from './content.information';
+import ContentTicket from './content.ticket';
+import ContentMap from './content.map';
 
-import styles from './detail-content.module.css';
+import styles from './content.module.css';
 
-export default function DetailContent() {
+type DetailContentProps = {
+  name: string;
+  tickets: string[];
+  pageUrl: string;
+  parkingLot: boolean;
+  stroller: boolean;
+  creditCard: boolean;
+  closedDays: string;
+  openingHour: string;
+  tellNumber: string;
+  latitude: number;
+  longitude: number;
+  address: string;
+};
+
+export default function DetailContent(props: DetailContentProps) {
+  const {
+    name,
+    tickets,
+    pageUrl,
+    // parkingLot,
+    // stroller,
+    // creditCard,
+    closedDays,
+    openingHour,
+    tellNumber,
+    latitude,
+    longitude,
+    address,
+  } = props;
+
   return (
     <main className={styles.main}>
       <header className={styles.main__header}>
         <h3>상품상세</h3>
       </header>
 
-      <section>
-        <img
-          src='https://images.unsplash.com/photo-1723920785346-d29bed210134?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-          alt=''
-        />
-      </section>
+      <DetailContent.ContentTicket ticket={tickets} pageUrl={pageUrl} />
 
-      <button className={styles.main__button}>
-        자세한 상품정보 보기 <img src={chevron_down} alt='더 보기' />
-      </button>
+      <div className={styles.section__header}>
+        <h3>상품상세</h3>
+      </div>
+
+      <DetailContent.ContentInformation
+        address={address}
+        tellNumber={tellNumber}
+        openingHour={openingHour}
+        closedDays={closedDays}
+      />
+
+      <DetailContent.ContentMap
+        name={name}
+        latitude={latitude ?? 0}
+        longitude={longitude ?? 0}
+      />
     </main>
   );
 }
+
+DetailContent.ContentTicket = ContentTicket;
+DetailContent.ContentInformation = ContentInformation;
+DetailContent.ContentMap = ContentMap;
