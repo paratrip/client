@@ -10,8 +10,20 @@ import LikesList from '@components/home/carousel/likes-list.carousel';
 import style from './Home.module.css';
 import RegionTags from '@components/home/carousel/region-tags';
 import { RecommendList } from '@components/home/recommend-location/recommend-list';
+import { useState } from 'react';
+import { useGet } from '@hooks/useGet';
+import { ResponseParagliding } from '@components/home/carousel/types';
 
 export default function Home() {
+  const [region, setRegion] = useState('');
+
+  const { data } = useGet<ResponseParagliding[]>({
+    queryKey: ['paragliding', region],
+    url: `https://euics.co.kr/api/paragliding/list/region?regionCode=${region}`,
+  });
+
+  const regionHandler = (region: string) => setRegion(region);
+
   return (
     <>
       <Header type='main' />
@@ -26,10 +38,10 @@ export default function Home() {
           <MoreHeader title='지역별 패러글라이딩 장소' to='location' />
 
           <nav className={style.location__filter}>
-            <RegionTags />
+            <RegionTags onRegion={regionHandler} />
           </nav>
 
-          <LocationListCarousel />
+          <LocationListCarousel data={data} />
         </section>
 
         <section className={style.main__location}>
