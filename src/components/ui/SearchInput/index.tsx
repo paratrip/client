@@ -8,10 +8,11 @@ import { END_POINT } from '@utils/endpoint/endpoint';
 type InputProps = {
   className?: string;
   onClick?: () => void;
+  onSearchResult: (data: any) => void;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 const SearchInput = memo(function Input(props: InputProps) {
-  const { className = '', ...rest } = props;
+  const { className = '', onSearchResult, ...rest } = props;
   const fetchSearch = useFetch();
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -31,9 +32,10 @@ const SearchInput = memo(function Input(props: InputProps) {
       console.log(response);
 
       if (response.status === 200) {
-        setInputValue(''); // input 값을 빈 문자열로 초기화
+        onSearchResult(response.data); // 검색 결과를 부모 컴포넌트로 전달
+        setInputValue('');
         if (inputRef.current) {
-          inputRef.current.value = ''; // input 요소의 값을 직접 초기화
+          inputRef.current.value = '';
         }
       }
     } catch (error) {

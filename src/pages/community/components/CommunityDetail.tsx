@@ -9,6 +9,7 @@ import { SetStateAction, useEffect, useState } from 'react';
 import { useFetch } from '@hooks/useFetch';
 import { END_POINT } from '@utils/endpoint/endpoint';
 import { timetoString } from '@utils/validation';
+import { getLocationName } from '@utils/helpers/trasformLocation';
 
 interface BoardCreatorInfo {
   memberSeq: number;
@@ -65,14 +66,12 @@ const CommunityDetail = () => {
     heart: false,
     scrap: false,
   });
+  const [isHeart, setIsHeart] = useState<boolean>(false);
+  const [isScrap, setIsScrap] = useState<boolean>(false);
 
   const [commentInputValue, setCommentInputValue] = useState('');
   const fetchPostDetail = useFetch<void, PostData>(true);
   const fetchComment = useFetch(true);
-
-  useEffect(() => {
-    getPostDetail();
-  }, []);
 
   // [ ] 게시글 상세정보 조회
   const getPostDetail = async () => {
@@ -81,7 +80,7 @@ const CommunityDetail = () => {
         url: `${END_POINT}/board?memberSeq=${memberSeq}&boardSeq=${boardSeq}`,
         method: 'get',
       });
-      console.log(response);
+
       if (response.status === 200) {
         const { data } = response;
         setPostDetail(data);
@@ -90,6 +89,8 @@ const CommunityDetail = () => {
         setCommentData(data.commentInfos || []);
         setCommentInputValue('');
         setCommentCnt(data.countInfo);
+        setIsHeart(data.countInfo.heart);
+        setIsScrap(data.countInfo.scrap);
       } else {
         console.error('게시글 상세 정보를 불러오는데 실패했습니다.');
       }
@@ -137,7 +138,16 @@ const CommunityDetail = () => {
     setCommentInputValue(e.target.value);
   };
 
-  console.log(userImgURL);
+  useEffect(() => {
+    getPostDetail();
+  }, []);
+
+  useEffect(() => {
+    if (postDetail) {
+      setIsHeart(postDetail.countInfo.heart);
+      setIsScrap(postDetail.countInfo.scrap);
+    }
+  }, [postDetail]);
 
   return (
     <>
@@ -164,22 +174,33 @@ const CommunityDetail = () => {
                 </div>
               </div>
               <div className={style.locationInput}>
-                {postDetail?.boardInfo?.location}
+                {getLocationName(postDetail?.boardInfo?.location || '')}
               </div>
             </div>
             <div className={style.activeBox}>
-              <ScrapButton data={postDetail} />
-              <HeartButton data={postDetail} />
+              {postDetail && (
+                <>
+                  <ScrapButton
+                    initialScrapState={postDetail.countInfo.scrap}
+                    onScrapChange={newState => setIsScrap(newState)}
+                  />
+                  <HeartButton
+                    initialHeartState={postDetail.countInfo.heart}
+                    onHeartChange={newState => setIsHeart(newState)}
+                  />
+                </>
+              )}
             </div>
           </div>
           <div className={style.postContainer}>
             <div className={style.postTitle}>
               {postDetail?.boardInfo?.title}
             </div>
-            <div className={style.SliderContainer}>
-              <PostSlider data={slidesData} />
-            </div>
-
+            {slidesData.length !== 0 && (
+              <div className={style.SliderContainer}>
+                <PostSlider data={slidesData} />
+              </div>
+            )}
             <div className={style.postContent}>
               {postDetail?.boardInfo?.content}
             </div>
@@ -233,19 +254,19 @@ const CommunityDetail = () => {
                 />
               </button>
             </div>
-            <div className={style.buttonBox}>
-              <button className={style.button}>
+            <div className={style.statusBox}>
+              <div className={style.status}>
                 <Icon iconType='comment' />
-                <p className={style.buttonText}>{commentCnt.commentCnt}</p>
-              </button>
-              <button className={style.button}>
+                <p className={style.statusText}>{commentCnt.commentCnt}</p>
+              </div>
+              <div className={style.status}>
                 <Icon iconType='heart' />
-                <p className={style.buttonText}>{commentCnt.heartCnt}</p>
-              </button>
-              <button className={style.button}>
+                <p className={style.statusText}>{commentCnt.heartCnt}</p>
+              </div>
+              <div className={style.status}>
                 <Icon iconType='scrap' />
-                <p className={style.buttonText}>{commentCnt.scrapCnt}</p>
-              </button>
+                <p className={style.statusText}>{commentCnt.scrapCnt}</p>
+              </div>
             </div>
           </div>
         </div>

@@ -33,7 +33,7 @@ export const timetoString = (time: string) => {
   const years = Math.floor(days / 365);
 
   if (timeDifference < 60) {
-    return '방금';
+    return '방금 전';
   } else if (minutes < 60) {
     return `${minutes}분 전`;
   } else if (hours < 24) {

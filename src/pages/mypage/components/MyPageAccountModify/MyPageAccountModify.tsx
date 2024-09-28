@@ -16,6 +16,7 @@ interface User {
   birth: string;
   gender: string;
   profileImage: string;
+  kakao: boolean;
 }
 
 interface RouteState {
@@ -233,7 +234,7 @@ const MyPageAccountModify = () => {
             <div className={style.userTextBox}>
               <div className={style.userEmailBox}>
                 <div className={style.userEmail}>{userData.email}</div>
-                {/* <Icon iconType='kakaoTalk' /> */}
+                {userData.kakao && <Icon iconType='kakaoTalk' />}
               </div>
               <div className={style.userPhoneNumber}>
                 {userData.phoneNumber}

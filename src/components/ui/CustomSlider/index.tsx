@@ -3,6 +3,11 @@ import Slider from 'react-slick';
 import { TITLE } from '@constants/texts';
 import { useNavigate } from 'react-router-dom';
 
+
+import Card from '../card';
+import RecommendLocationCard from '@components/home/recommend-location/list.card';
+import Icon from '../Icon';
+
 type Post = {
   postImg: string;
   postTitle: string;
@@ -21,23 +26,31 @@ type HomeData = {
   price: number;
 } & Post;
 
-interface BoardCreatorMemberInfo {
+interface BoardInfo {
+  boardSeq: number;
+  title: string;
+  location: string;
+  content: string;
+  updatedAt: string;
+  imageURLs: string[];
+}
+
+interface MemberInfo {
   memberSeq: number;
   userId: string;
   profileImage: string;
 }
 
-interface BoardInfo {
-  boardSeq: number;
-  title: string;
-  content: string;
-  location: string;
-  updatedAt: string;
-  imageURLs: string[];
+interface CountInfo {
+  commentCnt: number;
+  heartCnt: number;
+  scrapCnt: number;
 }
+
 interface PopularPostData {
-  boardCreatorMemberInfo: BoardCreatorMemberInfo;
   boardInfo: BoardInfo;
+  memberInfo: MemberInfo;
+  countInfo: CountInfo;
 }
 
 type SliderProps<T> = {
@@ -62,7 +75,7 @@ export default function CustomSlider<
     moreBtn = false,
     moreBtnPath,
   } = props;
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const sliderSettings = {
     dots: false,
@@ -76,59 +89,80 @@ export default function CustomSlider<
 
   const handleMoreView = () => {
     console.log('더보기 클릭');
-    // navigetion('/'); //TODO: 더보기 클릭시 이동할 페이지 추가
-    navigation(moreBtnPath);
+    navigate(moreBtnPath);
+  };
+
+  const handlePostClick = (boardSeq: number) => {
+    navigate(`/community/detail/:${boardSeq}`);
   };
 
   function isPopularPostData(item: any): item is PopularPostData {
-    return item && 'boardInfo' in item && 'boardCreatorMemberInfo' in item;
+
+    return item && 'boardInfo' in item && 'memberInfo' in item;
   }
+
 
   return (
     <div className={style.sliderMainContainer}>
       <div className={style.titleContainer}>
         <h1 className={style.title}>{TITLE.COMMUNITY.TOPPOST}</h1>
 
-        {/* //TODO: 더보기 버튼 클릭시 이동할 페이지 추가 */}
-        {moreBtn && (
+        {moreBtn && data.length !== 0 && (
           <button className={style.moreBtn} onClick={handleMoreView}>
             더보기
           </button>
         )}
       </div>
 
-      {/* //TODO: 필터컴포넌트 만들어서 추가*/}
       {filter && <>필터</>}
 
       <div className={style.SliderContainer}>
+        {data.length === 0 && (
+          <div className={style.noData}>게시글이 없습니다.</div>
+        )}
         <Slider {...sliderSettings}>
-          {data.map((item, index: number) => (
-            <div key={index} className={style.SliderItem}>
-              {isPopularPostData(item) && (
+          {data.map((item, index: number) => {
+            if (isPopularPostData(item)) {
+              return (
                 <div
-                  className={style.SliderContent}
-                  style={{
-                    backgroundImage: `url(${item?.boardInfo?.imageURLs[0]})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                  }}
+                  key={index}
+                  className={style.SliderItem}
+                  onClick={() => handlePostClick(item.boardInfo.boardSeq)}
                 >
-                  <div className={style.userInfo}>
-                    <img
-                      className={style.userImg}
-                      src={item?.boardCreatorMemberInfo?.profileImage}
-                      alt='user'
-                    />
-                    <p className={style.userName}>
-                      {item?.boardCreatorMemberInfo?.userId} 님
+                  <div
+                    className={style.SliderContent}
+                    style={{
+                      backgroundImage: `url(${item?.boardInfo?.imageURLs[0]})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <div className={style.userInfo}>
+                      {item?.memberInfo?.profileImage === null ? (
+                        <Icon iconType='communityPopularUserDefaultImg' />
+                      ) : (
+                        <img
+                          className={style.userImg}
+                          src={item?.memberInfo?.profileImage}
+                          alt='user'
+                        />
+                      )}
+
+                      <p className={style.userName}>
+                        {item?.memberInfo?.userId} 님
+                      </p>
+                    </div>
+                    <p className={style.contentText}>
+                      {item?.boardInfo?.title}
                     </p>
                   </div>
-                  <p className={style.contentText}>{item?.boardInfo?.title}</p>
                 </div>
-              )}
-            </div>
-          ))}
+              );
+            }
+            return null;
+          })}
         </Slider>
       </div>
     </div>

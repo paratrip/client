@@ -109,6 +109,7 @@
   font-weight: 500;
   line-height: 150%; /* 24px */
   letter-spacing: -0.048px;
+  margin-top: 20px;
   margin-bottom: 30px;
 }
 
@@ -261,12 +262,12 @@
   border: none;
   cursor: pointer;
 }
-.commentContainer .commentActiveBox .buttonBox {
+.commentContainer .commentActiveBox .statusBox {
   display: flex;
   width: 100%;
 }
 
-.commentContainer .commentActiveBox .buttonBox .button {
+.commentContainer .commentActiveBox .statusBox .status {
   display: flex;
   width: 200px;
   padding: 14px 10px;
@@ -277,15 +278,15 @@
   border-right: 1px solid var(--Gray-Scale-gray3, #e4e6ea);
 }
 
-.commentContainer .commentActiveBox .buttonBox .button:first-child {
+.commentContainer .commentActiveBox .statusBox .status:first-child {
   border-radius: 0 0 0 10px;
 }
-.commentContainer .commentActiveBox .buttonBox .button:last-child {
+.commentContainer .commentActiveBox .statusBox .status:last-child {
   border-right: none;
   border-radius: 0 0 10px 0;
 }
 
-.commentContainer .commentActiveBox .buttonBox .button .buttonText {
+.commentContainer .commentActiveBox .statusBox .status .statusText {
   color: var(--Gray-Gray9, #3b3f4a);
   font-family: Pretendard;
   font-size: 14px;
