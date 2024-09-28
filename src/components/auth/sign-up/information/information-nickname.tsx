@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 
-import { getValueHandler } from '@utils/helpers/auth/get-value';
+import { getValueHandler } from '@utils/helpers/get-value';
 import { signUpNicknameState } from '@store/sign-up';
 import { useFetch } from '@hooks/useFetch';
 

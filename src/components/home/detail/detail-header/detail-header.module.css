@@ -1,8 +1,10 @@
 .detail-header {
   display: flex;
+  justify-content: space-between;
   text-overflow: ellipsis;
   background-color: #fff;
-  padding: 10px;
+  padding: 20px;
+  min-width: 600px;
 }
 
 .header__section a {

@@ -4,7 +4,7 @@ import { TITLE } from '@constants/texts';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../card';
-import RecommendLocationCard from '@components/home/recommend-location-card/RecommendCard';
+import RecommendLocationCard from '@components/home/recommend-location/list.card';
 
 type Post = {
   postImg: string;
@@ -82,21 +82,6 @@ export default function CustomSlider<
     // navigetion('/'); //TODO: 더보기 클릭시 이동할 페이지 추가
     navigation(moreBtnPath);
   };
-
-  // 지역별 패러글라이딩 장소 추천
-  if (sliderType === 'homeRecommendPost') {
-    return (
-      <div className={style.SliderContainer}>
-        <Slider {...sliderSettings}>
-          {(data as HomeData[]).map((item: HomeData, index: number) => (
-            <div key={'*' + index} className={style.SliderItem}>
-              <Card {...item} />
-            </div>
-          ))}
-        </Slider>
-      </div>
-    );
-  }
 
   // 지역 추천
   if (sliderType === 'homeLocation') {

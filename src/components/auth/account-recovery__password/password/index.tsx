@@ -8,7 +8,7 @@ import { useRecoilValue } from 'recoil';
 import { findPasswordPhonNumberState } from '@store/find';
 import { useState } from 'react';
 
-import { getValueHandler } from '@utils/helpers/auth/get-value';
+import { getValueHandler } from '@utils/helpers/get-value';
 
 import { passwordRegex } from '@utils/validation';
 import { END_POINT_MEMBER } from '@utils/endpoint/endpoint';
