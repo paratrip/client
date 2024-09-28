@@ -7,7 +7,7 @@ import { END_POINT } from '@utils/endpoint/endpoint';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { useFetch } from '@hooks/useFetch';
-import FilterModal from '@components/tour-course/filter-modal/filter-modal';
+import FilterModal from '@components/ui/communityFilterModal/communityFilterModal';
 import { convertLocationItems } from '@utils/helpers/trasformLocation';
 
 interface LocationItem {

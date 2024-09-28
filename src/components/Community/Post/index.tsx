@@ -145,10 +145,10 @@ const CustomPost = (props: any) => {
               >
                 <div className={style.textInfo}>
                   <div className={style.userInfo}>
-                    {post.memberInfo.imgURL ? (
+                    {post.memberInfo.profileImage ? (
                       <img
                         className={style.userImg}
-                        src={post.memberInfo?.imgURL}
+                        src={post.memberInfo?.profileImage}
                         alt='userImg'
                       />
                     ) : (
