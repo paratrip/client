@@ -785,7 +785,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'notiHeart':
+    case 'notiHEART':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -803,7 +803,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'notiScrap':
+    case 'notiSCRAP':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -818,7 +818,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'notiComment':
+    case 'notiCOMMENT':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -833,7 +833,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'notiStar':
+    case 'notiPOPULARITY':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
