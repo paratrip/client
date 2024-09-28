@@ -10,20 +10,9 @@ import style from './carousel.module.css';
 
 type CardCarouselProps = {
   data: ResponseParagliding[] | undefined;
-  isLoading: boolean;
-  isError: boolean;
-  error: Error | null;
 };
 
-export default function CardCarousel({
-  data,
-  isLoading,
-  isError,
-  error,
-}: CardCarouselProps) {
-  if (isLoading) return <div>...Loading</div>;
-  if (isError && error) return <div>{error.message}</div>;
-
+export default function CardCarousel({ data }: CardCarouselProps) {
   return (
     <ul className={style.location__list}>
       <div className={style.SliderContainer}>

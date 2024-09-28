@@ -16,7 +16,7 @@ export default function RecommendLocationCard(props: RecommendCardProps) {
           alt={region}
         />
 
-        <strong>{transformRegion(region)}</strong>
+        <strong>{transformRegion(region!)}</strong>
       </li>
     </Link>
   );

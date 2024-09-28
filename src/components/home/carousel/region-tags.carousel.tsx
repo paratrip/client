@@ -6,8 +6,6 @@ import { sliderSettings } from './utils';
 
 import style from './carousel.module.css';
 import Button from '@components/ui/button';
-import { useMutate } from '@hooks/useMutate';
-import { END_POINT_API_PARAGLIDING } from '@utils/endpoint/endpoint';
 
 type RegionTagsCarouselProps = {
   data: ResponseParaglidingRegion[] | undefined;

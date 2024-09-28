@@ -3,6 +3,7 @@ import Slider from 'react-slick';
 import { TITLE } from '@constants/texts';
 import { useNavigate } from 'react-router-dom';
 
+
 import Card from '../card';
 import RecommendLocationCard from '@components/home/recommend-location/list.card';
 import Icon from '../Icon';
@@ -70,7 +71,7 @@ export default function CustomSlider<
   const {
     data = [],
     filter = false,
-    sliderType = '',
+    // sliderType = '',
     moreBtn = false,
     moreBtnPath,
   } = props;
@@ -96,23 +97,10 @@ export default function CustomSlider<
   };
 
   function isPopularPostData(item: any): item is PopularPostData {
+
     return item && 'boardInfo' in item && 'memberInfo' in item;
   }
 
-  // 지역 추천
-  if (sliderType === 'homeLocation') {
-    return (
-      <div className={style.SliderContainer}>
-        <Slider {...sliderSettings}>
-          {(data as Post[]).map((item: Post, index: number) => (
-            <div key={'*' + index} className={style.SliderItem}>
-              <RecommendLocationCard {...item} />
-            </div>
-          ))}
-        </Slider>
-      </div>
-    );
-  }
 
   return (
     <div className={style.sliderMainContainer}>

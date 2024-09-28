@@ -5,7 +5,6 @@ import ListCard from '@components/ui/list-card';
 import styles from './Popular.module.css';
 import { useGet } from '@hooks/useGet';
 import { ResponseParagliding } from '@components/home/carousel/types';
-import { END_POINT_API_PARAGLIDING } from '@utils/endpoint/endpoint';
 
 export default function Popular() {
   const { data } = useGet<ResponseParagliding[]>({

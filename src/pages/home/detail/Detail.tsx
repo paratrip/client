@@ -51,6 +51,8 @@ export default function Detail() {
           to='/'
           name={data?.name as string}
           cost={data?.cost as string}
+          pageUrl={data?.pageUrl ?? ''}
+          address={data?.address ?? ''}
         />
 
         <DetailContent

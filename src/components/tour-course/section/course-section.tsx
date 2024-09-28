@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import ActionButton from '@components/ui/action-button';
-import SelectedHashtagButton from '@components/ui/selected-hashtag-button';
 
 import slider from '@assets/icons/slider.svg';
 
