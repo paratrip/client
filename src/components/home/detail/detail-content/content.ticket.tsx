@@ -17,7 +17,7 @@ export default function ContentTicket(props: ContentTicketProps) {
       <header className={styles.tickets__header}>
         <div className={styles.header__information}>
           <h3>이용권</h3>
-          <img src={link} alt='링크' />
+          <button>{<img src={link} alt='링크' />}</button>
           <a href={pageUrl}>{pageUrl}</a>
         </div>
 

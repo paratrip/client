@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Button from '../button';
 import styles from './selected-hashtag-button.module.css';
 

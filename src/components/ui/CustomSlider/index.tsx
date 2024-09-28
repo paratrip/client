@@ -3,9 +3,6 @@ import Slider from 'react-slick';
 import { TITLE } from '@constants/texts';
 import { useNavigate } from 'react-router-dom';
 
-import Card from '../card';
-import RecommendLocationCard from '@components/home/recommend-location/list.card';
-
 type Post = {
   postImg: string;
   postTitle: string;
@@ -61,7 +58,7 @@ export default function CustomSlider<
   const {
     data = [],
     filter = false,
-    sliderType = '',
+    // sliderType = '',
     moreBtn = false,
     moreBtnPath,
   } = props;
@@ -82,21 +79,6 @@ export default function CustomSlider<
     // navigetion('/'); //TODO: 더보기 클릭시 이동할 페이지 추가
     navigation(moreBtnPath);
   };
-
-  // 지역 추천
-  if (sliderType === 'homeLocation') {
-    return (
-      <div className={style.SliderContainer}>
-        <Slider {...sliderSettings}>
-          {(data as Post[]).map((item: Post, index: number) => (
-            <div key={'*' + index} className={style.SliderItem}>
-              <RecommendLocationCard {...item} />
-            </div>
-          ))}
-        </Slider>
-      </div>
-    );
-  }
 
   function isPopularPostData(item: any): item is PopularPostData {
     return item && 'boardInfo' in item && 'boardCreatorMemberInfo' in item;

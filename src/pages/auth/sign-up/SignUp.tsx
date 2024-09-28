@@ -26,7 +26,7 @@ export default function SingUp() {
     switch (step) {
       case 'email':
         setProgressWith(20);
-        setCustomBack('/auth');
+        setCustomBack('/');
         break;
       case 'password':
         setProgressWith(40);

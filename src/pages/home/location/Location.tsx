@@ -1,5 +1,4 @@
 import AuthHeader from '@components/auth/common/auth-header';
-import Button from '@components/ui/button';
 
 import ListCard from '@components/ui/list-card';
 import Container from '@components/ui/container';

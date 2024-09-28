@@ -9,7 +9,7 @@ import RecommendLocationCard from './list.card';
 import styles from './recommend-list.module.css';
 
 export type ResponseRecommended = {
-  region: string;
+  region?: string;
 };
 
 export function RecommendList() {

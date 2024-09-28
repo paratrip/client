@@ -14,7 +14,7 @@ export default function Finish() {
         회원님의 에미일 주소는 <strong>{email}</strong>입니다.
       </p>
 
-      <LinkButton to='/auth/email' buttonStyle='fill'>
+      <LinkButton to='/email' buttonStyle='fill'>
         로그인하러 가기
       </LinkButton>
       <LinkButton to='/account-recovery/password' buttonStyle='border'>
