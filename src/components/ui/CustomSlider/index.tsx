@@ -4,7 +4,7 @@ import { TITLE } from '@constants/texts';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../card';
-import RecommendLocationCard from '@components/home/recommend-location-card/RecommendCard';
+import RecommendLocationCard from '@components/home/recommend-location/list.card';
 
 type Post = {
   postImg: string;
