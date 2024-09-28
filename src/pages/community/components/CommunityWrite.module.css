@@ -73,6 +73,29 @@
   border-bottom: 1px solid var(--Gray-Scale-gray5, #bec1c7);
 }
 
+.writeForm .locaitonInput .locationButtonBox {
+  display: flex;
+  gap: 8px;
+}
+
+.writeForm .locaitonInput .locationButtonBox .tagButton {
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 14px;
+  background: var(--Gray-Scale-gray5, #bec1c7);
+
+  color: var(--Gray-Scale-gray9, #3b3f4a);
+  text-align: center;
+  font-family: 'Hancom Gothic';
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%; /* 12px */
+}
+
 /* 파일 업로드 */
 .fileUpLoadContainer {
   display: flex;
@@ -128,6 +151,7 @@
 /* submit btn */
 
 .writeForm .submitBtn {
+  cursor: default;
   display: flex;
   width: 520px;
   height: 50px;
@@ -148,7 +172,8 @@
   line-height: 28px; /* 155.556% */
 }
 
-.writeForm .submitBtn:hover {
+.writeForm .submitBtn.isActive {
+  cursor: pointer;
   color: #f2f2f2;
   font-family: Pretendard;
   font-size: 18px;

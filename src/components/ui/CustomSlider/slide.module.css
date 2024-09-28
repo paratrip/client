@@ -78,3 +78,18 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.noData {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--Gray-Scale-gray8, #5a5e6a);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 100%;
+}

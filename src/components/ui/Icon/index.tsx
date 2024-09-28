@@ -719,7 +719,35 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           viewBox='0 0 32 32'
           fill='none'
         >
-          <circle cx='16' cy='16' r='16' fill='#D9D9D9' />
+          <circle cx='16' cy='16' r='15.5' fill='#9DA0A8' stroke='#EFF1F4' />
+          <circle cx='15.9999' cy='12.4706' r='5.73529' fill='#EFF1F4' />
+          <ellipse
+            cx='15.7798'
+            cy='25.4854'
+            rx='10.3676'
+            ry='5.51471'
+            fill='#EFF1F4'
+          />
+        </svg>
+      );
+    case 'communityPopularUserDefaultImg':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='20'
+          height='20'
+          viewBox='0 0 20 20'
+          fill='none'
+        >
+          <circle cx='10' cy='10' r='9.5' fill='#9DA0A8' stroke='#EFF1F4' />
+          <circle cx='9.99977' cy='7.88258' r='3.44118' fill='#EFF1F4' />
+          <ellipse
+            cx='9.86805'
+            cy='15.6911'
+            rx='6.22059'
+            ry='3.30882'
+            fill='#EFF1F4'
+          />
         </svg>
       );
     case 'userModifyImg':
@@ -757,7 +785,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'notiHeart':
+    case 'notiHEART':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -775,7 +803,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'notiScrap':
+    case 'notiSCRAP':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -790,7 +818,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'notiComment':
+    case 'notiCOMMENT':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -805,7 +833,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'notiStar':
+    case 'notiPOPULARITY':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -817,6 +845,29 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           <path
             d='M10.2456 9.83992L3.85751 10.7652L3.74436 10.7882C3.57308 10.8336 3.41694 10.9237 3.29188 11.0491C3.16682 11.1745 3.07732 11.3309 3.03252 11.5022C2.98772 11.6734 2.98923 11.8535 3.03689 12.0241C3.08455 12.1946 3.17666 12.3494 3.3038 12.4727L7.93167 16.9731L6.84029 23.3301L6.82727 23.4401C6.81679 23.6171 6.85357 23.7937 6.93386 23.9518C7.01414 24.1099 7.13505 24.2438 7.28419 24.3399C7.43333 24.436 7.60535 24.4907 7.78263 24.4985C7.95992 24.5063 8.1361 24.467 8.29313 24.3844L14.0064 21.3835L19.7066 24.3844L19.8067 24.4304C19.972 24.4954 20.1516 24.5154 20.3272 24.4882C20.5027 24.461 20.6678 24.3876 20.8056 24.2756C20.9434 24.1636 21.0489 24.017 21.1112 23.8509C21.1736 23.6847 21.1906 23.505 21.1605 23.3301L20.0681 16.9731L24.6979 12.4717L24.776 12.3867C24.8876 12.2494 24.9608 12.0851 24.988 11.9103C25.0153 11.7356 24.9957 11.5568 24.9313 11.3921C24.8669 11.2274 24.76 11.0827 24.6213 10.9728C24.4827 10.8628 24.3174 10.7915 24.1422 10.7662L17.7541 9.83992L14.8985 4.05814C14.8159 3.89062 14.688 3.74956 14.5292 3.65092C14.3705 3.55228 14.1873 3.5 14.0004 3.5C13.8134 3.5 13.6302 3.55228 13.4715 3.65092C13.3128 3.74956 13.1849 3.89062 13.1022 4.05814L10.2456 9.83992Z'
             fill='#B0E809'
+          />
+        </svg>
+      );
+    case 'closeModal':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='24'
+          height='24'
+          viewBox='0 0 24 24'
+          fill='none'
+        >
+          <path
+            d='M6 6L18 18'
+            stroke='#7F828C'
+            strokeWidth='2'
+            strokeLinecap='round'
+          />
+          <path
+            d='M18 6L6 18'
+            stroke='#7F828C'
+            strokeWidth='2'
+            strokeLinecap='round'
           />
         </svg>
       );
