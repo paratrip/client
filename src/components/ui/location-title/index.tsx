@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { transformRegion } from '@utils/helpers/transfrom-region';
 
 import style from './style.module.css';
 
@@ -12,7 +13,7 @@ const LocationTitle = memo(function LocationTitle(props: LocationTitleProps) {
 
   return (
     <strong className={`${className} ${style['location-title']}`}>
-      {title}
+      {transformRegion(title)}
     </strong>
   );
 });

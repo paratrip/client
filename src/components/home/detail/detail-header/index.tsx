@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { transformPrice } from '@utils/helpers/transfrom-price';
+
 import share from '@assets/icons/share.svg';
 import heart from '@assets/icons/heart.svg';
 
@@ -9,23 +11,23 @@ import styles from './detail-header.module.css';
 
 type DetailHeaderProps = {
   to: string;
+  name: string;
+  cost: string;
 };
 
 export default function DetailHeader(props: DetailHeaderProps) {
-  const { to } = props;
+  const { to, name, cost } = props;
 
   return (
     <header className={styles['detail-header']}>
       <section className={styles.header__section}>
         <Link to={to}>제주</Link>
 
-        <h2>
-          플라이 포커스 패러글라이딩 스쿨 업체명 더 길어지면 두줄로 오게됩니다.
-          최대 길이는 이정도로 설정 할거 같습니다
-        </h2>
+        <h2>{name}</h2>
 
         <strong>
-          77,000<span>원</span>
+          {transformPrice(cost)}
+          <span>원</span>
         </strong>
       </section>
 

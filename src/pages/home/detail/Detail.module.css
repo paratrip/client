@@ -1,0 +1,5 @@
+.detail__image {
+  width: 600px;
+  height: 346px;
+  object-fit: cover;
+}

@@ -1,3 +1,4 @@
+import { transformPrice } from '@utils/helpers/transfrom-price';
 import heart_s from '@assets/icons/heart_s.svg';
 
 import CardTitle from '../card-title';
@@ -6,35 +7,36 @@ import LocationTitle from '../location-title';
 import style from './style.module.css';
 
 type CardProps = {
-  postImg: string;
-  postTitle: string;
-  location: string;
-  likeCount: number;
-  price: number;
+  id: 0;
+  name: 'string';
+  heart: 0;
+  region: 'string';
+  cost: 0;
+  imageUrl: 'string';
 };
 
 export default function Card(props: CardProps) {
-  const { postImg, postTitle, likeCount, price, location } = props;
+  const { imageUrl, name, heart, cost, region } = props;
 
   return (
     <li className={style.card}>
       <header className={style.card__header}>
-        <img src={postImg} alt={postTitle} />
+        <img src={imageUrl} alt={name} />
       </header>
 
       <section className={style.card__information}>
-        <CardTitle title={postTitle} />
+        <CardTitle title={name} />
 
         <div className={style.information__actions}>
           <img src={heart_s} alt='좋아요' />
-          <span>{likeCount}</span>
+          <span>{heart}</span>
         </div>
       </section>
 
       <footer className={style.card__footer}>
-        <LocationTitle title={location} />
+        <LocationTitle title={region} />
         <span className={style.footer__price}>
-          <strong>{price}</strong>
+          <strong>{transformPrice(cost)}</strong>
           <p>원</p>
         </span>
       </footer>

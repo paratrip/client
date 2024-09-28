@@ -5,7 +5,7 @@ import style from './layout.module.css';
 export default function Layout() {
   const location = useLocation();
 
-  const hideNavPaths = ['/community/detail', '/mypage/'];
+  const hideNavPaths = ['/community/detail', '/mypage/', '/course/'];
 
   const shouldHideNav = hideNavPaths.some(path =>
     location.pathname.startsWith(path)

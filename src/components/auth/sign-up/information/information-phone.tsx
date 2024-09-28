@@ -5,7 +5,7 @@ import FunnelInput from '@components/auth/common/funnel-input';
 
 import { signUpPhonNumberState } from '@store/sign-up';
 
-import { getValueHandler } from '../../../../utils/helpers/auth/get-value';
+import { getValueHandler } from '../../../../utils/helpers/get-value';
 
 import { useFetch } from '@hooks/useFetch';
 import { END_POINT, END_POINT_MEMBER } from '@utils/endpoint/endpoint';

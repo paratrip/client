@@ -6,8 +6,8 @@ import { isValidStringLength } from '@utils/validation';
 import { END_POINT } from '@utils/endpoint/endpoint';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import FilterModal from '@components/tour-course/home/filter-modal/filter-modal';
 import { useFetch } from '@hooks/useFetch';
+import FilterModal from '@components/tour-course/filter-modal/filter-modal';
 import { convertLocationItems } from '@utils/helpers/trasformLocation';
 
 interface LocationItem {

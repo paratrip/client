@@ -1,11 +1,20 @@
-.selected-hashtag {
+.selected-hashtag,
+.hashtag {
   display: flex;
-  padding: 12px 22px;
+  padding: 10px;
   justify-content: center;
   align-items: center;
   gap: 10px;
   border-radius: 22px;
-  background: var(--primary-primary);
-  color: #fff;
   margin: 14px 10px 24px 10px;
+}
+
+.hashtag {
+  background: var(--Gray-Scale-gray3, #e4e6ea);
+  color: var(--Gray-Scale-gray6, #9da0a8);
+}
+
+.selected-hashtag {
+  color: #fff;
+  background: var(--primary-primary);
 }

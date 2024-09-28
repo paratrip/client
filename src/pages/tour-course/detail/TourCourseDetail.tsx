@@ -1,15 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
+
+import type { ResponseTourCourse } from '../home/TourCourseHome';
+
 import {
   Map,
   MapMarker,
   Polyline,
   CustomOverlayMap,
 } from 'react-kakao-maps-sdk';
-import { useKakaoLoader } from '@hooks/useKaKaoLoader';
+
 import AuthHeader from '@components/auth/common/auth-header';
 import Hashtag from '@components/ui/hashtag';
 import styles from './TourCourseDetail.module.css';
 import CourseItem from '@components/tour-course/detail/course-item';
+import { useMatch } from 'react-router-dom';
+import { useGet } from '@hooks/useGet';
+import { END_POINT } from '@utils/endpoint/endpoint';
+import { useKakaoLoader } from '@hooks/useKaKaoLoader';
 
 interface MapCenter {
   lat: number;
@@ -22,6 +29,16 @@ const mapCenterValue: MapCenter = {
 };
 
 const TourCourseDetail: React.FC = () => {
+  useKakaoLoader();
+
+  const match = useMatch('/course/:id');
+  const id = match?.params.id;
+
+  const { data, isLoading, isError, error } = useGet<ResponseTourCourse>({
+    url: END_POINT + '/api/courses/' + id,
+    queryKey: ['courses', 'detail', String(id)],
+  });
+
   const [path, _setPath] = useState([
     { name: '테스트', lat: 37.5665, lng: 126.978 },
     { name: '테스트', lat: 37.5667, lng: 126.9785 },
@@ -29,10 +46,8 @@ const TourCourseDetail: React.FC = () => {
     { name: '테스트', lat: 37.5671, lng: 126.9795 },
   ]);
 
-  useKakaoLoader();
-
   const [isMinimized, setIsMinimized] = useState<boolean>(false);
-  const [mapCenter] = useState<MapCenter>(mapCenterValue);
+  const [map, setMap] = useState<MapCenter>(mapCenterValue);
 
   const sectionRef = useRef<HTMLElement | null>(null);
   const startY = useRef<number>(0);
@@ -96,13 +111,16 @@ const TourCourseDetail: React.FC = () => {
 
   const polylinePath = path.map(loc => ({ lat: loc.lat, lng: loc.lng }));
 
+  if (isLoading) return <div>...Loading</div>;
+  if (isError) return <div>{error.message}</div>;
+
   return (
     <>
       <AuthHeader />
 
       <main className={styles.main}>
         <Map
-          center={mapCenter}
+          center={map}
           level={3}
           style={{
             height: '80%',
@@ -110,23 +128,20 @@ const TourCourseDetail: React.FC = () => {
             transition: '1s all',
           }}
         >
-          {path.map((loc, index) => (
-            <>
-              <MapMarker
-                key={index}
-                position={{ lat: loc.lat, lng: loc.lng }}
-                clickable={true}
-              />
-              <CustomOverlayMap
-                position={{ lat: loc.lat, lng: loc.lng }}
-                yAnchor={4}
-              >
-                <div className={styles['custom-overlay']}>
-                  <p>{loc.name}</p>
-                </div>
-              </CustomOverlayMap>
-            </>
-          ))}
+          <>
+            <MapMarker
+              position={{ lat: map.lat, lng: map.lng }}
+              clickable={true}
+            />
+            <CustomOverlayMap
+              position={{ lat: map.lat, lng: map.lng }}
+              yAnchor={4}
+            >
+              <div className={styles['custom-overlay']}>
+                <p>{data?.paraglidingName}</p>
+              </div>
+            </CustomOverlayMap>
+          </>
           <Polyline
             path={[polylinePath]}
             strokeWeight={5}
@@ -155,12 +170,12 @@ const TourCourseDetail: React.FC = () => {
             </div>
 
             <div className={styles['section__information']}>
-              <p>단양 · 코스 총 거리 14.13km</p>
+              <p>{data?.paraglidingRegion ?? ''} · 코스 총 거리 14.13km</p>
             </div>
 
             <div className={styles.section__hashtags}>
-              <Hashtag tag='태그' />
-              <Hashtag tag='태그' />
+              <Hashtag tag={data?.touristSpotTag1 ?? ''} />
+              <Hashtag tag={data?.touristSpotTag2 ?? ''} />
             </div>
           </header>
 
@@ -168,25 +183,25 @@ const TourCourseDetail: React.FC = () => {
 
           <article className={styles['location-information']}>
             <CourseItem
-              image='https://images.unsplash.com/photo-1725961476494-efa87ae3106a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+              image={data?.paraglidingImageUrl ?? ''}
               itemNumber={1}
-              locationTitle='플라이 포커스 패러글라이딩 스쿨'
+              locationTitle={data?.paraglidingName ?? ''}
               locationCity='단양'
               locationDistance={1.5}
               travelTime={40}
             ></CourseItem>
             <CourseItem
-              image='https://images.unsplash.com/photo-1725961476494-efa87ae3106a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+              image={data?.touristSpotImageUrl1 ?? ''}
               itemNumber={2}
-              locationTitle='플라이 포커스 패러글라이딩 스쿨'
+              locationTitle={data?.touristSpotName1 ?? ''}
               locationCity='단양'
               locationDistance={1.5}
               travelTime={40}
             ></CourseItem>
             <CourseItem
-              image='https://images.unsplash.com/photo-1725961476494-efa87ae3106a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+              image={data?.touristSpotImageUrl2 ?? ''}
               itemNumber={3}
-              locationTitle='플라이 포커스 패러글라이딩 스쿨'
+              locationTitle={data?.touristSpotName2 ?? ''}
               locationCity='단양'
               locationDistance={1.5}
             ></CourseItem>

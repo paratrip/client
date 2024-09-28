@@ -4,7 +4,7 @@ import { TITLE } from '@constants/texts';
 import { useNavigate } from 'react-router-dom';
 
 import Card from '../card';
-import RecommendLocationCard from '@components/home/recommend-location-card/RecommendCard';
+import RecommendLocationCard from '@components/home/recommend-location/list.card';
 import Icon from '../Icon';
 
 type Post = {
@@ -97,21 +97,6 @@ export default function CustomSlider<
 
   function isPopularPostData(item: any): item is PopularPostData {
     return item && 'boardInfo' in item && 'memberInfo' in item;
-  }
-
-  // 지역별 패러글라이딩 장소 추천
-  if (sliderType === 'homeRecommendPost') {
-    return (
-      <div className={style.SliderContainer}>
-        <Slider {...sliderSettings}>
-          {(data as HomeData[]).map((item: HomeData, index: number) => (
-            <div key={'*' + index} className={style.SliderItem}>
-              <Card {...item} />
-            </div>
-          ))}
-        </Slider>
-      </div>
-    );
   }
 
   // 지역 추천
