@@ -137,7 +137,11 @@ const CustomPost = (props: any) => {
         </div>
       ) : (
         postData?.map((post: any, index: any) => (
-          <div key={index} className={style.postBox}>
+          <div
+            key={index}
+            className={style.postBox}
+            style={index === postData.length - 1 ? { paddingBottom: '20px' } : {}}
+          >
             <div className={style.post}>
               <div
                 className={style.postInfo}

@@ -8,11 +8,13 @@ import { END_POINT } from '@utils/endpoint/endpoint';
 interface ScrapButtonProps {
   initialScrapState: boolean;
   onScrapChange: (newState: boolean) => void;
+  onScrapSuccess: () => void;
 }
 
 const ScrapButton: React.FC<ScrapButtonProps> = ({
   initialScrapState,
   onScrapChange,
+  onScrapSuccess,
 }) => {
   const [isScraped, setIsScraped] = useState(initialScrapState);
 
@@ -25,11 +27,11 @@ const ScrapButton: React.FC<ScrapButtonProps> = ({
     setIsScraped(initialScrapState);
   }, [initialScrapState]);
 
-  const handleScrapState = () => {
+  const handleScrapState = async () => {
     const newState = !isScraped;
     setIsScraped(newState);
     onScrapChange(newState);
-    handleScrap(newState);
+    await handleScrap(newState);
   };
 
   // [ ] 스크랩 핸들러
@@ -56,6 +58,7 @@ const ScrapButton: React.FC<ScrapButtonProps> = ({
         });
         console.log(response);
       }
+      onScrapSuccess(); // API 통신 성공 후 콜백 함수 호출
     } catch (error) {
       console.log(error);
     }
