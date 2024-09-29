@@ -30,7 +30,8 @@ const Notification = () => {
       console.log(response);
       const { status, data } = response;
       if (status === 200 && Array.isArray(data)) {
-        setAlarmList(data);
+        const lastestData = data.reverse();
+        setAlarmList(lastestData);
       }
     } catch (error) {
       console.error(error);

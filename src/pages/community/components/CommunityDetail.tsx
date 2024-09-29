@@ -183,10 +183,12 @@ const CommunityDetail = () => {
                   <ScrapButton
                     initialScrapState={postDetail.countInfo.scrap}
                     onScrapChange={newState => setIsScrap(newState)}
-                  />
+                    onScrapSuccess={getPostDetail}
+                  />  
                   <HeartButton
                     initialHeartState={postDetail.countInfo.heart}
                     onHeartChange={newState => setIsHeart(newState)}
+                    onHeartSuccess={getPostDetail}
                   />
                 </>
               )}
