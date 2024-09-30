@@ -25,7 +25,6 @@ export default function Popular() {
             {data?.map((item, index) => (
               <ListCard
                 key={'l' + index}
-                id={item.id}
                 src={item.imageUrl}
                 title={item.name}
                 likeCount={item.heart}
