@@ -66,8 +66,8 @@ const CommunityDetail = () => {
     heart: false,
     scrap: false,
   });
-  const [isHeart, setIsHeart] = useState<boolean>(false);
-  const [isScrap, setIsScrap] = useState<boolean>(false);
+  const [_, setIsHeart] = useState<boolean>(false);
+  const [__, setIsScrap] = useState<boolean>(false);
 
   const [commentInputValue, setCommentInputValue] = useState('');
   const fetchPostDetail = useFetch<void, PostData>(true);

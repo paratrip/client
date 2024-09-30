@@ -2,10 +2,6 @@ import style from './slide.module.css';
 import Slider from 'react-slick';
 import { TITLE } from '@constants/texts';
 import { useNavigate } from 'react-router-dom';
-
-
-import Card from '../card';
-import RecommendLocationCard from '@components/home/recommend-location/list.card';
 import Icon from '../Icon';
 
 type Post = {

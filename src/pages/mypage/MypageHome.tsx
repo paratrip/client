@@ -14,7 +14,7 @@ interface User {
   birth: string;
   gender: string;
   profileImage: string;
-  kakao: boolean;
+  kakao?: boolean;
 }
 
 const MypageHome = () => {
