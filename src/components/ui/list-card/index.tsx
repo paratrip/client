@@ -8,47 +8,79 @@ import LocationTitle from '../location-title';
 import style from './style.module.css';
 import { Link } from 'react-router-dom';
 
+import { transformPrice } from '@utils/helpers/transfrom-price';
+
 type ListCardProps = {
-  id: number;
   title: string;
   likeCount: number;
   price: number;
   location: string;
   src: string;
   alt?: string;
+  id?: number;
 };
 
 const ListCard = memo(function ListCard(props: ListCardProps) {
-  const { src, alt, id, title, likeCount, price, location } = props;
+  const { src, alt, title, likeCount, price, location } = props;
+
+  if (props.id) {
+    return (
+      <Link to={`/home/${props.id}`}>
+        <article className={style['list-card']}>
+          <section className={style.card__content}>
+            <div>
+              <Image className={style.card__image} src={src} alt={alt} />
+            </div>
+
+            <div className={style.information}>
+              <CardTitle title={title} />
+
+              <p>
+                <img src={heart_s} alt={`좋아요 ${likeCount}개`} /> {likeCount}
+              </p>
+
+              <strong className={style.information__price}>
+                {transformPrice(price)} <span>원</span>
+              </strong>
+
+              <LocationTitle title={location} />
+            </div>
+          </section>
+
+          <footer className={style.footer}>
+            <hr />
+          </footer>
+        </article>
+      </Link>
+    );
+  }
 
   return (
-    <Link to={`/home/${id}`}>
-      <article className={style['list-card']}>
-        <section className={style.card__content}>
-          <div>
-            <Image className={style.card__image} src={src} alt={alt} />
-          </div>
+    <article className={style['list-card']}>
+      <section className={style.card__content}>
+        <div>
+          <Image className={style.card__image} src={src} alt={alt} />
+        </div>
 
-          <div className={style.information}>
-            <CardTitle title={title} />
+        <div className={style.information}>
+          <CardTitle title={title} />
 
-            <p>
-              <img src={heart_s} alt={`좋아요 ${likeCount}개`} /> {likeCount}
-            </p>
+          <p>
+            <img src={heart_s} alt={`좋아요 ${likeCount}개`} /> {likeCount}
+          </p>
 
-            <strong className={style.information__price}>
-              {price} <span>원</span>
-            </strong>
+          <strong className={style.information__price}>
+            {transformPrice(price)} <span>원</span>
+          </strong>
 
-            <LocationTitle title={location} />
-          </div>
-        </section>
+          <LocationTitle title={location} />
+        </div>
+      </section>
 
-        <footer className={style.footer}>
-          <hr />
-        </footer>
-      </article>
-    </Link>
+      <footer className={style.footer}>
+        <hr />
+      </footer>
+    </article>
   );
 });
 
