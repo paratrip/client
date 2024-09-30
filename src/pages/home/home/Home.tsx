@@ -1,6 +1,3 @@
-import Header from '@components/layouts/Header';
-
-import Button from '@components/ui/button';
 import MoreHeader from '@components/ui/more-header';
 
 import Container from '@components/ui/container';
@@ -26,13 +23,6 @@ export default function Home() {
 
   return (
     <>
-      <Header type='main' />
-      <nav className={style.nav}>
-        <section>
-          <Button>패글 가능</Button>
-        </section>
-      </nav>
-
       <Container>
         <section className={style.main__location}>
           <MoreHeader title='지역별 패러글라이딩 장소' to='location' />
