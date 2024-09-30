@@ -38,6 +38,7 @@ export default function Location() {
             {data?.map((item, index) => (
               <ListCard
                 key={'l' + index}
+                id={item.id}
                 src={item.imageUrl}
                 title={item.name}
                 likeCount={item.heart}
