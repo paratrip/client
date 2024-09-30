@@ -3,11 +3,11 @@ import TourCourseHome from '@pages/tour-course/home/TourCourseHome';
 
 export const TOUR_COURSE_ROUTES = [
   {
-    path: 'tour-course',
+    path: 'tour-course/:id?',
     element: <TourCourseHome />,
   },
   {
-    path: 'tour-course/detail/:id',
+    path: 'course/:id',
     element: <TourCourseDetail />,
   },
 ];

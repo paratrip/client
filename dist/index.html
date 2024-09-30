@@ -4,18 +4,33 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
     <title>Paratrip</title>
-    <script type="module" crossorigin src="/assets/index-DBIIh6ca.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-hLYjQIh9.css" />
-  </head>
-  <body>
-    <div id="modal"></div>
-    <div id="root"></div>
+
+    <script
+      src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
+      integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2vxfAAD0eZxzCKakxg55G4"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+
+      Kakao.init(import.meta.env.VITE_KAKAO_API_KEY); // 사용하려는 앱의 JavaScript 키 입력
+    </script>
 
     <script
       strategy="beforeInteractive"
       type="text/javascript"
-      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a7ec07df4caa31e2befbe79ee0db8fa7"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=%VITE_KAKAO_API_KEY&libraries=services&autoload=false"
     ></script>
+    <script type="module" crossorigin src="/assets/index-C7Tp5Vsb.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BRTw7Fc1.css">
+  </head>
+  <body>
+    <div id="modal"></div>
+    <div id="root"></div>
+
   </body>
 </html>

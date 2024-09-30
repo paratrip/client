@@ -61,7 +61,7 @@ export default function Finish() {
         </article>
       </section>
 
-      <Link className={styles.button} to='/auth/email'>
+      <Link className={styles.button} to='/email'>
         로그인하러 가기
       </Link>
     </>

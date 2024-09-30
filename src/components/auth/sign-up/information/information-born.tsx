@@ -1,7 +1,7 @@
 import { useRecoilState } from 'recoil';
 import FunnelInput from '@components/auth/common/funnel-input';
 
-import { getValueHandler } from '@utils/helpers/auth/get-value';
+import { getValueHandler } from '@utils/helpers/get-value';
 import { signUpBornState } from '@store/sign-up';
 import { useEffect } from 'react';
 

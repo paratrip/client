@@ -10,7 +10,7 @@ import { type FunnelProps } from '@utils/funnel/types/funnel-types';
 import { type Response } from '@utils/types/response';
 
 import { signUpEmailState } from '@store/sign-up';
-import { getValueHandler } from '@utils/helpers/auth/get-value';
+import { getValueHandler } from '@utils/helpers/get-value';
 import { END_POINT_MEMBER } from '@utils/endpoint/endpoint';
 import { useFetch } from '@hooks/useFetch';
 

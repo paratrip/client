@@ -1,11 +1,54 @@
+import { useGet } from '@hooks/useGet';
+import { useMatch } from 'react-router-dom';
+import { END_POINT } from '@utils/endpoint/endpoint';
+
 import Header from '@components/layouts/Header';
 
 import styles from './TourCourseHome.module.css';
 import Container from '@components/ui/container';
-import CourseSection from '@components/tour-course/home/section/course-section';
-import CourseCard from '@components/tour-course/home/card/course-card';
+import CourseSection from '@components/tour-course/section/course-section';
+import { useState } from 'react';
+import TourCourseList from '@components/tour-course/home/tour-course-list';
+
+export type ResponseTourCourse = {
+  courseId: number;
+  paraglidingName: string;
+  touristSpotName1: string;
+  touristSpotName2: string;
+  paraglidingRegion: string;
+  touristSpotTag1: string;
+  touristSpotTag2: string;
+  paraglidingImageUrl: string;
+  touristSpotImageUrl1: string;
+  touristSpotImageUrl2: string;
+  rlteTatsNm1: string;
+  rlteTatsNm2: string;
+};
 
 export default function TourCourseHome() {
+  const match = useMatch('/tour-course/:id');
+  const region = match?.params.id;
+  const [tags, setTags] = useState<string[]>([]);
+
+  const { data, isLoading, isError, error } = useGet<ResponseTourCourse[]>({
+    url: END_POINT + '/api/courses/list',
+    queryKey: ['courses', String(region), ...tags],
+  });
+  // `?region=${region ? region : ''}&tags=${tags ? tags : ''}`,
+
+  if (isLoading) return <div>...Loading</div>;
+  if (isError && error) return <div>{error.message}</div>;
+
+  const toggleTag = (tag: string) => {
+    setTags(prevTags => {
+      if (prevTags.includes(tag)) {
+        return prevTags.filter(t => t !== tag);
+      } else {
+        return [...prevTags, tag];
+      }
+    });
+  };
+
   return (
     <>
       <Header type='main' />
@@ -16,24 +59,13 @@ export default function TourCourseHome() {
           주변 광광지도 둘러보세요.
         </h2>
 
-        {/*  TODO  CourseSection  Props 타입 */}
-        <CourseSection />
-        <CourseCard
-          href='/tour-course/detail/1'
-          image='https://plus.unsplash.com/premium_photo-1695302441138-f68978135eff?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8'
-          title='가족끼리 즐기는 패러글라이딩 코스'
-          location='서울'
-          hashtags={[{ tag: '태그1', href: '' }]}
-          locations={[{ tag: '태그1', href: '' }]}
+        <CourseSection
+          tags={tags ?? []}
+          onToggleTag={toggleTag}
+          length={data?.length ?? 0}
         />
-        <CourseCard
-          href='/tour-course/detail/2'
-          image='https://plus.unsplash.com/premium_photo-1695302441138-f68978135eff?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8'
-          title='가족끼리 즐기는 패러글라이딩 코스'
-          location='서울'
-          hashtags={[{ tag: '태그1', href: '' }]}
-          locations={[{ tag: '태그1', href: '' }]}
-        />
+
+        <TourCourseList data={data ?? []} />
       </Container>
     </>
   );

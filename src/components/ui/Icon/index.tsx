@@ -730,6 +730,26 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
+    case 'communityPopularUserDefaultImg':
+      return (
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width='20'
+          height='20'
+          viewBox='0 0 20 20'
+          fill='none'
+        >
+          <circle cx='10' cy='10' r='9.5' fill='#9DA0A8' stroke='#EFF1F4' />
+          <circle cx='9.99977' cy='7.88258' r='3.44118' fill='#EFF1F4' />
+          <ellipse
+            cx='9.86805'
+            cy='15.6911'
+            rx='6.22059'
+            ry='3.30882'
+            fill='#EFF1F4'
+          />
+        </svg>
+      );
     case 'userModifyImg':
       return (
         <svg
@@ -765,7 +785,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'notiHeart':
+    case 'notiHEART':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -783,7 +803,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'notiScrap':
+    case 'notiSCRAP':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -798,7 +818,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'notiComment':
+    case 'notiCOMMENT':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -813,7 +833,7 @@ const renderIcon = (iconType: string, isActive: boolean) => {
           />
         </svg>
       );
-    case 'notiStar':
+    case 'notiPOPULARITY':
       return (
         <svg
           xmlns='http://www.w3.org/2000/svg'

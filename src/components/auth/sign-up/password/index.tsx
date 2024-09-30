@@ -7,7 +7,7 @@ import FunnelInput from '@components/auth/common/funnel-input';
 import { type FunnelProps } from '@utils/funnel/types/funnel-types';
 import { signUpPasswordState } from '@store/sign-up';
 
-import { getValueHandler } from '@utils/helpers/auth/get-value';
+import { getValueHandler } from '@utils/helpers/get-value';
 import ValidationMessage from '@components/auth/common/validation-message';
 
 import { passwordRegex } from '@utils/validation';

@@ -8,11 +8,13 @@ import { useFetch } from '@hooks/useFetch';
 interface HeartButtonProps {
   initialHeartState: boolean;
   onHeartChange: (newState: boolean) => void;
+  onHeartSuccess: () => void;
 }
 
 const HeartButton: React.FC<HeartButtonProps> = ({
   initialHeartState,
   onHeartChange,
+  onHeartSuccess,
 }) => {
   const [isHeart, setIsHeart] = useState(initialHeartState);
 
@@ -25,11 +27,11 @@ const HeartButton: React.FC<HeartButtonProps> = ({
     setIsHeart(initialHeartState);
   }, [initialHeartState]);
 
-  const handleHeartState = () => {
+  const handleHeartState = async () => {
     const newState = !isHeart;
     setIsHeart(newState);
     onHeartChange(newState);
-    handleHeart(newState);
+    await handleHeart(newState);
   };
 
   // [ ] 좋아요 핸들러
@@ -56,6 +58,7 @@ const HeartButton: React.FC<HeartButtonProps> = ({
         });
         console.log('감소', response);
       }
+      onHeartSuccess();
     } catch (error) {
       console.log(newState);
       console.log(error);

@@ -1,12 +1,26 @@
 import AuthHeader from '@components/auth/common/auth-header';
-import Button from '@components/ui/button';
 
 import ListCard from '@components/ui/list-card';
 import Container from '@components/ui/container';
 
 import styles from './Location.module.css';
+import { useGet } from '@hooks/useGet';
+import { ResponseParagliding } from '@components/home/carousel/types';
+import { useState } from 'react';
+import RegionTags from '@components/home/carousel/region-tags';
 
 export default function Location() {
+  const [region, setRegion] = useState('');
+
+  const { data } = useGet<ResponseParagliding[]>({
+    queryKey: ['paragliding', region],
+    url: `https://euics.co.kr/api/paragliding/list/region?regionCode=${region}`,
+  });
+
+  const regionHandler = (region: string) => {
+    setRegion(region);
+  };
+
   return (
     <>
       <AuthHeader title='' />
@@ -17,26 +31,20 @@ export default function Location() {
           </header>
 
           <nav className={styles.location__filter}>
-            <Button>전체</Button>
-            <Button>전체</Button>
-            <Button>전체</Button>
+            <RegionTags onRegion={regionHandler} />
           </nav>
 
           <ul>
-            <ListCard
-              src='https://images.unsplash.com/photo-1724250973924-0209b9a64c13?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-              title='테스트'
-              likeCount={12}
-              price={77000}
-              location='서울'
-            />
-            <ListCard
-              src='https://images.unsplash.com/photo-1724250973924-0209b9a64c13?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-              title='테스트'
-              likeCount={12}
-              price={77000}
-              location='서울'
-            />
+            {data?.map((item, index) => (
+              <ListCard
+                key={'l' + index}
+                src={item.imageUrl}
+                title={item.name}
+                likeCount={item.heart}
+                price={item.cost}
+                location={item.region}
+              />
+            ))}
           </ul>
         </section>
       </Container>

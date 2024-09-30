@@ -2,8 +2,7 @@
 .postContainer {
   background: var(--Gray-Gray2, #eff1f4);
   width: 600px;
-  /* min-height: 741px; */
-  height: calc(100% - 220px);
+  min-height: 741px;
   flex-shrink: 0;
 }
 

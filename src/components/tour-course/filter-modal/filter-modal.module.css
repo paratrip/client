@@ -1,0 +1,90 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 25vw;
+  max-height: 50vh;
+  min-width: 316px;
+  min-height: 227px;
+  flex-shrink: 0;
+  z-index: 1005;
+  background-color: #fff;
+  overflow: scroll;
+  border-radius: 20px;
+}
+
+.regions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+}
+
+.br {
+  border: 1px solid #cbcbcb;
+  width: 100%;
+}
+
+.closeButton {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+}
+
+.buttonBox {
+  margin: 28px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 8px;
+}
+
+.AlltagButton {
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 22px;
+  background: var(--secondary-secondary, #d4ff5e);
+
+  color: var(--Gray-Scale-gray9, #3b3f4a);
+  text-align: center;
+  font-family: 'Hancom Gothic';
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 100%;
+}
+
+.tagButton {
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 22px;
+  background: var(--Gray-Scale-gray3, #e4e6ea);
+
+  color: var(--Gray-Scale-gray6, #9da0a8);
+  text-align: center;
+  font-family: 'Hancom Gothic';
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 100%;
+}

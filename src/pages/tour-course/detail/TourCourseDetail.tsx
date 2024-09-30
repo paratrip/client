@@ -1,4 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import type { ResponseTourCourse } from '../home/TourCourseHome';
+
 import {
   Map,
   MapMarker,
@@ -6,95 +9,98 @@ import {
   CustomOverlayMap,
 } from 'react-kakao-maps-sdk';
 import { useKakaoLoader } from '@hooks/useKaKaoLoader';
+import { useSetMaker } from './useSetMaker';
+
 import AuthHeader from '@components/auth/common/auth-header';
-import Hashtag from '@components/ui/hashtag';
+
+import { useMatch } from 'react-router-dom';
+import { useGet } from '@hooks/useGet';
+import { END_POINT } from '@utils/endpoint/endpoint';
+import { TourCourseNavigation } from './TourCourseNavigation';
+
 import styles from './TourCourseDetail.module.css';
-import CourseItem from '@components/tour-course/detail/course-item';
-
-interface MapCenter {
-  lat: number;
-  lng: number;
-}
-
-const mapCenterValue: MapCenter = {
-  lat: 37.5665,
-  lng: 126.978,
-};
 
 const TourCourseDetail: React.FC = () => {
-  const [path, _setPath] = useState([
-    { name: '테스트', lat: 37.5665, lng: 126.978 },
-    { name: '테스트', lat: 37.5667, lng: 126.9785 },
-    { name: '테스트', lat: 37.5669, lng: 126.979 },
-    { name: '테스트', lat: 37.5671, lng: 126.9795 },
-  ]);
-
   useKakaoLoader();
 
+  const match = useMatch('/course/:id');
+  const id = match?.params.id;
+
+  const { data, isLoading, isError, error } = useGet<ResponseTourCourse>({
+    url: END_POINT + '/api/courses/' + id,
+    queryKey: ['courses', 'detail', String(id)],
+  });
+
+  const [mapCenterLat, setMapCenterLat] = useState<number>(37.5665);
+  const [mapCenterLng, setMapCenterLng] = useState<number>(126.978);
+  const [middleLatCourse, setMiddleLatCourse] = useState<number>(0);
+  const [middleLngCourse, setMiddleLngCourse] = useState<number>(0);
+  const [lastLatCourse, setLastLatCourse] = useState<number>(0);
+  const [lastLngCourse, setLastLngCourse] = useState<number>(0);
+
+  const [path, setPath] = useState([
+    { name: data?.paraglidingName, lat: mapCenterLat, lng: mapCenterLng },
+    {
+      name: data?.touristSpotName1,
+      lat: middleLatCourse,
+      lng: middleLngCourse,
+    },
+    { name: data?.touristSpotName2, lat: lastLatCourse, lng: lastLngCourse },
+  ]);
+
+  useSetMaker(
+    data?.paraglidingName as string,
+    setMapCenterLat,
+    setMapCenterLng
+  );
+
+  useSetMaker(
+    data?.touristSpotName1 as string,
+    setMiddleLatCourse,
+    setMiddleLngCourse
+  );
+
+  useSetMaker(
+    data?.touristSpotName1 as string,
+    setLastLatCourse,
+    setLastLngCourse
+  );
+
   const [isMinimized, setIsMinimized] = useState<boolean>(false);
-  const [mapCenter] = useState<MapCenter>(mapCenterValue);
-
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const startY = useRef<number>(0);
-  const currentY = useRef<number>(0);
-
-  const handleTouchStart = (e: React.TouchEvent<HTMLElement>): void => {
-    startY.current = e.touches[0].clientY;
-  };
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLElement>): void => {
-    currentY.current = e.touches[0].clientY;
-  };
-
-  const handleTouchEnd = (): void => {
-    const diff = startY.current - currentY.current;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0 && isMinimized) {
-        setIsMinimized(false);
-      } else if (diff < 0 && !isMinimized) {
-        setIsMinimized(true);
-      }
-    }
-  };
-
-  const toggleSection = (): void => {
-    setIsMinimized(prev => !prev);
-  };
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (section) {
-      section.addEventListener(
-        'touchstart',
-        handleTouchStart as unknown as EventListener
-      );
-      section.addEventListener(
-        'touchmove',
-        handleTouchMove as unknown as EventListener
-      );
-      section.addEventListener(
-        'touchend',
-        handleTouchEnd as unknown as EventListener
-      );
-
-      return () => {
-        section.removeEventListener(
-          'touchstart',
-          handleTouchStart as unknown as EventListener
-        );
-        section.removeEventListener(
-          'touchmove',
-          handleTouchMove as unknown as EventListener
-        );
-        section.removeEventListener(
-          'touchend',
-          handleTouchEnd as unknown as EventListener
-        );
-      };
-    }
-  }, [isMinimized]);
 
   const polylinePath = path.map(loc => ({ lat: loc.lat, lng: loc.lng }));
+
+  useEffect(() => {
+    const newPoly = [
+      {
+        name: data?.paraglidingName,
+        lat: mapCenterLat,
+        lng: mapCenterLng,
+      },
+      {
+        name: data?.touristSpotName1,
+        lat: middleLatCourse,
+        lng: middleLngCourse,
+      },
+      {
+        name: data?.touristSpotName2,
+        lat: lastLatCourse,
+        lng: lastLngCourse,
+      },
+    ];
+
+    setPath(newPoly);
+  }, [
+    mapCenterLat,
+    mapCenterLng,
+    middleLatCourse,
+    middleLngCourse,
+    lastLatCourse,
+    lastLngCourse,
+  ]);
+
+  if (isLoading) return <div>...Loading</div>;
+  if (isError) return <div>{error.message}</div>;
 
   return (
     <>
@@ -102,7 +108,10 @@ const TourCourseDetail: React.FC = () => {
 
       <main className={styles.main}>
         <Map
-          center={mapCenter}
+          center={{
+            lat: mapCenterLat,
+            lng: mapCenterLng,
+          }}
           level={3}
           style={{
             height: '80%',
@@ -110,23 +119,28 @@ const TourCourseDetail: React.FC = () => {
             transition: '1s all',
           }}
         >
-          {path.map((loc, index) => (
-            <>
-              <MapMarker
-                key={index}
-                position={{ lat: loc.lat, lng: loc.lng }}
-                clickable={true}
-              />
-              <CustomOverlayMap
-                position={{ lat: loc.lat, lng: loc.lng }}
-                yAnchor={4}
-              >
-                <div className={styles['custom-overlay']}>
-                  <p>{loc.name}</p>
-                </div>
-              </CustomOverlayMap>
-            </>
-          ))}
+          <>
+            <MapMarker
+              position={{ lat: mapCenterLat, lng: mapCenterLng }}
+              clickable={true}
+            />
+            <MapMarker
+              position={{ lat: middleLatCourse, lng: middleLngCourse }}
+              clickable={true}
+            />
+            <MapMarker
+              position={{ lat: lastLatCourse, lng: lastLngCourse }}
+              clickable={true}
+            />
+            <CustomOverlayMap
+              position={{ lat: Number(0)!, lng: Number(0)! }}
+              yAnchor={4}
+            >
+              <div className={styles['custom-overlay']}>
+                <p>{data?.paraglidingName}</p>
+              </div>
+            </CustomOverlayMap>
+          </>
           <Polyline
             path={[polylinePath]}
             strokeWeight={5}
@@ -136,62 +150,19 @@ const TourCourseDetail: React.FC = () => {
           />
         </Map>
 
-        <section
-          ref={sectionRef}
-          className={`${styles['main-section']} ${
-            isMinimized ? styles.minimized : ''
-          }`}
-        >
-          <button
-            className={styles['section__button']}
-            onClick={toggleSection}
-          />
-          <header>
-            <div className={styles['section__header']}>
-              <h2>
-                낮에 보아도 밤에 보아도 아름다운 단양 1박 2일 코스로 여행 즐기고
-                2줄 이상 넘어가면 여기까지 올거 같습니다
-              </h2>
-            </div>
-
-            <div className={styles['section__information']}>
-              <p>단양 · 코스 총 거리 14.13km</p>
-            </div>
-
-            <div className={styles.section__hashtags}>
-              <Hashtag tag='태그' />
-              <Hashtag tag='태그' />
-            </div>
-          </header>
-
-          <hr className={styles.hr} />
-
-          <article className={styles['location-information']}>
-            <CourseItem
-              image='https://images.unsplash.com/photo-1725961476494-efa87ae3106a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-              itemNumber={1}
-              locationTitle='플라이 포커스 패러글라이딩 스쿨'
-              locationCity='단양'
-              locationDistance={1.5}
-              travelTime={40}
-            ></CourseItem>
-            <CourseItem
-              image='https://images.unsplash.com/photo-1725961476494-efa87ae3106a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-              itemNumber={2}
-              locationTitle='플라이 포커스 패러글라이딩 스쿨'
-              locationCity='단양'
-              locationDistance={1.5}
-              travelTime={40}
-            ></CourseItem>
-            <CourseItem
-              image='https://images.unsplash.com/photo-1725961476494-efa87ae3106a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-              itemNumber={3}
-              locationTitle='플라이 포커스 패러글라이딩 스쿨'
-              locationCity='단양'
-              locationDistance={1.5}
-            ></CourseItem>
-          </article>
-        </section>
+        <TourCourseNavigation
+          isMinimized={isMinimized}
+          setIsMinimized={setIsMinimized}
+          paraglidingRegion={data?.paraglidingRegion ?? ''}
+          touristSpotTag1={data?.touristSpotTag1 ?? ''}
+          touristSpotTag2={data?.touristSpotTag2 ?? '' ?? ''}
+          paraglidingName={data?.paraglidingName ?? ''}
+          touristSpotName1={data?.touristSpotName1 ?? ''}
+          touristSpotName2={data?.touristSpotName2 ?? ''}
+          paraglidingImageUrl={data?.paraglidingImageUrl ?? ''}
+          touristSpotImageUrl1={data?.touristSpotImageUrl1 ?? ''}
+          touristSpotImageUrl2={data?.touristSpotImageUrl2 ?? ''}
+        />
       </main>
     </>
   );
